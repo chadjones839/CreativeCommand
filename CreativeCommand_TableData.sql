@@ -46,7 +46,7 @@ CREATE TABLE [Account] (
   [ZipCode] integer NOT NULL,
   [DateCreated] datetime NOT NULL,
   [SalesUserId] integer NOT NULL,
-  [ManagerUserId] integer,
+  [ManagerUserId] integer NOT NULL,
 
   CONSTRAINT [FK_Account_User_SalesUser] FOREIGN KEY ([SalesUserId]) REFERENCES [User] ([Id]),
   CONSTRAINT [FK_Account_User_ManagerUser] FOREIGN KEY ([ManagerUserId]) REFERENCES [User] ([Id])
@@ -76,11 +76,9 @@ CREATE TABLE [ScheduleType] (
 
 CREATE TABLE [Campaign] (
   [Id] integer PRIMARY KEY IDENTITY,
-  [SalesUserId] int NOT NULL,
-  [ManagerUserId] int,
   [AccountId] int NOT NULL,
   [Revenue] integer NOT NULL,
-  [ScheduleTypeId] varchar(40) NOT NULL,
+  [ScheduleTypeId] int NOT NULL,
   [PlatformId] integer NOT NULL,
   [CreateDate] date NOT NULL,
   [StartDate] date NOT NULL,
@@ -88,8 +86,6 @@ CREATE TABLE [Campaign] (
   [Impressions] int,
   [Audience] int,
 
-  CONSTRAINT [FK_Campaign_User_SalesUser] FOREIGN KEY ([SalesUserId]) REFERENCES [User] ([Id]),
-  CONSTRAINT [FK_Campaign_User_ManagerUser] FOREIGN KEY ([ManagerUserId]) REFERENCES [User] ([Id]),
   CONSTRAINT [FK_Campaign_Account] FOREIGN KEY ([AccountId]) REFERENCES [Account] ([Id])
 )
 
@@ -102,7 +98,7 @@ CREATE TABLE [CampaignStatus] (
   [Id] integer PRIMARY KEY IDENTITY,
   [CampaignId] integer NOT NULL,
   [SalesUserId] integer NOT NULL,
-  [ManagerUserId] integer,
+  [ManagerUserId] integer NOT NULL,
   [IsSold] bit NOT NULL,
   [IsApproved] bit NOT NULL,
   [CreativeSubmitted] bit NOT NULL,
@@ -115,15 +111,4 @@ CREATE TABLE [CampaignStatus] (
   CONSTRAINT [FK_CampaignStatus_Campaign] FOREIGN KEY ([CampaignId]) REFERENCES [Campaign] ([Id])
 )
 
-CREATE TABLE [Creative] (
-  [Id] integer PRIMARY KEY IDENTITY,
-  [SalesUserId] integer NOT NULL,
-  [ManagerUserId] integer,
-  [CampaignId] integer NOT NULL,
-  [FileType] varchar(255) NOT NULL,
-  [File] varchar(255) NOT NULL,
-
-  CONSTRAINT [FK_Creative_User_SalesUser] FOREIGN KEY ([SalesUserId]) REFERENCES [User] ([Id]),
-  CONSTRAINT [FK_Creative_User_ManagerUser] FOREIGN KEY ([ManagerUserId]) REFERENCES [User] ([Id])
-)
 GO
