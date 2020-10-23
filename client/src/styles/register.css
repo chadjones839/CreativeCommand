@@ -1,0 +1,14 @@
+.registration-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.registrationFields {
+    width: 20%;
+}
+
+.registerBtn {
+    display: flex;
+    justify-content: flex-end;
+}
