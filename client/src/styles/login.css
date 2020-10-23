@@ -1,0 +1,14 @@
+.login-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.loginFields {
+    width: 20%;
+}
+
+.loginBtn {
+    display: flex;
+    justify-content: flex-end;
+}
