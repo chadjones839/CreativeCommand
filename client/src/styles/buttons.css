@@ -1,0 +1,22 @@
+.accountBtn {
+    display: block;
+    color: black;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color:#ffffff;
+    width: auto;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: .8rem;
+    font-weight: 500;
+    box-shadow: 1px 1px 2px 1px #747272;
+
+}
+
+.accountBtn:hover {
+    background-color: goldenrod;
+}
+

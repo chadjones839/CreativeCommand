@@ -68,7 +68,7 @@ export function UserProvider(props) {
       }).then(resp => resp.json()));
   };
 
-  const getUserId = (id) => {
+  const getUserById = (id) => {
     return getToken().then((token) =>
       fetch(`${apiUrl}/user/${id}`, {
         method: "GET",
@@ -105,7 +105,7 @@ export function UserProvider(props) {
 
 
   return (
-    <UserContext.Provider value={{ users, isLoggedIn, user, login, logout, register, getToken, setUsers, getAllUsers, getUser, update, getUserId }}>
+    <UserContext.Provider value={{ users, isLoggedIn, user, login, logout, register, getToken, setUsers, getAllUsers, getUser, update, getUserById }}>
       {isFirebaseReady
         ? props.children
         : <Spinner className="app-spinner dark" />}

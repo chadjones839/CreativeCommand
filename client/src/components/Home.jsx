@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { AccountContext } from "./../providers/AccountProvider";
+import AccountPreview from "./accounts/AccountPreview"
 
-export default function Hello() {
+export default function Home() {
+  const { accounts, getAllAccounts } = useContext(AccountContext);
+
+    
+    useEffect(() => {
+        getAllAccounts();
+    }, []);
+
   return (
    <>
     <main className="home-container">
@@ -17,9 +26,11 @@ export default function Hello() {
             <div className="overview-container">
             <section className="account-container">
               <h3 className="dashboardTitle">Account Activity</h3>
-              <div className="accountCard">
-                
-              </div>
+
+              {accounts.map(a =>
+                <AccountPreview key={a.id} account={a} />
+              )}
+
             </section>
 
             <section className="campaign-container">
