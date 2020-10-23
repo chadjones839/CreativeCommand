@@ -97,8 +97,6 @@ CREATE TABLE [Platform] (
 CREATE TABLE [CampaignStatus] (
   [Id] integer PRIMARY KEY IDENTITY,
   [CampaignId] integer NOT NULL,
-  [SalesUserId] integer NOT NULL,
-  [ManagerUserId] integer NOT NULL,
   [IsSold] bit NOT NULL,
   [IsApproved] bit NOT NULL,
   [CreativeSubmitted] bit NOT NULL,

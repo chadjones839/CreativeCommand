@@ -37,13 +37,6 @@ namespace CreativeCommand.Models
         public int AccountId { get; set; }
         public Account Account { get; set; }
 
-        [Required]
-        public int SalesUserId { get; set; }
-        public User SalesUser { get; set; }
-
-        [Required]
-        public int ManagerUserId { get; set; }
-        public User ManagerUser { get; set; }
 
     }
 }
