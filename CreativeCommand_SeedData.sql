@@ -12,12 +12,17 @@ set identity_insert [ScheduleType] off
 set identity_insert [User] on
 insert into [User] (Id, FirebaseUserId, FirstName, LastName, Email, UserTypeId) values (1, 'wza8zqGbdRSGjJRESfMWadGpsd93', 'Tommy', 'Trainwreck', 'tommytrainwreck@bigrick.comx', 1);
 insert into [User] (Id, FirebaseUserId, FirstName, LastName, Email, UserTypeId) values (2, '1D3K3em6pwgHpsQclNmc2nOQwy93', 'Bill', 'Brasky', 'billbrasky@bigrick.comx', 2);
+insert into [User] (Id, FirebaseUserId, FirstName, LastName, Email, UserTypeId) values (3, '9LyGobdAWKclCqNyy2x9GHJYE053', 'Shelley', 'Levene', 'shelleylevene@bigrick.comx', 2);
+insert into [User] (Id, FirebaseUserId, FirstName, LastName, Email, UserTypeId) values (4, 'N3ub2hJa8vOf5Gf4ATQxq2fRMby2', 'John', 'Williamson', 'johnwilliamson@bigrick.comx', 1);
+insert into [User] (Id, FirebaseUserId, FirstName, LastName, Email, UserTypeId) values (5, 'vzcQcIaAAOOOvXMUkaOfnrBlERz2', 'Richard', 'Roma', 'richardroma@bigrick.comx', 2);
 set identity_insert [User] off
 
 set identity_insert [Account] on
 insert into Account (Id, Company, [Address], City, [State], ZipCode, DateCreated, SalesUserId, ManagerUserId) values (1, 'Action Park', '200 NJ-94', 'Vernon Township', 'NJ', 070462, '1984-02-20', 2, 1);
 insert into Account (Id, Company, [Address], City, [State], ZipCode, DateCreated, SalesUserId, ManagerUserId) values (2, 'Clams Casino', '3900 Las Vegas Blvd', 'Las Vegas', 'NV', 89119, '2015-05-10', 2, 1);
 insert into Account (Id, Company, [Address], City, [State], ZipCode, DateCreated, SalesUserId, ManagerUserId) values (3, 'Coca Cola', '1 Coca Cola Plz', 'Atlanta', 'GA', 30313, '2017-07-05', 2, 1);
+insert into Account (Id, Company, [Address], City, [State], ZipCode, DateCreated, SalesUserId, ManagerUserId) values (4, 'Hanks Autobody', '15 Meat Street', 'New York', 'NY', 12110, '2016-07-05', 3, 1);
+insert into Account (Id, Company, [Address], City, [State], ZipCode, DateCreated, SalesUserId, ManagerUserId) values (5, 'Glengarry Farms', '1415 W Randolph St', 'Chicago', 'IL', 60607, '2017-07-05', 5, 4);
 set identity_insert [Account] off
 
 set identity_insert [Campaign] on
