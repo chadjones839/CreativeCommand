@@ -1,11 +1,23 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { AccountContext } from "../../providers/AccountProvider";
 
-export default function AccountPreview({ account }) {
-    const sessionUser = JSON.parse(sessionStorage.getItem("user"));
+export default function AccountDetail() {
+    const { account, getById } = useContext(AccountContext);
+    const { id } = useParams()
     
-    const dateTime = new Intl.DateTimeFormat('en-US').format(new Date(account.dateCreated));
+    
+    useEffect(() => {
+        getById(id)
+    }, []);
+
+    console.log(account)
+    
     const defaultImg = "https://res.cloudinary.com/dhduglm4j/image/upload/v1603478435/icons/defaultCompanyIcon_bqlwsn.jpg"
+
+    if (!account || !account.salesUser || !account.managerUser) {
+        return null
+    }
 
     return (
         <>
@@ -18,13 +30,19 @@ export default function AccountPreview({ account }) {
                 </div> }
                 <div className="accountCard-middle">
                   <div className="accountActivity-details">
-                    <Link className="accountButton" style={{ textDecoration: 'none' }} to={`/account/${account.id}`}>
+                    <Link className="accountButton" style={{ textDecoration: 'none' }} to={`/account/details/`}>
                       <p className="accountCard-companyName">{account.company}</p>
                     </Link> 
                   </div>
                   <div className="accountActivity-identifiers">
-                    <p className="accountCard-details">Owned by {account.salesUser.fullName}</p> <em>Created on {dateTime}</em>
+                    <p className="accountCard-details">Owned by {account.salesUser.fullName}</p> <em>Created on {new Intl.DateTimeFormat('en-US').format(new Date(account.dateCreated))} </em>
                   </div>
+                  <p>{account.address}</p>
+                  <p>{account.city}</p>
+                  <p>{account.state}</p>
+                  <p>{account.zipCode}</p>
+                  <br/>
+                  <p>Manager: {account.managerUser.fullName}</p>
                 </div>
                 <div className="accountCard-right">
                   <div className="accountButtons">
@@ -39,5 +57,4 @@ export default function AccountPreview({ account }) {
               </div>
         </>
     )
-
 }

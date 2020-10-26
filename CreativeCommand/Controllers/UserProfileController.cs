@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CreativeCommand.Controllers
 {
-    /*[Authorize]*/
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserProfileController : ControllerBase
     {
-        private readonly IUserRepository _userRepo;
+        private readonly IUserProfileRepository _userRepo;
         private readonly IUserTypeRepository _userTypeRepo;
-        public UserController(IUserRepository userRepository, IUserTypeRepository userTypeRepository)
+        public UserProfileController(IUserProfileRepository userRepository, IUserTypeRepository userTypeRepository)
         {
             _userRepo = userRepository;
             _userTypeRepo = userTypeRepository;
@@ -25,24 +25,42 @@ namespace CreativeCommand.Controllers
             return Ok(_userRepo.GetAllUsers());
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("sales")]
+        public IActionResult GetAllSalesUsers()
+        {
+            return Ok(_userRepo.GetAllSalesUsers());
+        }
+
+        [HttpGet("manager")]
+        public IActionResult GetAllManagerUsers()
+        {
+            return Ok(_userRepo.GetAllManagerUsers());
+        }
+
+        [HttpGet("id/{id}")]
         public IActionResult GetUser(int id)
         {
             return Ok(_userRepo.GetUserById(id));
         }
 
+        [HttpGet("{firebaseUserId}")]
+        public IActionResult GetUserProfile(string firebaseUserId)
+        {
+            return Ok(_userRepo.GetByFirebaseUserId(firebaseUserId));
+        }
+
         [HttpPost]
-        public IActionResult Post(User user)
+        public IActionResult Post(UserProfile user)
         {
             _userRepo.Add(user);
             return CreatedAtAction(
-                nameof(GetUser),
+                nameof(GetUserProfile),
                 new { firebaseUserId = user.FirebaseUserId },
                 user);
         }
 
         [HttpPut("edit/{id}")]
-        public IActionResult Put(int id, User user)
+        public IActionResult Put(int id, UserProfile user)
         {
             if (id != user.Id)
             {

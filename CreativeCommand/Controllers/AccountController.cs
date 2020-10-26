@@ -1,20 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using CreativeCommand.Repositories;
 using CreativeCommand.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CreativeCommand.Controllers
 {
-    /*[Authorize]*/
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
     {
         private readonly IAccountRepository _accountRepo;
-        private readonly IUserRepository _userRepo;
+        private readonly IUserProfileRepository _userRepo;
         private readonly IUserTypeRepository _userTypeRepo;
         public AccountController(
             IAccountRepository accountRepository, 
-            IUserRepository userRepository, 
+            IUserProfileRepository userRepository, 
             IUserTypeRepository userTypeRepository)
         {
             _accountRepo = accountRepository;
@@ -37,6 +39,7 @@ namespace CreativeCommand.Controllers
         [HttpPost]
         public IActionResult Post(Account account)
         {
+            account.DateCreated = DateTime.Now;
             _accountRepo.Add(account);
             return CreatedAtAction("Get", new { id = account.Id }, account);
         }

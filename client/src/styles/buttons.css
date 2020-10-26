@@ -1,4 +1,5 @@
-.accountBtn {
+.accountBtn,
+.campaignBtn {
     display: block;
     color: black;
     cursor: pointer;
@@ -16,7 +17,8 @@
 
 }
 
-.accountBtn:hover {
+.accountBtn:hover
+.campaignBtn:hover {
     background-color: goldenrod;
 }
 

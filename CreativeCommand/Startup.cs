@@ -20,7 +20,7 @@ namespace CreativeCommand
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<IUserTypeRepository, UserTypeRepository>();
             services.AddTransient<IAccountRepository, AccountRepository>();
             services.AddTransient<ICampaignRepository, CampaignRepository>();
@@ -48,7 +48,7 @@ namespace CreativeCommand
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() || env.IsEnvironment("Local"))
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -56,6 +56,8 @@ namespace CreativeCommand
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

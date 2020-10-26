@@ -12,12 +12,12 @@ namespace CreativeCommand.Controllers
         private readonly ICampaignStatusRepository _campaignStatusRepo;
         private readonly ICampaignRepository _campaignRepo;
         private readonly IAccountRepository _accountRepo;
-        private readonly IUserRepository _userRepo;
+        private readonly IUserProfileRepository _userRepo;
         public CampaignStatusController(
             ICampaignStatusRepository campaignStatusRepository,
             ICampaignRepository campaignRepository,
             IAccountRepository accountRepository,
-            IUserRepository userRepository)
+            IUserProfileRepository userRepository)
         {
             _campaignStatusRepo = campaignStatusRepository;
             _campaignRepo = campaignRepository;

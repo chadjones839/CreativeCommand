@@ -15,6 +15,7 @@
     border-radius: 5px;
     margin-right: 10px;
     border: 1px black solid;
+    width: 20%;
 }
 
 .home-contents {
@@ -47,4 +48,25 @@
 
 .dashboardTitle {
     text-align: center;
+}
+
+/* ----------------USER---------------------------- */
+/* ------------------------------------------------ */
+
+.userImage {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.userProfilePic {
+    width: 50%;
+    height: auto;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
+.user-name {
+    text-align: center;
+    margin-top: 10px;
 }

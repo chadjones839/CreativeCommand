@@ -17,6 +17,7 @@ namespace CreativeCommand.Repositories
             return new Campaign()
             {
                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                Title = reader.GetString(reader.GetOrdinal("Title")),
                 Revenue = reader.GetInt32(reader.GetOrdinal("Revenue")),
                 ScheduleTypeId = reader.GetInt32(reader.GetOrdinal("ScheduleTypeId")),
                 ScheduleType = new ScheduleType()
@@ -40,8 +41,9 @@ namespace CreativeCommand.Repositories
                 {
                     Id = reader.GetInt32(reader.GetOrdinal("AccountId")),
                     Company = reader.GetString(reader.GetOrdinal("Company")),
+                    Logo = DbUtils.GetNullableString(reader, "Logo"),
                     SalesUserId = reader.GetInt32(reader.GetOrdinal("SalesUserId")),
-                    SalesUser = new User()
+                    SalesUser = new UserProfile()
                     {
                         Id = reader.GetInt32(reader.GetOrdinal("SalesUserId")),
                         FirebaseUserId = reader.GetString(reader.GetOrdinal("FirebaseUserId")),
@@ -51,7 +53,7 @@ namespace CreativeCommand.Repositories
                         UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId"))
                     },
                     ManagerUserId = reader.GetInt32(reader.GetOrdinal("ManagerUserId")),
-                    ManagerUser = new User()
+                    ManagerUser = new UserProfile()
                     {
                         Id = reader.GetInt32(reader.GetOrdinal("ManagerUserId")),
                         FirebaseUserId = reader.GetString(reader.GetOrdinal("ManagerFirebaseId")),
@@ -72,10 +74,10 @@ namespace CreativeCommand.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                       SELECT c.Id, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
+                       SELECT c.Id, c.Title, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
                               c.StartDate, c.EndDate, c.Impressions, c.Audience,
 
-                              a.Id, a.Company, a.SalesUserId, a.ManagerUserId,
+                              a.Id, a.Company, a.Logo, a.SalesUserId, a.ManagerUserId,
 
                               u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
                               u.UserTypeId,
@@ -89,8 +91,8 @@ namespace CreativeCommand.Repositories
 
                          FROM Campaign c
                               LEFT JOIN Account a ON c.AccountId = a.Id
-                              LEFT JOIN [User] u ON a.SalesUserId = u.Id
-                              LEFT JOIN [User] um ON a.ManagerUserId = um.Id
+                              LEFT JOIN UserProfile u ON a.SalesUserId = u.Id
+                              LEFT JOIN UserProfile um ON a.ManagerUserId = um.Id
                               LEFT JOIN ScheduleType s ON c.ScheduleTypeId = s.Id
                               LEFT JOIN Platform p ON c.PlatformId = p.Id";
                     var reader = cmd.ExecuteReader();
@@ -116,10 +118,10 @@ namespace CreativeCommand.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                       SELECT c.Id, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
+                       SELECT c.Id, c.Title, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
                               c.StartDate, c.EndDate, c.Impressions, c.Audience,
 
-                              a.Id, a.Company, a.SalesUserId, a.ManagerUserId,
+                              a.Id, a.Company, a.Logo, a.SalesUserId, a.ManagerUserId,
 
                               u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
                               u.UserTypeId,
@@ -133,8 +135,8 @@ namespace CreativeCommand.Repositories
 
                          FROM Campaign c
                               LEFT JOIN Account a ON c.AccountId = a.Id
-                              LEFT JOIN [User] u ON a.SalesUserId = u.Id
-                              LEFT JOIN [User] um ON a.ManagerUserId = um.Id
+                              LEFT JOIN UserProfile u ON a.SalesUserId = u.Id
+                              LEFT JOIN UserProfile um ON a.ManagerUserId = um.Id
                               LEFT JOIN ScheduleType s ON c.ScheduleTypeId = s.Id
                               LEFT JOIN Platform p ON c.PlatformId = p.Id
                         WHERE c.Id = @Id";
@@ -162,12 +164,13 @@ namespace CreativeCommand.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Campaign (AccountId, Revenue, ScheduleTypeId, PlatformId, CreateDate,
+                    cmd.CommandText = @"INSERT INTO Campaign (AccountId, Title, Revenue, ScheduleTypeId, PlatformId, CreateDate,
                                                               StartDate, EndDate, Impressions, Audience)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@AccountId, @Revenue, @ScheduleTypeId, @PlatformId, @CreateDate, @StartDate,
+                                        VALUES (@AccountId, @Title, @Revenue, @ScheduleTypeId, @PlatformId, @CreateDate, @StartDate,
                                                 @EndDate, @Impressions, @Audience)";
                     DbUtils.AddParameter(cmd, "@AccountId", campaign.AccountId);
+                    DbUtils.AddParameter(cmd, "@Title", campaign.Title);
                     DbUtils.AddParameter(cmd, "@Revenue", campaign.Revenue);
                     DbUtils.AddParameter(cmd, "@ScheduleTypeId", campaign.ScheduleTypeId);
                     DbUtils.AddParameter(cmd, "@PlatformId", campaign.PlatformId);
@@ -193,6 +196,7 @@ namespace CreativeCommand.Repositories
                             UPDATE Campaign
                             SET 
                                 AccountId = @AccountId, 
+                                Title = @Title,
                                 Revenue = @Revenue,
                                 ScheduleTypeId = @ScheduleTypeId, 
                                 PlatformId = @PlatformId,
@@ -203,6 +207,7 @@ namespace CreativeCommand.Repositories
                                 Audience = @Audience
                             WHERE Id = @Id";
                     DbUtils.AddParameter(cmd, "@Id", campaign.Id);
+                    DbUtils.AddParameter(cmd, "@Title", campaign.Title);
                     DbUtils.AddParameter(cmd, "@AccountId", campaign.AccountId);
                     DbUtils.AddParameter(cmd, "@Revenue", campaign.Revenue);
                     DbUtils.AddParameter(cmd, "@ScheduleTypeId", campaign.ScheduleTypeId);
