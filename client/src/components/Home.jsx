@@ -14,8 +14,6 @@ export default function Home() {
     getAllCampaigns();
   }, []);
 
-  console.log(campaigns)
-
   return (
     <>
       <main className="home-container">

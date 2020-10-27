@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { AccountContext } from "../../providers/AccountProvider";
@@ -10,8 +11,6 @@ export default function AccountDetail() {
     useEffect(() => {
         getById(id)
     }, []);
-
-    console.log(account)
     
     const defaultImg = "https://res.cloudinary.com/dhduglm4j/image/upload/v1603478435/icons/defaultCompanyIcon_bqlwsn.jpg"
 

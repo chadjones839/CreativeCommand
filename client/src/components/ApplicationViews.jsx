@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
@@ -11,7 +12,7 @@ import Register from "./Register";
 import Home from "./Home";
 
 export default function ApplicationViews() {
-  const { isLoggedIn, user } = useContext(UserProfileContext);
+  const { isLoggedIn } = useContext(UserProfileContext);
 
   return (
     <main>
@@ -30,7 +31,7 @@ export default function ApplicationViews() {
         </Route>
 
         {/* ACCOUNTS */}
-        <Route path="/accounts" exact>
+        <Route exact path="/accounts">
           {isLoggedIn ? <AccountList /> : <Redirect to="/login" />}
         </Route>
 

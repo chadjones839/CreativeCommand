@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { useState, useContext, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory, useParams } from "react-router-dom";
@@ -6,14 +7,18 @@ import { UserProfileContext } from "../../providers/UserProfileProvider";
 
 export default function AccountEditForm() {
   const history = useHistory();
+  const { id } = useParams();
   const { account, getById, updateAccount } = useContext(AccountContext);
-  const { salesUsers, managerUsers, getAllSalesUsers, getAllManagerUsers } = useContext(UserProfileContext);
+  const { salesUsers, 
+          managerUsers, 
+          getAllSalesUsers, 
+          getAllManagerUsers 
+        } = useContext(UserProfileContext);
   const [ salesUserId, setSalesUserId ] = useState()
   const [ managerUserId, setManagerUserId ] = useState()
-  const { id } = useParams();
 
   const [editedAccount, setEditedAccount] = useState({
-      id: id,
+      id: account.id,
       company: "",
       logo: "",
       address: "",
@@ -26,18 +31,18 @@ export default function AccountEditForm() {
   });
 
   useEffect(() => {
-    getAllSalesUsers()
-    getAllManagerUsers()
-  }, [])
-
-  useEffect(() => {
     getById(id)
-  }, [])
-
+  }, [id])
+  
   useEffect(() => {
     setEditedAccount(account)
   }, [account])
-
+  
+  useEffect(() => {
+    getAllSalesUsers()
+    getAllManagerUsers()
+  }, [])
+  
   const handleSalesUserChange = (e) => {
     setSalesUserId(e.target.value);
   }
@@ -96,13 +101,13 @@ export default function AccountEditForm() {
             id="accountId" 
             type="hidden"
             name="accountId"
-            value={account.id} 
+            value={editedAccount.id} 
             onChange={handleFieldChange} />
         <Input 
             id="dateCreated" 
             type="hidden"
             name="dateCreated"
-            defaultValue={account.dateCreated} 
+            defaultValue={editedAccount.dateCreated} 
             onChange={handleFieldChange} />
         </FormGroup>
         <FormGroup>
@@ -111,7 +116,7 @@ export default function AccountEditForm() {
             id="company" 
             type="text" 
             name="company"
-            defaultValue={account.company}
+            defaultValue={editedAccount.company}
             onChange={handleFieldChange} />
         </FormGroup>
         <FormGroup>
@@ -120,7 +125,7 @@ export default function AccountEditForm() {
             id="logo" 
             type="text" 
             name="logo"
-            defaultValue={account.logo}
+            defaultValue={editedAccount.logo}
             onChange={handleFieldChange} />
         </FormGroup>
         <FormGroup>
@@ -129,7 +134,7 @@ export default function AccountEditForm() {
             id="address" 
             type="text" 
             name="address"
-            defaultValue={account.address}
+            defaultValue={editedAccount.address}
             onChange={handleFieldChange} />
         </FormGroup>
         <FormGroup>
@@ -138,7 +143,7 @@ export default function AccountEditForm() {
             id="city" 
             type="text" 
             name="city"
-            defaultValue={account.city}
+            defaultValue={editedAccount.city}
             onChange={handleFieldChange} />
         </FormGroup>
         <FormGroup>
@@ -147,7 +152,7 @@ export default function AccountEditForm() {
             id="state" 
             type="text" 
             name="state"
-            defaultValue={account.state}
+            defaultValue={editedAccount.state}
             onChange={handleFieldChange} />
         </FormGroup>
         <FormGroup>
@@ -156,7 +161,7 @@ export default function AccountEditForm() {
             id="zipCode" 
             type="text" 
             name="zipCode"
-            defaultValue={account.zipCode}
+            defaultValue={editedAccount.zipCode}
             onChange={handleFieldChange} />
         </FormGroup>
         <FormGroup>
@@ -165,10 +170,10 @@ export default function AccountEditForm() {
             id="salesUserId" 
             type="select" 
             name="salesUserId"
-            defaultValue={account.salesUserId}
+            defaultValue={editedAccount.salesUserId}
             onChange={handleSalesUserChange}>
                 {salesUsers.map(users =>
-                    users.id === account.salesUserId ?
+                    users.id === editedAccount.salesUserId ?
                         <option selected value={users.id}>
                             {users.fullName}
                         </option> :
@@ -184,10 +189,10 @@ export default function AccountEditForm() {
             id="managerUserId" 
             type="select" 
             name="managerUserId"
-            defaultValue={account.managerUserId}
+            defaultValue={editedAccount.managerUserId}
             onChange={handleManagerUserChange}>
                 {managerUsers.map(users =>
-                    users.id === account.salesUserId ?
+                    users.id === editedAccount.salesUserId ?
                         <option selected value={users.id}>
                             {users.fullName}
                         </option> :

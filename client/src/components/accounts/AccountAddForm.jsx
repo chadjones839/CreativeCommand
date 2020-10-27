@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { useState, useContext, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory, Link } from "react-router-dom";
@@ -69,8 +70,6 @@ export default function AccountAddForm() {
 
     addAccount(account)
     .then((a) => {
-        debugger
-        console.log(a)
         history.push(`/account/${a.id}`)
     })
   };

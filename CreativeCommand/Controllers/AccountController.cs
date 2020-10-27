@@ -41,7 +41,7 @@ namespace CreativeCommand.Controllers
         {
             account.DateCreated = DateTime.Now;
             _accountRepo.Add(account);
-            return CreatedAtAction("Get", new { id = account.Id }, account);
+            return CreatedAtAction("GetAccount", new { id = account.Id }, account);
         }
 
         [HttpPut("edit/{id}")]

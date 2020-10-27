@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { useState, useContext } from 'react';
 import { NavLink as RRNavLink } from "react-router-dom";
 import {
@@ -7,12 +8,7 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
-    DropdownItem,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-
+    NavLink
 } from 'reactstrap';
 import { UserProfileContext } from "../providers/UserProfileProvider";
 
@@ -20,9 +16,8 @@ export default function Header() {
     const { isLoggedIn, logout } = useContext(UserProfileContext);
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
-    const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
+    // const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
-    //Tabs for the navBar on landing page go here
     return (
         <div>
             <Navbar color="light" light expand="md">
@@ -32,7 +27,6 @@ export default function Header() {
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
-                        { /* When isLoggedIn === true, we will render the Home link */}
                         {isLoggedIn &&
                             <>
                                 <NavItem>
