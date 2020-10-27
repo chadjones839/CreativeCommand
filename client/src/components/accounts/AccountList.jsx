@@ -1,17 +1,21 @@
+/*eslint-disable*/
 import React, { useContext, useEffect } from "react";
-import { AccountContext } from "./../providers/AccountProvider";
-import { CampaignContext } from "./../providers/CampaignProvider";
-import AccountPreview from "./accounts/AccountPreview"
-import CampaignPreview from "./campaigns/CampaignPreview"
+import { AccountContext } from "../../providers/AccountProvider";
+import { CampaignContext } from "../../providers/CampaignProvider";
+import AccountPreview from "../accounts/AccountPreview"
+import AccountDetail from "../accounts/AccountDetail"
+import CampaignPreview from "../campaigns/CampaignPreview"
 
 export default function Home() {
   const { accounts, getAllAccounts } = useContext(AccountContext);
   const { campaigns, getAllCampaigns } = useContext(CampaignContext);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
+
+  const {account, setAccount} = useState({});
   
   useEffect(() => {
-    getAllAccounts();
-    getAllCampaigns();
+      getAllAccounts();
+      getAllCampaigns();
   }, []);
 
   return (
@@ -26,11 +30,6 @@ export default function Home() {
             <p className="user-name">{sessionUser.firstName} {sessionUser.lastName}</p>
           </section>
           <div className="home-contents">
-            <div className="dashboard-container">
-              <section className="dashboard-details">
-                Overview Container
-            </section>
-            </div>
             <div className="overview-container">
               <section className="account-container">
                 <h3 className="dashboardTitle">Account Activity</h3>
@@ -45,16 +44,8 @@ export default function Home() {
 
               </section>
 
-              <section className="campaign-container">
-                <h3 className="dashboardTitle">Campaign Activity</h3>
-
-                {campaigns.map(c =>
-                  <CampaignPreview key={c.id} campaign={c} />
-                )}
-              </section>
-
-              <section className="campaignTracker-container">
-                <h3 className="dashboardTitle">Campaign Tracker</h3>
+              <section className="accountDetail-container">
+                {<AccountDetail/>}
               </section>
             </div>
           </div>

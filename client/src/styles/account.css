@@ -1,0 +1,60 @@
+/* -----------ACCOUNT PREVIEW------------------------------ */
+/* -------------------------------------------------------- */
+.accountCard {
+    border-bottom: 1px solid black;
+    display: flex; 
+    padding: 10px; 
+}
+
+.companyLogo {
+    height: auto;
+    width: 80%;
+}
+
+.accountCard-left {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.accountCard-middle {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    width: 70%;
+}
+
+.accountCard-companyName {
+    margin: 0;
+    color: blue;
+    font-weight: bold;
+    font-size: 1.2em;
+
+}
+
+.accountCard-details {
+    margin: 0;
+    line-height: .8;
+}
+
+.accountActivity-identifiers > em {
+    font-size: .8em;
+}
+
+.accountCard-right {
+    display: flex;
+    justify-content: flex-end;
+    width: 10%;
+}
+
+.accountButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+/* -----------FULL ACCOUNT VIEW------------------------------ */
+/* ---------------------------------------------------------- */
+

@@ -15,6 +15,10 @@ namespace CreativeCommand.Models
         public string Company { get; set; }
 
         [Required]
+        [MaxLength(255)]
+        public string Logo { get; set; }
+
+        [Required]
         [MaxLength(62)]
         public string Address { get; set; }
 
@@ -34,11 +38,11 @@ namespace CreativeCommand.Models
 
         [Required]
         public int SalesUserId { get; set; }
-        public User SalesUser { get; set; }
+        public UserProfile SalesUser { get; set; }
 
         [Required]
         public int ManagerUserId { get; set; }
-        public User ManagerUser { get; set; }
+        public UserProfile ManagerUser { get; set; }
 
     }
 }

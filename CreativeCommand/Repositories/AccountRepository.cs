@@ -17,12 +17,14 @@ namespace CreativeCommand.Repositories
             {
                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                 Company = reader.GetString(reader.GetOrdinal("Company")),
+                Logo = DbUtils.GetNullableString(reader, "Logo"),
                 Address = reader.GetString(reader.GetOrdinal("Address")),
                 City = reader.GetString(reader.GetOrdinal("City")),
                 State = reader.GetString(reader.GetOrdinal("State")),
                 ZipCode = reader.GetInt32(reader.GetOrdinal("ZipCode")),
+                DateCreated = reader.GetDateTime(reader.GetOrdinal("DateCreated")),
                 SalesUserId = reader.GetInt32(reader.GetOrdinal("SalesUserId")),
-                SalesUser = new User()
+                SalesUser = new UserProfile()
                 {
                     Id = reader.GetInt32(reader.GetOrdinal("SalesUserId")),
                     FirebaseUserId = reader.GetString(reader.GetOrdinal("FirebaseUserId")),
@@ -37,7 +39,7 @@ namespace CreativeCommand.Repositories
                     }
                 },
                 ManagerUserId = reader.GetInt32(reader.GetOrdinal("ManagerUserId")),
-                ManagerUser = new User()
+                ManagerUser = new UserProfile()
                 {
                     Id = reader.GetInt32(reader.GetOrdinal("ManagerUserId")),
                     FirebaseUserId = reader.GetString(reader.GetOrdinal("ManagerFirebaseId")),
@@ -62,7 +64,7 @@ namespace CreativeCommand.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                       SELECT a.Id, a.Company, a.Address, a.City, a.State, a.ZipCode,
+                       SELECT a.Id, a.Company, a.Logo, a.Address, a.City, a.State, a.ZipCode,
                               a.DateCreated, a.SalesUserId, a.ManagerUserId,
 
                               u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
@@ -75,9 +77,9 @@ namespace CreativeCommand.Repositories
 
                               mut.Id, mut.[Name] AS ManagerUserTypeName
                          FROM Account a
-                              LEFT JOIN [User] u ON a.SalesUserId = u.Id
+                              LEFT JOIN UserProfile u ON a.SalesUserId = u.Id
                               LEFT JOIN UserType ut ON u.UserTypeId = ut.Id
-                              LEFT JOIN [User] um ON a.ManagerUserId = um.Id
+                              LEFT JOIN UserProfile um ON a.ManagerUserId = um.Id
                               LEFT JOIN UserType mut ON um.UserTypeId = mut.Id";
                     var reader = cmd.ExecuteReader();
 
@@ -102,7 +104,7 @@ namespace CreativeCommand.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                       SELECT a.Id, a.Company, a.Address, a.City, a.State, a.ZipCode,
+                       SELECT a.Id, a.Company, a.Logo, a.Address, a.City, a.State, a.ZipCode,
                               a.DateCreated, a.SalesUserId, a.ManagerUserId,
 
                               u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
@@ -115,9 +117,9 @@ namespace CreativeCommand.Repositories
 
                               mut.Id, mut.[Name] AS ManagerUserTypeName
                          FROM Account a
-                              LEFT JOIN [User] u ON a.SalesUserId = u.Id
+                              LEFT JOIN UserProfile u ON a.SalesUserId = u.Id
                               LEFT JOIN UserType ut ON u.UserTypeId = ut.Id
-                              LEFT JOIN [User] um ON a.ManagerUserId = um.Id
+                              LEFT JOIN UserProfile um ON a.ManagerUserId = um.Id
                               LEFT JOIN UserType mut ON um.UserTypeId = mut.Id
                         WHERE a.Id = @Id";
 
@@ -144,12 +146,13 @@ namespace CreativeCommand.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Account (Company, Address, City, State, ZipCode, DateCreated,
+                    cmd.CommandText = @"INSERT INTO Account (Company, Logo, Address, City, State, ZipCode, DateCreated,
                                                             SalesUserId, ManagerUserId)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@Company, @Address, @City, @State, @ZipCode, 
+                                        VALUES (@Company, @Logo, @Address, @City, @State, @ZipCode, 
                                                 @DateCreated, @SalesUserId, @ManagerUserId)";
                     DbUtils.AddParameter(cmd, "@Company", account.Company);
+                    DbUtils.AddParameter(cmd, "@Logo", account.Logo);
                     DbUtils.AddParameter(cmd, "@Address", account.Address);
                     DbUtils.AddParameter(cmd, "@City", account.City);
                     DbUtils.AddParameter(cmd, "@State", account.State);
@@ -173,7 +176,8 @@ namespace CreativeCommand.Repositories
                     cmd.CommandText = @"
                             UPDATE Account
                             SET 
-                                Company = @company, 
+                                Company = @company,
+                                Logo = @logo,
                                 Address = @address,
                                 City = @city, 
                                 State = @state,
@@ -183,6 +187,7 @@ namespace CreativeCommand.Repositories
                                 ManagerUserId = @managerUserId
                             WHERE Id = @id";
                     cmd.Parameters.AddWithValue("@id", account.Id);
+                    cmd.Parameters.AddWithValue("@logo", account.Logo);
                     cmd.Parameters.AddWithValue("@company", account.Company);
                     cmd.Parameters.AddWithValue("@address", account.Address);
                     cmd.Parameters.AddWithValue("@city", account.City);

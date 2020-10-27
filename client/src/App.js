@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
-import { UserProvider } from "./providers/UserProvider";
+import { UserProfileProvider } from "./providers/UserProfileProvider";
+import { AccountProvider } from "./providers/AccountProvider";
+import { CampaignProvider } from './providers/CampaignProvider';
 import Navbar from "./components/Navbar";
 import ApplicationViews from "./components/ApplicationViews";
 import './styles/main.css';
@@ -8,12 +10,16 @@ import './styles/main.css';
 function App() {
   return (
     <Router>
-      <UserProvider>
+      <UserProfileProvider>
+        <AccountProvider>
+          <CampaignProvider>
 
-        <Navbar />
-        <ApplicationViews />
+          <Navbar />
+          <ApplicationViews />
 
-      </UserProvider>
+          </CampaignProvider>
+        </AccountProvider>
+      </UserProfileProvider>
     </Router >
   );
 }

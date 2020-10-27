@@ -51,7 +51,7 @@ namespace CreativeCommand.Repositories
                         Id = reader.GetInt32(reader.GetOrdinal("AccountId")),
                         Company = reader.GetString(reader.GetOrdinal("Company")),
                         SalesUserId = reader.GetInt32(reader.GetOrdinal("SalesUserId")),
-                        SalesUser = new User()
+                        SalesUser = new UserProfile()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("SalesUserId")),
                             FirebaseUserId = reader.GetString(reader.GetOrdinal("FirebaseUserId")),
@@ -61,7 +61,7 @@ namespace CreativeCommand.Repositories
                             UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId"))
                         },
                         ManagerUserId = reader.GetInt32(reader.GetOrdinal("ManagerUserId")),
-                        ManagerUser = new User()
+                        ManagerUser = new UserProfile()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("ManagerUserId")),
                             FirebaseUserId = reader.GetString(reader.GetOrdinal("ManagerFirebaseId")),
@@ -104,8 +104,8 @@ namespace CreativeCommand.Repositories
                         FROM CampaignStatus cs
                             LEFT JOIN Campaign c On cs.CampaignId = c.Id
                             LEFT JOIN Account a ON c.AccountId = a.Id
-                            LEFT JOIN [User] u ON a.SalesUserId = u.Id
-                            LEFT JOIN [User] um ON a.ManagerUserId = um.Id
+                            LEFT JOIN UserProfile u ON a.SalesUserId = u.Id
+                            LEFT JOIN UserProfile um ON a.ManagerUserId = um.Id
                             LEFT JOIN ScheduleType s ON c.ScheduleTypeId = s.Id
                             LEFT JOIN Platform p ON c.PlatformId = p.Id";
                     var reader = cmd.ExecuteReader();
@@ -152,8 +152,8 @@ namespace CreativeCommand.Repositories
                         FROM CampaignStatus cs
                             LEFT JOIN Campaign c On cs.CampaignId = c.Id
                             LEFT JOIN Account a ON c.AccountId = a.Id
-                            LEFT JOIN [User] u ON a.SalesUserId = u.Id
-                            LEFT JOIN [User] um ON a.ManagerUserId = um.Id
+                            LEFT JOIN UserProfile u ON a.SalesUserId = u.Id
+                            LEFT JOIN UserProfile um ON a.ManagerUserId = um.Id
                             LEFT JOIN ScheduleType s ON c.ScheduleTypeId = s.Id
                             LEFT JOIN Platform p ON c.PlatformId = p.Id
                     WHERE c.Id = @Id";

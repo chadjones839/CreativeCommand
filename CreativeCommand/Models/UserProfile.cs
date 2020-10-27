@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CreativeCommand.Models
 {
-    public class User
+    public class UserProfile
     {
         public int Id { get; set; }
 
@@ -25,6 +25,8 @@ namespace CreativeCommand.Models
         [DataType(DataType.EmailAddress)]
         [MaxLength(255)]
         public string Email { get; set; }
+
+        public string ImageUrl { get; set; }
 
         [Required]
         public int UserTypeId { get; set; }

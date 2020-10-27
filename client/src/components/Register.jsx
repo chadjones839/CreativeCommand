@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory } from "react-router-dom";
-import { UserContext } from "../providers/UserProvider";
+import { UserProfileContext } from "../providers/UserProfileProvider";
 
 export default function Register() {
   const history = useHistory();
-  const { register } = useContext(UserContext);
+  const { register } = useContext(UserProfileContext);
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
@@ -22,7 +22,7 @@ export default function Register() {
       register(user, password)
         .then(() => history.push("/"));
     }
- };
+  };
 
   return (
     <Form className="registration-form" onSubmit={registerClick}>
