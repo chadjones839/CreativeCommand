@@ -47,7 +47,9 @@ export default function Home() {
 
               <section className="campaign-container">
                 <h3 className="dashboardTitle">Campaign Activity</h3>
-
+                <p>
+                  <a className="btn-red" href="/campaigns/add">+ New Campaign</a>
+                </p>
                 {campaigns.map(c =>
                   <CampaignPreview key={c.id} campaign={c} />
                 )}

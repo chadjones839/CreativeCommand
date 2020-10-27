@@ -23,7 +23,7 @@ export const CampaignProvider = (props) => {
 
     const getById = (id) => {
         getToken().then((token) =>
-            fetch(`/api/campaign/${id}`, {
+            fetch(`${apiUrl}/${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -34,7 +34,7 @@ export const CampaignProvider = (props) => {
 
     const addCampaign = (campaign) => {
         return getToken().then((token) =>
-            fetch("/api/campaign", {
+            fetch(apiUrl, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ export const CampaignProvider = (props) => {
 
     const updateCampaign = (id, campaign) => {
         return getToken().then((token) =>
-            fetch(`/api/campaign/edit/${id}`, {
+            fetch(`${apiUrl}/edit/${id}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -63,7 +63,7 @@ export const CampaignProvider = (props) => {
 
     const deleteCampaign = (id) =>
         getToken().then((token) =>
-            fetch(`/api/campaign/delete/${id}`, {
+            fetch(`${apiUrl}/delete/${id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,

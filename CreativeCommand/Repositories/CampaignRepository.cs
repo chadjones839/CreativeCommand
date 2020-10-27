@@ -34,8 +34,8 @@ namespace CreativeCommand.Repositories
                 CreateDate = reader.GetDateTime(reader.GetOrdinal("CreateDate")),
                 StartDate = reader.GetDateTime(reader.GetOrdinal("StartDate")),
                 EndDate = reader.GetDateTime(reader.GetOrdinal("EndDate")),
-                Impressions = reader.GetInt32(reader.GetOrdinal("Impressions")),
-                Audience = reader.GetInt32(reader.GetOrdinal("Audience")),
+                Impressions = DbUtils.GetNullableInt(reader, "Impressions"),
+                Audience = DbUtils.GetNullableInt(reader, "Audience"),
                 AccountId = reader.GetInt32(reader.GetOrdinal("AccountId")),
                 Account = new Account()
                 {

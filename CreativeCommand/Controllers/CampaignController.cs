@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using CreativeCommand.Repositories;
 using CreativeCommand.Models;
 
@@ -29,7 +30,7 @@ namespace CreativeCommand.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetAccount(int id)
+        public IActionResult GetCampaign(int id)
         {
             return Ok(_campaignRepo.GetCampaignById(id));
         }
@@ -37,8 +38,9 @@ namespace CreativeCommand.Controllers
         [HttpPost]
         public IActionResult Post(Campaign campaign)
         {
+            campaign.CreateDate = DateTime.Now;
             _campaignRepo.Add(campaign);
-            return CreatedAtAction("Get", new { id = campaign.Id }, campaign);
+            return CreatedAtAction("GetCampaign", new { id = campaign.Id }, campaign);
         }
 
         [HttpPut("edit/{id}")]
