@@ -1,17 +1,17 @@
 /*eslint-disable*/
 import React, { useState, useContext, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { useHistory, useParams, Link } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { CampaignContext } from "../../providers/CampaignProvider";
 import { AccountContext } from "../../providers/AccountProvider";
 import { ScheduleTypeContext } from "../../providers/ScheduleTypeProvider";
 import { PlatformContext } from "../../providers/PlatformProvider";
 
-export default function CampaignAddForm() {
+export default function CampaignEditForm() {
   const history = useHistory();
   const { id } = useParams();
 
-  const { campaign, getById, updateCampaign } = useContext(CampaignContext);
+  const { campaign, getCampaignById, updateCampaign } = useContext(CampaignContext);
   const { accounts, getAllAccounts } = useContext(AccountContext);
   const { scheduleTypes, getAllScheduleTypes } = useContext(ScheduleTypeContext);
   const { platforms, getAllPlatforms } = useContext(PlatformContext);
@@ -27,7 +27,7 @@ export default function CampaignAddForm() {
       revenue: "",
       scheduleTypeId: "",
       platformId: "",
-      dateCreated: "",
+      createDate: "",
       startDate: "",
       endDate: "",
       impressions: "",
@@ -35,7 +35,7 @@ export default function CampaignAddForm() {
   });
 
   useEffect(() => {
-    getById(id)
+    getCampaignById(id)
   }, [id])
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export default function CampaignAddForm() {
       revenue: editedCampaign.revenue,
       scheduleTypeId: editedCampaign.scheduleTypeId,
       platformId: editedCampaign.platformId,
-      dateCreated: editedCampaign.dateCreated,
+      createDate: editedCampaign.createDate,
       startDate: editedCampaign.startDate,
       endDate: editedCampaign.endDate,
       impressions: editedCampaign.impressions,
@@ -106,19 +106,15 @@ export default function CampaignAddForm() {
       editedCampaign.platformId = campaign.platformId;
     }
 
-    debugger
     updateCampaign(editedCampaign.id, editedCampaign)
     .then(() => {
         history.push(`/campaign/${id}`)
     })
   };
 
-  // if (!editedCampaign || 
-  //     !accountId || 
-  //     !scheduleTypeId || 
-  //     !platformId) {
-  //   return null
-  // }
+  if (!editedCampaign && !accountId && !scheduleTypeId && !platformId) {
+    return null
+  }
 
   return (
     <>
@@ -132,10 +128,10 @@ export default function CampaignAddForm() {
             value={editedCampaign.id} 
             onChange={handleFieldChange} />
         <Input 
-            id="dateCreated" 
+            id="createDate" 
             type="hidden"
-            name="dateCreated"
-            defaultValue={editedCampaign.dateCreated} 
+            name="createDate"
+            defaultValue={editedCampaign.createDate} 
             onChange={handleFieldChange} />
         </FormGroup>
         <FormGroup>

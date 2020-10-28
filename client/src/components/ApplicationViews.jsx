@@ -61,9 +61,9 @@ export default function ApplicationViews() {
           {isLoggedIn ? <CampaignList /> : <Redirect to="/login" />}
         </Route> */}
 
-        {/* <Route exact path="/campaign/:id">
+        <Route exact path="/campaign/:id">
           {isLoggedIn ? <CampaignDetail /> : <Redirect to="/login" />}
-        </Route> */}
+        </Route>
 
         <Route exact path="/campaigns/add">
           {isLoggedIn ? <CampaignAddForm /> : <Redirect to="/login" />}
@@ -73,9 +73,9 @@ export default function ApplicationViews() {
           {isLoggedIn ? <CampaignEditForm /> : <Redirect to="/login" />}
         </Route>
 
-        {/* <Route exact path="/campaign/delete/:id">
+        <Route exact path="/campaign/delete/:id">
           {isLoggedIn ? <CampaignDelete /> : <Redirect to="/login" />}
-        </Route>  */}
+        </Route> 
 
       </Switch>
     </main>

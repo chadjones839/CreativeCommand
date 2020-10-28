@@ -11,11 +11,11 @@ export default function Home() {
   const { campaigns, getAllCampaigns } = useContext(CampaignContext);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
-  const {account, setAccount} = useState({});
-  
+  const { account, setAccount } = useState({});
+
   useEffect(() => {
-      getAllAccounts();
-      getAllCampaigns();
+    getAllAccounts();
+    getAllCampaigns();
   }, []);
 
   return (
@@ -25,7 +25,7 @@ export default function Home() {
           <section className="userDetails">
             <div className="userImage">
               {!sessionUser.imageUrl ? <img className="userProfilePic" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1596490031/icons/profileNav_lord6y.png" alt="user-image" /> :
-              <img className="userProfilePic" src={sessionUser.imageUrl} alt="user-image" /> }
+                <img className="userProfilePic" src={sessionUser.imageUrl} alt="user-image" />}
             </div>
             <p className="user-name">{sessionUser.firstName} {sessionUser.lastName}</p>
           </section>
@@ -35,7 +35,7 @@ export default function Home() {
                 <h3 className="dashboardTitle">Account Activity</h3>
                 <div>
                   <p>
-                    <a className="btn-red" href="/accounts/add">+ New Account</a>
+                    <a className="mainBtn" href="/accounts/add">+ New Account</a>
                   </p>
                 </div>
                 {accounts.map(a =>
@@ -45,7 +45,7 @@ export default function Home() {
               </section>
 
               <section className="accountDetail-container">
-                {<AccountDetail/>}
+                {<AccountDetail />}
               </section>
             </div>
           </div>

@@ -24,7 +24,7 @@ export default function AccountPreview({ campaign }) {
                 </Link> 
               </div>
               <div className="campaignActivity-identifiers">
-                <p className="campaignCard-details">Developed for <span className="campaign-company">{campaign.account.company}</span></p> <em>Created on {dateTime}</em>
+                <p className="campaignCard-details">Client: <span className="campaign-company">{campaign.account.company}</span></p> <em>Created on {dateTime}</em>
               </div>
             </div>
             <div className="campaignCard-right">

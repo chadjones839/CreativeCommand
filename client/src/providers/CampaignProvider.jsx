@@ -21,7 +21,7 @@ export const CampaignProvider = (props) => {
                 .then(setCampaigns));
     };
 
-    const getById = (id) => {
+    const getCampaignById = (id) => {
         getToken().then((token) =>
             fetch(`${apiUrl}/${id}`, {
                 method: "GET",
@@ -74,7 +74,7 @@ export const CampaignProvider = (props) => {
 
     return (
         <CampaignContext.Provider value={{
-            campaign, campaigns, getAllCampaigns, getById, addCampaign, updateCampaign, deleteCampaign, setCampaign
+            campaign, campaigns, getAllCampaigns, getCampaignById, addCampaign, updateCampaign, deleteCampaign, setCampaign
         }}>
             {props.children}
         </CampaignContext.Provider>

@@ -2,10 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using CreativeCommand.Repositories;
 using CreativeCommand.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CreativeCommand.Controllers
 {
-    /*[Authorize]*/
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CampaignController : ControllerBase

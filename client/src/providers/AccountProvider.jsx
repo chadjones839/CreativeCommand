@@ -34,7 +34,7 @@ export const AccountProvider = (props) => {
 
     const getById = (id) => {
         getToken().then((token) =>
-            fetch(`/api/account/${id}`, {
+            fetch(`${apiUrl}/${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -45,7 +45,7 @@ export const AccountProvider = (props) => {
 
     const addAccount = (account) => {
         return getToken().then((token) =>
-            fetch("/api/account", {
+            fetch(apiUrl, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -62,7 +62,7 @@ export const AccountProvider = (props) => {
 
     const updateAccount = (id, account) => {
         return getToken().then((token) =>
-            fetch(`/api/account/edit/${id}`, {
+            fetch(`${apiUrl}/edit/${id}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -74,7 +74,7 @@ export const AccountProvider = (props) => {
 
     const deleteAccount = (id) =>
         getToken().then((token) =>
-            fetch(`/api/account/delete/${id}`, {
+            fetch(`${apiUrl}/delete/${id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,

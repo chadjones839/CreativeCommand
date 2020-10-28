@@ -33,8 +33,11 @@ namespace CreativeCommand.Models
         [Required]
         public DateTime EndDate { get; set; }
 
-        public int? Impressions { get; set; }
-        public int? Audience { get; set; }
+        [Required]
+        public int Impressions { get; set; }
+
+        [Required]
+        public int Audience { get; set; }
 
         [Required]
         public int AccountId { get; set; }

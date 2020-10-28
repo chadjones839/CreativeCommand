@@ -87,7 +87,7 @@ export default function CampaignAddForm() {
     campaign.revenue = parseRev;
     campaign.impressions = parseImp;
     campaign.audience = parseAud;
-    debugger
+    
     addCampaign(campaign)
     .then((c) => {
         history.push(`/campaign/${c.id}`)
