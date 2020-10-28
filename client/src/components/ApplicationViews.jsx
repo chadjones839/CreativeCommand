@@ -57,9 +57,9 @@ export default function ApplicationViews() {
         </Route> 
 
         {/* CAMPAIGNS */}
-        {/* <Route exact path="/campaigns">
+        <Route exact path="/campaigns">
           {isLoggedIn ? <CampaignList /> : <Redirect to="/login" />}
-        </Route> */}
+        </Route>
 
         <Route exact path="/campaign/:id">
           {isLoggedIn ? <CampaignDetail /> : <Redirect to="/login" />}

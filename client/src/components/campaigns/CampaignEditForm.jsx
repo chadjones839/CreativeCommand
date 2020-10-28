@@ -8,9 +8,7 @@ import { ScheduleTypeContext } from "../../providers/ScheduleTypeProvider";
 import { PlatformContext } from "../../providers/PlatformProvider";
 
 export default function CampaignEditForm() {
-  const history = useHistory();
-  const { id } = useParams();
-
+  
   const { campaign, getCampaignById, updateCampaign } = useContext(CampaignContext);
   const { accounts, getAllAccounts } = useContext(AccountContext);
   const { scheduleTypes, getAllScheduleTypes } = useContext(ScheduleTypeContext);
@@ -20,13 +18,13 @@ export default function CampaignEditForm() {
   const [ scheduleTypeId, setScheduleTypeId ] = useState()
   const [ platformId, setPlatformId ] = useState()
 
-  const [editedCampaign, setEditedCampaign] = useState({
+  const [ editedCampaign, setEditedCampaign ] = useState({
       id: campaign.id,
-      accountId: "",
+      accountId: accountId,
       title: "",
       revenue: "",
-      scheduleTypeId: "",
-      platformId: "",
+      scheduleTypeId: scheduleTypeId,
+      platformId: platformId,
       createDate: "",
       startDate: "",
       endDate: "",
@@ -34,52 +32,50 @@ export default function CampaignEditForm() {
       audience: ""
   });
 
+  const history = useHistory();
+  const { id } = useParams();
+
   useEffect(() => {
     getCampaignById(id)
-  }, [id])
+  }, [])
 
+  useEffect(() => {
+    getAllAccounts()
+  }, [])
+  
+  useEffect(() => {
+    getAllScheduleTypes()
+  }, [])
+  
+  useEffect(() => {
+    getAllPlatforms()
+  }, [])
+  
   useEffect(() => {
     setEditedCampaign(campaign)
   }, [campaign])
 
-  useEffect(() => {
-    getAllAccounts()
-    getAllScheduleTypes()
-    getAllPlatforms()
-  }, [])
-
   const handleAccountIdChange = (e) => {
-    setAccountId(e.target.value);
+    setAccountId(e.target.defaultValue);
   }
 
   const handleScheduleTypeIdChange = (e) => {
-    setScheduleTypeId(e.target.value);
+    setScheduleTypeId(e.target.defaultValue);
   }
 
   const handlePlatformIdChange = (e) => {
-    setPlatformId(e.target.value);
+    setPlatformId(e.target.defaultValue);
   }
 
   const handleFieldChange = e => {
-    const impressionsToChange = { ...editedCampaign };
-    impressionsToChange[e.target.id] = e.target.value;
-    setEditedCampaign(impressionsToChange);
+    const stateToChange = { ...editedCampaign };
+    stateToChange[e.target.id] = e.target.value;
+    setEditedCampaign(stateToChange);
   };
 
   const saveChanges = (e) => {
     e.preventDefault();
-    updateCampaign({
-      accountId: editedCampaign.accountId,
-      title: editedCampaign.title,
-      revenue: editedCampaign.revenue,
-      scheduleTypeId: editedCampaign.scheduleTypeId,
-      platformId: editedCampaign.platformId,
-      createDate: editedCampaign.createDate,
-      startDate: editedCampaign.startDate,
-      endDate: editedCampaign.endDate,
-      impressions: editedCampaign.impressions,
-      audience: editedCampaign.audience 
-    });
+    
 
     const parseAccountId = parseInt(accountId);
     const parseSchTypeId = parseInt(scheduleTypeId);
@@ -105,14 +101,29 @@ export default function CampaignEditForm() {
     if (!editedCampaign.platformId) {
       editedCampaign.platformId = campaign.platformId;
     }
-
+    updateCampaign({
+      id: campaign.id,
+      accountId: editedCampaign.accountId,
+      title: editedCampaign.title,
+      revenue: editedCampaign.revenue,
+      scheduleTypeId: editedCampaign.scheduleTypeId,
+      platformId: editedCampaign.platformId,
+      createDate: editedCampaign.createDate,
+      startDate: editedCampaign.startDate,
+      endDate: editedCampaign.endDate,
+      impressions: editedCampaign.impressions,
+      audience: editedCampaign.audience 
+    });
+    debugger
     updateCampaign(editedCampaign.id, editedCampaign)
     .then(() => {
         history.push(`/campaign/${id}`)
     })
   };
 
-  if (!editedCampaign && !accountId && !scheduleTypeId && !platformId) {
+  if (!editedCampaign 
+    // && !accountId && !scheduleTypeId && !platformId
+    ) {
     return null
   }
 
@@ -122,16 +133,15 @@ export default function CampaignEditForm() {
       <fieldset className="loginFields">
         <FormGroup>
           <Input 
-            id="campaignId" 
+            id={editedCampaign.id}  
             type="hidden"
-            name="campaignId"
-            value={editedCampaign.id} 
-            onChange={handleFieldChange} />
-        <Input 
+            value={campaign.id} 
+            onChange={handleFieldChange}
+             />
+          <Input 
             id="createDate" 
             type="hidden"
-            name="createDate"
-            defaultValue={editedCampaign.createDate} 
+            value={campaign.createDate} 
             onChange={handleFieldChange} />
         </FormGroup>
         <FormGroup>
@@ -140,6 +150,7 @@ export default function CampaignEditForm() {
             id="title" 
             type="text" 
             name="title"
+            required
             defaultValue={editedCampaign.title}
             onChange={handleFieldChange} />
         </FormGroup>
@@ -149,17 +160,18 @@ export default function CampaignEditForm() {
             id="accountId" 
             type="select" 
             name="accountId"
+            required
             defaultValue={editedCampaign.accountId}
             onChange={handleAccountIdChange}>
-                {accounts.map(account =>
-                  account.id === editedCampaign.accountId ?
-                    <option selected value={account.id}>
-                        {account.company}
-                    </option> :
-                    <option value={account.id}>
-                        {account.company}
-                    </option>
-                )}
+              {accounts.map(account =>
+                account.id === editedCampaign.accountId ?
+                  <option selected key={account.id} value={account.id}>
+                    {account.company}
+                  </option> :
+                  <option key={account.id} value={account.id}>
+                    {account.company}
+                  </option>
+              )}
             </Input>
         </FormGroup>
         <FormGroup>
@@ -168,17 +180,18 @@ export default function CampaignEditForm() {
             id="scheduleTypeId" 
             type="select" 
             name="scheduleTypeId"
+            required
             defaultValue={editedCampaign.scheduleTypeId}
             onChange={handleScheduleTypeIdChange}>
-                {scheduleTypes.map(type =>
-                  type.id === editedCampaign.scheduleTypeId ?
-                    <option selected value={type.id}>
-                        {type.name}
-                    </option> :
-                    <option value={type.id}>
-                        {type.name}
-                    </option>
-                )}
+              {scheduleTypes.map(type =>
+                type.id === editedCampaign.scheduleTypeId ?
+                  <option key={type.id} selected value={type.id}>
+                    {type.name}
+                  </option> :
+                  <option key={type.id} value={type.id}>
+                    {type.name}
+                  </option>
+              )}
           </Input>
         </FormGroup>
         <FormGroup>
@@ -187,18 +200,18 @@ export default function CampaignEditForm() {
             id="platformTypeId" 
             type="select" 
             name="platformTypeId"
+            required
             defaultValue={editedCampaign.platformTypeId}
             onChange={handlePlatformIdChange}>
-                <option></option>
-                {platforms.map(platform =>
-                  platform.id === editedCampaign.platformId ?
-                    <option selected value={platform.id}>
-                        {platform.name}
-                    </option> :
-                    <option value={platform.id}>
-                        {platform.name}
-                    </option>
-                )}
+              {platforms.map(platform =>
+                platform.id === editedCampaign.platformId ?
+                  <option selected key={platform.id} value={platform.id}>
+                    {platform.name}
+                  </option> :
+                  <option key={platform.id} value={platform.id}>
+                    {platform.name}
+                  </option>
+              )}
           </Input>
         </FormGroup>
         <FormGroup>
@@ -207,6 +220,7 @@ export default function CampaignEditForm() {
             id="revenue" 
             type="text" 
             name="revenue"
+            required
             defaultValue={editedCampaign.revenue}
             onChange={handleFieldChange} />
         </FormGroup>
@@ -214,8 +228,9 @@ export default function CampaignEditForm() {
           <Label for="startDate">Campaign Start Date</Label>
           <Input 
             id="startDate" 
-            type="date" 
+            type="datetime-local" 
             name="startDate"
+            required
             defaultValue={editedCampaign.startDate}
             onChange={handleFieldChange} />
         </FormGroup>
@@ -223,8 +238,9 @@ export default function CampaignEditForm() {
           <Label for="endDate">Campaign End Date</Label>
           <Input 
             id="endDate" 
-            type="date" 
+            type="datetime-local" 
             name="endDate"
+            required
             defaultValue={editedCampaign.endDate}
             onChange={handleFieldChange} />
         </FormGroup>
@@ -234,6 +250,7 @@ export default function CampaignEditForm() {
             id="impressions" 
             type="text" 
             name="impressions"
+            required
             defaultValue={editedCampaign.impressions}
             onChange={handleFieldChange} />
         </FormGroup>
@@ -243,6 +260,7 @@ export default function CampaignEditForm() {
             id="audience" 
             type="text" 
             name="audience"
+            required
             defaultValue={editedCampaign.audience}
             onChange={handleFieldChange} />
         </FormGroup>

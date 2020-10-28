@@ -41,6 +41,10 @@ namespace CreativeCommand.Repositories
                 {
                     Id = reader.GetInt32(reader.GetOrdinal("AccountId")),
                     Company = reader.GetString(reader.GetOrdinal("Company")),
+                    Address = reader.GetString(reader.GetOrdinal("Address")),
+                    City = reader.GetString(reader.GetOrdinal("City")),
+                    State = reader.GetString(reader.GetOrdinal("State")),
+                    ZipCode = reader.GetInt32(reader.GetOrdinal("ZipCode")),
                     Logo = DbUtils.GetNullableString(reader, "Logo"),
                     SalesUserId = reader.GetInt32(reader.GetOrdinal("SalesUserId")),
                     SalesUser = new UserProfile()
@@ -77,7 +81,7 @@ namespace CreativeCommand.Repositories
                        SELECT c.Id, c.Title, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
                               c.StartDate, c.EndDate, c.Impressions, c.Audience,
 
-                              a.Id, a.Company, a.Logo, a.SalesUserId, a.ManagerUserId,
+                              a.Id, a.Company, a.Logo, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
 
                               u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
                               u.UserTypeId,

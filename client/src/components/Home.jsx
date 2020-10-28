@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { useContext, useEffect } from "react";
 import { AccountContext } from "./../providers/AccountProvider";
 import { CampaignContext } from "./../providers/CampaignProvider";

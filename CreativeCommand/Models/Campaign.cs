@@ -25,12 +25,18 @@ namespace CreativeCommand.Models
         public Platform Platform { get; set; }
 
         [Required]
+        /*[DataType(DataType.Date)]*/
+        /*[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]*/
         public DateTime CreateDate { get; set; }
 
         [Required]
+        /*[DataType(DataType.Date)]*/
+        /*[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]*/
         public DateTime StartDate { get; set; }
 
         [Required]
+        /*[DataType(DataType.Date)]*/
+        /*[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]*/
         public DateTime EndDate { get; set; }
 
         [Required]
