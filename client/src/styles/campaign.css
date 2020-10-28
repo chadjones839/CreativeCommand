@@ -65,3 +65,140 @@
 .tag {
     color: red;
 }
+
+.campaignStatus {
+    display: flex;
+    justify-content: center;
+}
+
+.campaignStatusList {
+    display: flex;
+    justify-content: center;
+}
+
+.campaignStatus-wrapper {
+    width: 80%;
+}
+
+.campaignStatus-container {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+}
+
+.inProgressCampaigns {
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.inProgressCampaign-card {
+    border: 1px solid blue;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.campaignTrackerHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.campaign-title {
+    width: 70%;
+}
+
+.campaignDetails {
+    width: 22%
+}
+
+.campaignStatus-actionButtons {
+    display: flex;
+    justify-content: space-around;
+    width: 8%;
+}
+
+.progressBar {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    border-radius: 35px;
+}
+
+.statusTag-complete {
+    color: white;
+    font-weight: bold;
+}
+
+.soldComplete,
+.soldIncomplete {
+    border-radius: 35px 0 0 35px;
+    width: 10%;
+    text-align: center;
+    border-right: 1px solid black;
+}
+
+.approvalComplete,
+.approvalIncomplete {
+    width: 15%;
+    text-align: center;
+    border-right: 1px solid black;
+}
+
+.creativeComplete,
+.creativeIncomplete {
+    width: 15%;
+    text-align: center;
+    border-right: 1px solid black;
+}
+
+.productionComplete,
+.productionIncomplete {
+    width: 30%;
+    text-align: center;
+    border-right: 1px solid black;
+}
+
+.schedulingComplete,
+.schedulingIncomplete {
+    width: 15%;
+    text-align: center;
+    border-right: 1px solid black;
+}
+
+
+.campaignComplete,
+.campaignIncomplete {
+    border-radius: 0 35px 35px 0;
+    width: 15%;
+    text-align: center;
+    border-right: 1px solid black;
+}
+
+.soldComplete,
+.approvalComplete,
+.creativeComplete,
+.productionComplete,
+.schedulingComplete,
+.campaignComplete {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: green;
+    padding: 10px 5px;
+}
+
+.soldIncomplete,
+.approvalIncomplete,
+.creativeIncomplete,
+.productionIncomplete,
+.schedulingIncomplete,
+.campaignIncomplete {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #c9c7c7;
+    padding: 10px 5px;
+}

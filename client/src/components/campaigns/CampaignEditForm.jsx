@@ -114,7 +114,7 @@ export default function CampaignEditForm() {
       impressions: editedCampaign.impressions,
       audience: editedCampaign.audience 
     });
-    debugger
+
     updateCampaign(editedCampaign.id, editedCampaign)
     .then(() => {
         history.push(`/campaign/${id}`)

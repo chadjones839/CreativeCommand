@@ -7,8 +7,11 @@ namespace CreativeCommand.Repositories
     {
         List<CampaignStatus> GetAllCampaignStatuses();
         CampaignStatus GetCampaignStatusById(int id);
+        CampaignStatus GetByCampaignId(int campaignId);
+        List<CampaignStatus> GetAllByCampaignId(int campaignId);
         void Add(CampaignStatus campaignStatus);
         void Delete(int id);
         void Update(CampaignStatus campaignStatus);
+        List<CampaignStatus> GetAllByCampaignAccountId(int accountId);
     }
 }

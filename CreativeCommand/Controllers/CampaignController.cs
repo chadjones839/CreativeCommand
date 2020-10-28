@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CreativeCommand.Controllers
 {
-    /*[Authorize]*/
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CampaignController : ControllerBase

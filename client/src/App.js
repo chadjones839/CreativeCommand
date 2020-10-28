@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { UserProfileProvider } from "./providers/UserProfileProvider";
 import { AccountProvider } from "./providers/AccountProvider";
 import { CampaignProvider } from './providers/CampaignProvider';
+import { CampaignStatusProvider } from './providers/CampaignStatusProvider';
 import { ScheduleTypeProvider } from './providers/ScheduleTypeProvider';
 import { PlatformProvider } from './providers/PlatformProvider';
 import Navbar from "./components/Navbar";
@@ -17,10 +18,12 @@ function App() {
           <CampaignProvider>
             <ScheduleTypeProvider>
               <PlatformProvider>
+                <CampaignStatusProvider>
 
                 <Navbar />
                 <ApplicationViews />
 
+                </CampaignStatusProvider>
               </PlatformProvider>
             </ScheduleTypeProvider>
           </CampaignProvider>

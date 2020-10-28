@@ -19,7 +19,7 @@ export default function AccountPreview({ campaign }) {
             </div> }
             <div className="campaignCard-middle">
               <div className="campaignActivity-details">
-                <Link className="campaignButton" style={{ textDecoration: 'none' }} to={`/campaign/details/`}>
+                <Link className="campaignButton" style={{ textDecoration: 'none' }} to={`/campaign/${campaign.id}`}>
                   <p className="campaignCard-campaignName">{campaign.title}</p>
                 </Link> 
               </div>

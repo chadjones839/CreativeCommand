@@ -2,19 +2,26 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { AccountContext } from "../../providers/AccountProvider";
+import { CampaignStatusContext } from "../../providers/CampaignStatusProvider";
+import CampaignStatusDetail from "../campaignstatus/CampaignStatusDetail";
+
 
 export default function AccountDetail() {
     const { account, getById } = useContext(AccountContext);
+    const { campaignStatuses, getAllByCampaignAccountId } = useContext(CampaignStatusContext);
     const { id } = useParams()
     
-    
     useEffect(() => {
-        getById(id)
+      getById(id)
+    }, []);
+
+    useEffect(() => {
+      getAllByCampaignAccountId(id)
     }, []);
     
     const defaultImg = "https://res.cloudinary.com/dhduglm4j/image/upload/v1603478435/icons/defaultCompanyIcon_bqlwsn.jpg"
 
-    if (!account || !account.salesUser || !account.managerUser) {
+    if (!account || !campaignStatuses || !account.salesUser || !account.managerUser) {
         return null
     }
 
@@ -54,6 +61,16 @@ export default function AccountDetail() {
                   <img className="accountBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121902/icons/delete_mr2ko5.png" alt="delete"/>
                 </Link> 
               </div>
+            </div>
+          </div>
+        </section>
+        <section className="campaignStatusList">
+          <div className="campaignStatus-wrapper">
+            <div className="campaignStatus-container">
+            <h3>Campaigns In Progress</h3>
+              {campaignStatuses.map(c => 
+                <CampaignStatusDetail key={c.id} campaignStatus={c} />
+              )}
             </div>
           </div>
         </section>

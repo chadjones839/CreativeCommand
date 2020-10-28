@@ -3,6 +3,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory, Link } from "react-router-dom";
 import { CampaignContext } from "../../providers/CampaignProvider";
+import { CampaignStatusContext } from "../../providers/CampaignStatusProvider";
 import { AccountContext } from "../../providers/AccountProvider";
 import { ScheduleTypeContext } from "../../providers/ScheduleTypeProvider";
 import { PlatformContext } from "../../providers/PlatformProvider";
@@ -10,6 +11,7 @@ import { PlatformContext } from "../../providers/PlatformProvider";
 export default function CampaignAddForm() {
   const history = useHistory();
   const { addCampaign } = useContext(CampaignContext);
+  const { addCampaignStatus } = useContext(CampaignStatusContext);
   const { accounts, getAllAccounts } = useContext(AccountContext);
   const { scheduleTypes, getAllScheduleTypes } = useContext(ScheduleTypeContext);
   const { platforms, getAllPlatforms } = useContext(PlatformContext);
@@ -29,6 +31,16 @@ export default function CampaignAddForm() {
       impressions: "",
       audience: ""
   });
+
+  const campaignStatus = {
+    campaignId: "",
+    isSold: false,
+    isApproved: false,
+    creativeSubmitted: false,
+    inProduction: false,
+    isScheduled: false,
+    isComplete: false
+};
 
   useEffect(() => {
     getAllAccounts()
@@ -90,7 +102,12 @@ export default function CampaignAddForm() {
     
     addCampaign(campaign)
     .then((c) => {
+      debugger
+      campaignStatus.campaignId = c.id;
+      addCampaignStatus(campaignStatus)
+      .then(() =>{
         history.push(`/campaign/${c.id}`)
+      })  
     })
   };
 

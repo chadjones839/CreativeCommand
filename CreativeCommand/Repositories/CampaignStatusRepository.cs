@@ -18,15 +18,16 @@ namespace CreativeCommand.Repositories
             {
                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                 IsSold = reader.GetBoolean(reader.GetOrdinal("IsSold")),
-                IsApproved = reader.GetBoolean(reader.GetOrdinal("IsSold")),
-                CreativeSubmitted = reader.GetBoolean(reader.GetOrdinal("IsSold")),
-                InProduction = reader.GetBoolean(reader.GetOrdinal("IsSold")),
-                IsScheduled = reader.GetBoolean(reader.GetOrdinal("IsSold")),
-                IsComplete = reader.GetBoolean(reader.GetOrdinal("IsSold")),
+                IsApproved = reader.GetBoolean(reader.GetOrdinal("IsApproved")),
+                CreativeSubmitted = reader.GetBoolean(reader.GetOrdinal("CreativeSubmitted")),
+                InProduction = reader.GetBoolean(reader.GetOrdinal("InProduction")),
+                IsScheduled = reader.GetBoolean(reader.GetOrdinal("IsScheduled")),
+                IsComplete = reader.GetBoolean(reader.GetOrdinal("IsComplete")),
                 CampaignId = reader.GetInt32(reader.GetOrdinal("CampaignId")),
                 Campaign = new Campaign()
                 {
                     Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                    Title = reader.GetString(reader.GetOrdinal("Title")),
                     Revenue = reader.GetInt32(reader.GetOrdinal("Revenue")),
                     ScheduleTypeId = reader.GetInt32(reader.GetOrdinal("ScheduleTypeId")),
                     ScheduleType = new ScheduleType()
@@ -50,6 +51,10 @@ namespace CreativeCommand.Repositories
                     {
                         Id = reader.GetInt32(reader.GetOrdinal("AccountId")),
                         Company = reader.GetString(reader.GetOrdinal("Company")),
+                        Address = reader.GetString(reader.GetOrdinal("Address")),
+                        City = reader.GetString(reader.GetOrdinal("City")),
+                        State = reader.GetString(reader.GetOrdinal("State")),
+                        ZipCode = reader.GetInt32(reader.GetOrdinal("ZipCode")),
                         SalesUserId = reader.GetInt32(reader.GetOrdinal("SalesUserId")),
                         SalesUser = new UserProfile()
                         {
@@ -86,10 +91,10 @@ namespace CreativeCommand.Repositories
                      SELECT cs.Id, cs.CampaignId, cs.IsSold, cs.IsApproved, cs.CreativeSubmitted, 
                             cs.InProduction, cs.IsScheduled, cs.IsComplete,
 
-                            c.Id, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
+                            c.Id, c.Title, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
                             c.StartDate, c.EndDate, c.Impressions, c.Audience,
 
-                            a.Id, a.Company, a.SalesUserId, a.ManagerUserId,
+                            a.Id, a.Company, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
 
                             u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
                             u.UserTypeId,
@@ -134,10 +139,10 @@ namespace CreativeCommand.Repositories
                     SELECT cs.Id, cs.CampaignId, cs.IsSold, cs.IsApproved, cs.CreativeSubmitted, 
                             cs.InProduction, cs.IsScheduled, cs.IsComplete,
 
-                            c.Id, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
+                            c.Id, c.Title, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
                             c.StartDate, c.EndDate, c.Impressions, c.Audience,
 
-                            a.Id, a.Company, a.SalesUserId, a.ManagerUserId,
+                            a.Id, a.Company, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
 
                             u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
                             u.UserTypeId,
@@ -170,6 +175,161 @@ namespace CreativeCommand.Repositories
                     reader.Close();
 
                     return campaign;
+                }
+            }
+        }
+
+        public CampaignStatus GetByCampaignId(int campaignId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT cs.Id, cs.CampaignId, cs.IsSold, cs.IsApproved, cs.CreativeSubmitted, 
+                            cs.InProduction, cs.IsScheduled, cs.IsComplete,
+
+                            c.Id, c.Title, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
+                            c.StartDate, c.EndDate, c.Impressions, c.Audience,
+
+                            a.Id, a.Company, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
+
+                            u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
+                            u.UserTypeId,
+
+                            um.Id AS ManagerId, um.FirebaseUserId AS ManagerFirebaseId, um.FirstName AS ManagerFirstName, 
+                            um.LastName AS ManagerLastName, um.Email AS ManagerEmail, um.UserTypeId AS ManagerUserTypeId,
+
+                            s.Id, s.Name AS ScheduleTypeName,
+
+                            p.Id, p.Name AS PlatformName
+
+                        FROM CampaignStatus cs
+                            LEFT JOIN Campaign c On cs.CampaignId = c.Id
+                            LEFT JOIN Account a ON c.AccountId = a.Id
+                            LEFT JOIN UserProfile u ON a.SalesUserId = u.Id
+                            LEFT JOIN UserProfile um ON a.ManagerUserId = um.Id
+                            LEFT JOIN ScheduleType s ON c.ScheduleTypeId = s.Id
+                            LEFT JOIN Platform p ON c.PlatformId = p.Id
+                    WHERE cs.CampaignId = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", campaignId);
+
+                    CampaignStatus campaign = null;
+
+                    var reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        campaign = NewCampaignStatusFromReader(reader);
+                    }
+                    reader.Close();
+
+                    return campaign;
+                }
+            }
+        }
+
+        public List<CampaignStatus> GetAllByCampaignId(int campaignId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT cs.Id, cs.CampaignId, cs.IsSold, cs.IsApproved, cs.CreativeSubmitted, 
+                            cs.InProduction, cs.IsScheduled, cs.IsComplete,
+
+                            c.Id, c.Title, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
+                            c.StartDate, c.EndDate, c.Impressions, c.Audience,
+
+                            a.Id, a.Company, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
+
+                            u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
+                            u.UserTypeId,
+
+                            um.Id AS ManagerId, um.FirebaseUserId AS ManagerFirebaseId, um.FirstName AS ManagerFirstName, 
+                            um.LastName AS ManagerLastName, um.Email AS ManagerEmail, um.UserTypeId AS ManagerUserTypeId,
+
+                            s.Id, s.Name AS ScheduleTypeName,
+
+                            p.Id, p.Name AS PlatformName
+
+                        FROM CampaignStatus cs
+                            LEFT JOIN Campaign c On cs.CampaignId = c.Id
+                            LEFT JOIN Account a ON c.AccountId = a.Id
+                            LEFT JOIN UserProfile u ON a.SalesUserId = u.Id
+                            LEFT JOIN UserProfile um ON a.ManagerUserId = um.Id
+                            LEFT JOIN ScheduleType s ON c.ScheduleTypeId = s.Id
+                            LEFT JOIN Platform p ON c.PlatformId = p.Id
+                    WHERE cs.CampaignId = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", campaignId);
+
+
+                    var reader = cmd.ExecuteReader();
+                    var campaigns = new List<CampaignStatus>();
+
+                    while (reader.Read())
+                    {
+                        campaigns.Add(NewCampaignStatusFromReader(reader));
+                    }
+                    reader.Close();
+
+                    return campaigns;
+                }
+            }
+        }
+
+        public List<CampaignStatus> GetAllByCampaignAccountId(int accountId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT cs.Id, cs.CampaignId, cs.IsSold, cs.IsApproved, cs.CreativeSubmitted, 
+                            cs.InProduction, cs.IsScheduled, cs.IsComplete,
+
+                            c.Id, c.Title, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
+                            c.StartDate, c.EndDate, c.Impressions, c.Audience,
+
+                            a.Id, a.Company, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
+
+                            u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
+                            u.UserTypeId,
+
+                            um.Id AS ManagerId, um.FirebaseUserId AS ManagerFirebaseId, um.FirstName AS ManagerFirstName, 
+                            um.LastName AS ManagerLastName, um.Email AS ManagerEmail, um.UserTypeId AS ManagerUserTypeId,
+
+                            s.Id, s.Name AS ScheduleTypeName,
+
+                            p.Id, p.Name AS PlatformName
+
+                        FROM CampaignStatus cs
+                            LEFT JOIN Campaign c On cs.CampaignId = c.Id
+                            LEFT JOIN Account a ON c.AccountId = a.Id
+                            LEFT JOIN UserProfile u ON a.SalesUserId = u.Id
+                            LEFT JOIN UserProfile um ON a.ManagerUserId = um.Id
+                            LEFT JOIN ScheduleType s ON c.ScheduleTypeId = s.Id
+                            LEFT JOIN Platform p ON c.PlatformId = p.Id
+                    WHERE c.AccountId = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", accountId);
+
+
+                    var reader = cmd.ExecuteReader();
+                    var campaigns = new List<CampaignStatus>();
+
+                    while (reader.Read())
+                    {
+                        campaigns.Add(NewCampaignStatusFromReader(reader));
+                    }
+                    reader.Close();
+
+                    return campaigns;
                 }
             }
         }
