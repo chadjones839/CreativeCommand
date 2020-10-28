@@ -25,6 +25,8 @@ namespace CreativeCommand
             services.AddTransient<IAccountRepository, AccountRepository>();
             services.AddTransient<ICampaignRepository, CampaignRepository>();
             services.AddTransient<ICampaignStatusRepository, CampaignStatusRepository>();
+            services.AddTransient<IScheduleTypeRepository, ScheduleTypeRepository>();
+            services.AddTransient<IPlatformRepository, PlatformRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";

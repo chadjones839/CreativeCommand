@@ -35,12 +35,16 @@ namespace CreativeCommand.Repositories
                 StartDate = reader.GetDateTime(reader.GetOrdinal("StartDate")),
                 EndDate = reader.GetDateTime(reader.GetOrdinal("EndDate")),
                 Impressions = reader.GetInt32(reader.GetOrdinal("Impressions")),
-                Audience = reader.GetInt32(reader.GetOrdinal("Audience")),
+                Audience = reader.GetInt32(reader.GetOrdinal("Audience")) ,
                 AccountId = reader.GetInt32(reader.GetOrdinal("AccountId")),
                 Account = new Account()
                 {
                     Id = reader.GetInt32(reader.GetOrdinal("AccountId")),
                     Company = reader.GetString(reader.GetOrdinal("Company")),
+                    Address = reader.GetString(reader.GetOrdinal("Address")),
+                    City = reader.GetString(reader.GetOrdinal("City")),
+                    State = reader.GetString(reader.GetOrdinal("State")),
+                    ZipCode = reader.GetInt32(reader.GetOrdinal("ZipCode")),
                     Logo = DbUtils.GetNullableString(reader, "Logo"),
                     SalesUserId = reader.GetInt32(reader.GetOrdinal("SalesUserId")),
                     SalesUser = new UserProfile()
@@ -77,7 +81,7 @@ namespace CreativeCommand.Repositories
                        SELECT c.Id, c.Title, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
                               c.StartDate, c.EndDate, c.Impressions, c.Audience,
 
-                              a.Id, a.Company, a.Logo, a.SalesUserId, a.ManagerUserId,
+                              a.Id, a.Company, a.Logo, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
 
                               u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
                               u.UserTypeId,
@@ -195,28 +199,28 @@ namespace CreativeCommand.Repositories
                     cmd.CommandText = @"
                             UPDATE Campaign
                             SET 
-                                AccountId = @AccountId, 
-                                Title = @Title,
-                                Revenue = @Revenue,
-                                ScheduleTypeId = @ScheduleTypeId, 
-                                PlatformId = @PlatformId,
-		                        CreateDate = @CreateDate,
-                                StartDate = @StartDate,
-                                EndDate = @EndDate,
-                                Impressions = @Impressions,
-                                Audience = @Audience
-                            WHERE Id = @Id";
-                    DbUtils.AddParameter(cmd, "@Id", campaign.Id);
-                    DbUtils.AddParameter(cmd, "@Title", campaign.Title);
-                    DbUtils.AddParameter(cmd, "@AccountId", campaign.AccountId);
-                    DbUtils.AddParameter(cmd, "@Revenue", campaign.Revenue);
-                    DbUtils.AddParameter(cmd, "@ScheduleTypeId", campaign.ScheduleTypeId);
-                    DbUtils.AddParameter(cmd, "@PlatformId", campaign.PlatformId);
-                    DbUtils.AddParameter(cmd, "@CreateDate", campaign.CreateDate);
-                    DbUtils.AddParameter(cmd, "@StartDate", campaign.StartDate);
-                    DbUtils.AddParameter(cmd, "@EndDate", campaign.EndDate);
-                    DbUtils.AddParameter(cmd, "@Impressions", campaign.Impressions);
-                    DbUtils.AddParameter(cmd, "@Audience", campaign.Audience);
+                                AccountId = @accountId, 
+                                Title = @title,
+                                Revenue = @revenue,
+                                ScheduleTypeId = @scheduleTypeId, 
+                                PlatformId = @platformId,
+		                        CreateDate = @createDate,
+                                StartDate = @startDate,
+                                EndDate = @endDate,
+                                Impressions = @impressions,
+                                Audience = @audience
+                            WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@id", campaign.Id);
+                    cmd.Parameters.AddWithValue("@title", campaign.Title);
+                    cmd.Parameters.AddWithValue("@accountId", campaign.AccountId);
+                    cmd.Parameters.AddWithValue("@revenue", campaign.Revenue);
+                    cmd.Parameters.AddWithValue("@scheduleTypeId", campaign.ScheduleTypeId);
+                    cmd.Parameters.AddWithValue("@platformId", campaign.PlatformId);
+                    cmd.Parameters.AddWithValue("@createDate", campaign.CreateDate);
+                    cmd.Parameters.AddWithValue("@startDate", campaign.StartDate);
+                    cmd.Parameters.AddWithValue("@endDate", campaign.EndDate);
+                    cmd.Parameters.AddWithValue("@impressions", campaign.Impressions);
+                    cmd.Parameters.AddWithValue("@audience", campaign.Audience);
                     cmd.ExecuteNonQuery();
                 }
             }

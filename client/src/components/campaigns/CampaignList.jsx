@@ -1,20 +1,15 @@
 /*eslint-disable*/
 import React, { useContext, useEffect, useState } from "react";
-import { AccountContext } from "../../providers/AccountProvider";
 import { CampaignContext } from "../../providers/CampaignProvider";
-import AccountPreview from "../accounts/AccountPreview"
-import AccountDetail from "../accounts/AccountDetail"
 import CampaignPreview from "../campaigns/CampaignPreview"
 
 export default function Home() {
-  const { accounts, getAllAccounts } = useContext(AccountContext);
   const { campaigns, getAllCampaigns } = useContext(CampaignContext);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
-  const { account, setAccount } = useState({});
+  const { campaign, setCampaign } = useState({});
 
   useEffect(() => {
-    getAllAccounts();
     getAllCampaigns();
   }, []);
 
@@ -32,20 +27,20 @@ export default function Home() {
           <div className="home-contents">
             <div className="overview-container">
               <section className="account-container">
-                <h3 className="dashboardTitle">Account Activity</h3>
+                <h3 className="dashboardTitle">Campaigns</h3>
                 <div>
                   <p>
-                    <a className="mainBtn" href="/accounts/add">+ New Account</a>
+                    <a className="mainBtn" href="/campaigns/add">+ New Campaign</a>
                   </p>
                 </div>
-                {accounts.map(a =>
-                  <AccountPreview key={a.id} account={a} />
+                {campaigns.map(c =>
+                  <CampaignPreview key={c.id} campaign={c} />
                 )}
 
               </section>
 
               <section className="accountDetail-container">
-                {<AccountDetail />}
+
               </section>
             </div>
           </div>

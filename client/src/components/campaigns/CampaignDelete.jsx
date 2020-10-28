@@ -1,24 +1,24 @@
 /*eslint-disable*/
 import React, { useEffect, useContext } from "react";
-import { AccountContext } from "../../providers/AccountProvider";
+import { CampaignContext } from "../../providers/CampaignProvider";
 import { useHistory, useParams, Link } from "react-router-dom";
 
-export default function DeleteAccount() {
+export default function DeletePostPage() {
 
-  const { account, deleteAccount, getById } = useContext(AccountContext);
+  const { campaign, deleteCampaign, getCampaignById } = useContext(CampaignContext);
   const { id } = useParams();
   const history = useHistory();
 
   useEffect(() => {
-    getById(id)
+    getCampaignById(id)
   }, [id])
 
-  const deleteAct = () => {
-    deleteAccount(id)
+  const deleteConfirm = () => {
+    deleteCampaign(id)
       .then(() => history.push("/"));
   }
 
-  if (!account) {
+  if (!campaign) {
     return null;
   }
 
@@ -26,13 +26,13 @@ export default function DeleteAccount() {
     <>
       <div className="deleteContainer">
         <div className="deleteAccount">
-          <h4> Delete <span className="deleteConfirm-companyName">{account.company}</span>?</h4>
+          <h4> Delete <span className="deleteConfirm-companyName">{campaign.title}</span>?</h4>
           <div className="actionButtons">
             <div className="actionBtns">
               <div className="form-group">
                 <input
                   type="submit"
-                  onClick={deleteAct}
+                  onClick={deleteConfirm}
                   value="Confirm"
                   className="mainBtn" />
                     &nbsp;&nbsp;|&nbsp;&nbsp;

@@ -17,8 +17,31 @@
 
 }
 
-.accountBtn:hover
+.accountBtn:hover,
 .campaignBtn:hover {
     background-color: goldenrod;
 }
 
+
+.mainBtn{
+    display: block;
+    color: black;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color:#ffffff;
+    width: 40%;
+    text-align: center;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: .8rem;
+    font-weight: 500;
+    box-shadow: 1px 1px 2px 1px #747272;
+    text-decoration: none;
+}
+
+.mainBtn:hover {
+    background-color: #c4bebe;
+}

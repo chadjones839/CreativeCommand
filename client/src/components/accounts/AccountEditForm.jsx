@@ -172,15 +172,15 @@ export default function AccountEditForm() {
             name="salesUserId"
             defaultValue={editedAccount.salesUserId}
             onChange={handleSalesUserChange}>
-                {salesUsers.map(users =>
-                    users.id === editedAccount.salesUserId ?
-                        <option selected value={users.id}>
-                            {users.fullName}
-                        </option> :
-                        <option value={users.id}>
-                            {users.fullName}
-                        </option>
-                )}
+              {salesUsers.map(users =>
+                users.id === editedAccount.salesUserId ?
+                  <option selected value={users.id}>
+                    {users.fullName}
+                  </option> :
+                  <option value={users.id}>
+                    {users.fullName}
+                  </option>
+              )}
           </Input>
         </FormGroup>
         <FormGroup>
@@ -191,15 +191,15 @@ export default function AccountEditForm() {
             name="managerUserId"
             defaultValue={editedAccount.managerUserId}
             onChange={handleManagerUserChange}>
-                {managerUsers.map(users =>
-                    users.id === editedAccount.salesUserId ?
-                        <option selected value={users.id}>
-                            {users.fullName}
-                        </option> :
-                        <option value={users.id}>
-                            {users.fullName}
-                        </option>
-                )}
+              {managerUsers.map(users =>
+                users.id === editedAccount.salesUserId ?
+                  <option selected value={users.id}>
+                    {users.fullName}
+                  </option> :
+                  <option value={users.id}>
+                    {users.fullName}
+                  </option>
+              )}
           </Input>
         </FormGroup>
         <div className="loginBtn">

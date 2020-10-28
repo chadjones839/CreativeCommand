@@ -21,9 +21,9 @@ export const CampaignProvider = (props) => {
                 .then(setCampaigns));
     };
 
-    const getById = (id) => {
+    const getCampaignById = (id) => {
         getToken().then((token) =>
-            fetch(`/api/campaign/${id}`, {
+            fetch(`${apiUrl}/${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -34,7 +34,7 @@ export const CampaignProvider = (props) => {
 
     const addCampaign = (campaign) => {
         return getToken().then((token) =>
-            fetch("/api/campaign", {
+            fetch(apiUrl, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -50,20 +50,19 @@ export const CampaignProvider = (props) => {
     };
 
     const updateCampaign = (id, campaign) => {
-        return getToken().then((token) =>
-            fetch(`/api/campaign/edit/${id}`, {
+        debugger
+        return fetch(`${apiUrl}/edit/${id}`, {
                 method: "PUT",
                 headers: {
-                    Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(campaign)
-            }))
+            })
     };
 
     const deleteCampaign = (id) =>
         getToken().then((token) =>
-            fetch(`/api/campaign/delete/${id}`, {
+            fetch(`${apiUrl}/delete/${id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -74,7 +73,7 @@ export const CampaignProvider = (props) => {
 
     return (
         <CampaignContext.Provider value={{
-            campaign, campaigns, getAllCampaigns, getById, addCampaign, updateCampaign, deleteCampaign, setCampaign
+            campaign, campaigns, getAllCampaigns, getCampaignById, addCampaign, updateCampaign, deleteCampaign, setCampaign
         }}>
             {props.children}
         </CampaignContext.Provider>
