@@ -50,14 +50,15 @@ export const CampaignProvider = (props) => {
     };
 
     const updateCampaign = (id, campaign) => {
-        debugger
-        return fetch(`${apiUrl}/edit/${id}`, {
+        return getToken().then((token) =>
+            fetch(`${apiUrl}/edit/${id}`, {
                 method: "PUT",
                 headers: {
+                    Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(campaign)
-            })
+            }))
     };
 
     const deleteCampaign = (id) =>

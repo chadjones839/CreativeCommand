@@ -72,7 +72,7 @@ export function UserProfileProvider(props) {
 
   const register = (userProfile, password) => {
     return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
-      .then((createResponse) => addUser({ ...userProfile, firebaseUserProfileId: createResponse.user.uid }))
+      .then((createResponse) => addUser({ ...userProfile, firebaseUserId: createResponse.user.uid }))
       .then((savedUserProfile) => {
         sessionStorage.setItem("userProfile", JSON.stringify(savedUserProfile))
         setIsLoggedIn(true);

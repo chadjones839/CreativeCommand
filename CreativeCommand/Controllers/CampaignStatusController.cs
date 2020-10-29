@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CreativeCommand.Repositories;
 using CreativeCommand.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CreativeCommand.Controllers
 {
-    /*[Authorize]*/
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CampaignStatusController : ControllerBase
@@ -31,17 +32,35 @@ namespace CreativeCommand.Controllers
             return Ok(_campaignStatusRepo.GetAllCampaignStatuses());
         }
 
+        [HttpGet("campaignid/{campaignId}")]
+        public IActionResult GetAllByCampaignId(int campaignId)
+        {
+            return Ok(_campaignStatusRepo.GetAllByCampaignId(campaignId));
+        }
+
+        [HttpGet("accountid/{accountId}")]
+        public IActionResult GetAllByCampaignAccountId(int accountId)
+        {
+            return Ok(_campaignStatusRepo.GetAllByCampaignAccountId(accountId));
+        }
+
         [HttpGet("{id}")]
-        public IActionResult GetAccount(int id)
+        public IActionResult GetCampaignStatus(int id)
         {
             return Ok(_campaignStatusRepo.GetCampaignStatusById(id));
+        }
+
+        [HttpGet("campaigntracker/{campaignId}")]
+        public IActionResult GetByCampaignId(int campaignId)
+        {
+            return Ok(_campaignStatusRepo.GetByCampaignId(campaignId));
         }
 
         [HttpPost]
         public IActionResult Post(CampaignStatus campaignStatus)
         {
             _campaignStatusRepo.Add(campaignStatus);
-            return CreatedAtAction("Get", new { id = campaignStatus.Id }, campaignStatus);
+            return CreatedAtAction("GetCampaignStatus", new { id = campaignStatus.Id }, campaignStatus);
         }
 
         [HttpPut("edit/{id}")]
