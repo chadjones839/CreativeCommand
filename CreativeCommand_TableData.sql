@@ -31,6 +31,7 @@ CREATE TABLE [User] (
   [FirstName] varchar(25) NOT NULL,
   [LastName] varchar(25) NOT NULL,
   [Email] varchar(100) NOT NULL,
+  [ImageUrl] varchar NULL,
   [UserTypeId] int NOT NULL,
 
   CONSTRAINT [FK_User_UserType] FOREIGN KEY ([UserTypeId]) REFERENCES [UserType] ([Id]),
@@ -40,6 +41,7 @@ CREATE TABLE [User] (
 CREATE TABLE [Account] (
   [Id] integer PRIMARY KEY IDENTITY,
   [Company] varchar(72) NOT NULL,
+  [Logo] varchar,
   [Address] varchar(62) NOT NULL,
   [City] varchar(48) NOT NULL,
   [State] varchar(2) NOT NULL,
@@ -70,12 +72,13 @@ CREATE TABLE [Notes] (
 )
 
 CREATE TABLE [ScheduleType] (
-[Id] integer PRIMARY KEY IDENTITY,
-[Name] varchar(50) NOT NULL
+  [Id] integer PRIMARY KEY IDENTITY,
+  [Name] varchar(50) NOT NULL
 )
 
 CREATE TABLE [Campaign] (
   [Id] integer PRIMARY KEY IDENTITY,
+  [Title] varchar NOT NULL,
   [AccountId] int NOT NULL,
   [Revenue] integer NOT NULL,
   [ScheduleTypeId] int NOT NULL,
