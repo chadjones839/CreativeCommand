@@ -38,12 +38,11 @@
 }
 
 .account-container,
-.campaign-container,
-.campaignTracker-container {
+.campaign-container {
     border: 1px black solid;
     border-radius: 5px;
     padding: 20px;
-    width: 33%;
+    width: 49%;
 }
 
 .dashboardTitle {

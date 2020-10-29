@@ -15,21 +15,21 @@ export default function CampaignAddForm() {
   const { accounts, getAllAccounts } = useContext(AccountContext);
   const { scheduleTypes, getAllScheduleTypes } = useContext(ScheduleTypeContext);
   const { platforms, getAllPlatforms } = useContext(PlatformContext);
-  const [ accountId, setAccountId ] = useState()
-  const [ scheduleTypeId, setScheduleTypeId ] = useState()
-  const [ platformId, setPlatformId ] = useState()
-  const [ isLoading, setIsLoading ] = useState(false);
+  const [accountId, setAccountId] = useState()
+  const [scheduleTypeId, setScheduleTypeId] = useState()
+  const [platformId, setPlatformId] = useState()
+  const [isLoading, setIsLoading] = useState(false);
 
   const [campaign, setCampaign] = useState({
-      accountId: "",
-      title: "",
-      revenue: "",
-      scheduleTypeId: "",
-      platformId: "",
-      startDate: "",
-      endDate: "",
-      impressions: "",
-      audience: ""
+    accountId: "",
+    title: "",
+    revenue: "",
+    scheduleTypeId: "",
+    platformId: "",
+    startDate: "",
+    endDate: "",
+    impressions: "",
+    audience: ""
   });
 
   const campaignStatus = {
@@ -40,7 +40,7 @@ export default function CampaignAddForm() {
     inProduction: false,
     isScheduled: false,
     isComplete: false
-};
+  };
 
   useEffect(() => {
     getAllAccounts()
@@ -74,17 +74,17 @@ export default function CampaignAddForm() {
 
   const createCampaign = (e) => {
     e.preventDefault();
-    if (accountId === "" || 
-        campaign.title === "" ||
-        campaign.revenue === "" ||
-        scheduleTypeId === "" ||
-        platformId === "" ||
-        campaign.startDate === "" ||
-        campaign.endDate === "" ) {
-        alert("Missing Fields")
+    if (accountId === "" ||
+      campaign.title === "" ||
+      campaign.revenue === "" ||
+      scheduleTypeId === "" ||
+      platformId === "" ||
+      campaign.startDate === "" ||
+      campaign.endDate === "") {
+      alert("Missing Fields")
 
     } else {
-        setIsLoading(true);
+      setIsLoading(true);
     }
 
     const parseAccountId = parseInt(accountId);
@@ -99,138 +99,138 @@ export default function CampaignAddForm() {
     campaign.revenue = parseRev;
     campaign.impressions = parseImp;
     campaign.audience = parseAud;
-    
+
     addCampaign(campaign)
-    .then((c) => {
-      debugger
-      campaignStatus.campaignId = c.id;
-      addCampaignStatus(campaignStatus)
-      .then(() =>{
-        history.push(`/campaign/${c.id}`)
-      })  
-    })
+      .then((c) => {
+
+        campaignStatus.campaignId = c.id;
+        addCampaignStatus(campaignStatus)
+          .then(() => {
+            history.push(`/campaign/${c.id}`)
+          })
+      })
   };
 
-//   if (!campaign || 
-//       !accountId || 
-//       !scheduleTypeId || 
-//       !platformId) {
-//     return null
-//   }
+  //   if (!campaign || 
+  //       !accountId || 
+  //       !scheduleTypeId || 
+  //       !platformId) {
+  //     return null
+  //   }
 
   return (
     <>
-    <Form className="login-form" onSubmit={createCampaign}>
-      <fieldset className="loginFields">
-      <FormGroup>
-          <Label for="title">Campaign Name</Label>
-          <Input 
-            id="title" 
-            type="text" 
-            name="title"
-            value={campaign.title}
-            onChange={handleFieldChange} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="accountId">Account Name</Label>
-          <Input 
-            id="accountId" 
-            type="select" 
-            name="accountId"
-            defaultValue={campaign.accountId}
-            onChange={handleAccountIdChange}>
-                <option></option>
-                {accounts.map(account =>
-                    <option value={account.id}>
-                        {account.company}
-                    </option>
-                )}
-            </Input>
-        </FormGroup>
-        <FormGroup>
-          <Label for="scheduleTypeId">Schedule Type</Label>
-          <Input 
-            id="scheduleTypeId" 
-            type="select" 
-            name="scheduleTypeId"
-            defaultValue={campaign.scheduleTypeId}
-            onChange={handleScheduleTypeIdChange}>
-                <option></option>
-                {scheduleTypes.map(type =>
-                    <option value={type.id}>
-                        {type.name}
-                    </option>
-                )}
-          </Input>
-        </FormGroup>
-        <FormGroup>
-          <Label for="platformTypeId">Platform Type</Label>
-          <Input 
-            id="platformTypeId" 
-            type="select" 
-            name="platformTypeId"
-            defaultValue={campaign.platformTypeId}
-            onChange={handlePlatformIdChange}>
-                <option></option>
-                {platforms.map(platform =>
-                    <option value={platform.id}>
-                        {platform.name}
-                    </option>
-                )}
-          </Input>
-        </FormGroup>
-        <FormGroup>
-          <Label for="revenue">Revenue</Label>
-          <Input 
-            id="revenue" 
-            type="text" 
-            name="revenue"
-            value={campaign.revenue}
-            onChange={handleFieldChange} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="startDate">Campaign Start Date</Label>
-          <Input 
-            id="startDate" 
-            type="date" 
-            name="startDate"
-            value={campaign.startDate}
-            onChange={handleFieldChange} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="endDate">Campaign End Date</Label>
-          <Input 
-            id="endDate" 
-            type="date" 
-            name="endDate"
-            value={campaign.endDate}
-            onChange={handleFieldChange} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="impressions">Impressions</Label>
-          <Input 
-            id="impressions" 
-            type="text" 
-            name="impressions"
-            value={campaign.impressions}
-            onChange={handleFieldChange} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="audience">Audience</Label>
-          <Input 
-            id="audience" 
-            type="text" 
-            name="audience"
-            value={campaign.audience}
-            onChange={handleFieldChange} />
-        </FormGroup>
-        <div className="loginBtn">
+      <Form className="login-form" onSubmit={createCampaign}>
+        <fieldset className="loginFields">
           <FormGroup>
-            <Button>Save Campaign</Button>
+            <Label for="title">Campaign Name</Label>
+            <Input
+              id="title"
+              type="text"
+              name="title"
+              value={campaign.title}
+              onChange={handleFieldChange} />
           </FormGroup>
-        </div>
-      </fieldset>
-    </Form>
+          <FormGroup>
+            <Label for="accountId">Account Name</Label>
+            <Input
+              id="accountId"
+              type="select"
+              name="accountId"
+              defaultValue={campaign.accountId}
+              onChange={handleAccountIdChange}>
+              <option></option>
+              {accounts.map(account =>
+                <option value={account.id}>
+                  {account.company}
+                </option>
+              )}
+            </Input>
+          </FormGroup>
+          <FormGroup>
+            <Label for="scheduleTypeId">Schedule Type</Label>
+            <Input
+              id="scheduleTypeId"
+              type="select"
+              name="scheduleTypeId"
+              defaultValue={campaign.scheduleTypeId}
+              onChange={handleScheduleTypeIdChange}>
+              <option></option>
+              {scheduleTypes.map(type =>
+                <option value={type.id}>
+                  {type.name}
+                </option>
+              )}
+            </Input>
+          </FormGroup>
+          <FormGroup>
+            <Label for="platformTypeId">Platform Type</Label>
+            <Input
+              id="platformTypeId"
+              type="select"
+              name="platformTypeId"
+              defaultValue={campaign.platformTypeId}
+              onChange={handlePlatformIdChange}>
+              <option></option>
+              {platforms.map(platform =>
+                <option value={platform.id}>
+                  {platform.name}
+                </option>
+              )}
+            </Input>
+          </FormGroup>
+          <FormGroup>
+            <Label for="revenue">Revenue</Label>
+            <Input
+              id="revenue"
+              type="text"
+              name="revenue"
+              value={campaign.revenue}
+              onChange={handleFieldChange} />
+          </FormGroup>
+          <FormGroup>
+            <Label for="startDate">Campaign Start Date</Label>
+            <Input
+              id="startDate"
+              type="date"
+              name="startDate"
+              value={campaign.startDate}
+              onChange={handleFieldChange} />
+          </FormGroup>
+          <FormGroup>
+            <Label for="endDate">Campaign End Date</Label>
+            <Input
+              id="endDate"
+              type="date"
+              name="endDate"
+              value={campaign.endDate}
+              onChange={handleFieldChange} />
+          </FormGroup>
+          <FormGroup>
+            <Label for="impressions">Impressions</Label>
+            <Input
+              id="impressions"
+              type="text"
+              name="impressions"
+              value={campaign.impressions}
+              onChange={handleFieldChange} />
+          </FormGroup>
+          <FormGroup>
+            <Label for="audience">Audience</Label>
+            <Input
+              id="audience"
+              type="text"
+              name="audience"
+              value={campaign.audience}
+              onChange={handleFieldChange} />
+          </FormGroup>
+          <div className="loginBtn">
+            <FormGroup>
+              <Button>Save Campaign</Button>
+            </FormGroup>
+          </div>
+        </fieldset>
+      </Form>
     </>
   );
 }

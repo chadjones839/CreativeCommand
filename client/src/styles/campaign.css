@@ -202,3 +202,7 @@
     background: #c9c7c7;
     padding: 10px 5px;
 }
+
+.editStatusHeader {
+    text-align: center;
+}

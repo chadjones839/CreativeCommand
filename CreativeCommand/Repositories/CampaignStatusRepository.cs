@@ -50,6 +50,7 @@ namespace CreativeCommand.Repositories
                     Account = new Account()
                     {
                         Id = reader.GetInt32(reader.GetOrdinal("AccountId")),
+                        Logo = DbUtils.GetNullableString(reader, "Logo"),
                         Company = reader.GetString(reader.GetOrdinal("Company")),
                         Address = reader.GetString(reader.GetOrdinal("Address")),
                         City = reader.GetString(reader.GetOrdinal("City")),
@@ -94,7 +95,7 @@ namespace CreativeCommand.Repositories
                             c.Id, c.Title, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
                             c.StartDate, c.EndDate, c.Impressions, c.Audience,
 
-                            a.Id, a.Company, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
+                            a.Id, a.Logo, a.Company, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
 
                             u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
                             u.UserTypeId,
@@ -136,13 +137,13 @@ namespace CreativeCommand.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                    SELECT cs.Id, cs.CampaignId, cs.IsSold, cs.IsApproved, cs.CreativeSubmitted, 
+                     SELECT cs.Id, cs.CampaignId, cs.IsSold, cs.IsApproved, cs.CreativeSubmitted, 
                             cs.InProduction, cs.IsScheduled, cs.IsComplete,
 
                             c.Id, c.Title, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
                             c.StartDate, c.EndDate, c.Impressions, c.Audience,
 
-                            a.Id, a.Company, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
+                            a.Id, a.Logo, a.Company, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
 
                             u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
                             u.UserTypeId,
@@ -161,7 +162,7 @@ namespace CreativeCommand.Repositories
                             LEFT JOIN UserProfile um ON a.ManagerUserId = um.Id
                             LEFT JOIN ScheduleType s ON c.ScheduleTypeId = s.Id
                             LEFT JOIN Platform p ON c.PlatformId = p.Id
-                    WHERE c.Id = @Id";
+                    WHERE cs.Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Id", id);
 
@@ -193,7 +194,7 @@ namespace CreativeCommand.Repositories
                             c.Id, c.Title, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
                             c.StartDate, c.EndDate, c.Impressions, c.Audience,
 
-                            a.Id, a.Company, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
+                            a.Id, a.Logo, a.Company, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
 
                             u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
                             u.UserTypeId,
@@ -244,7 +245,7 @@ namespace CreativeCommand.Repositories
                             c.Id, c.Title, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
                             c.StartDate, c.EndDate, c.Impressions, c.Audience,
 
-                            a.Id, a.Company, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
+                            a.Id, a.Logo, a.Company, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
 
                             u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
                             u.UserTypeId,
@@ -296,7 +297,7 @@ namespace CreativeCommand.Repositories
                             c.Id, c.Title, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
                             c.StartDate, c.EndDate, c.Impressions, c.Audience,
 
-                            a.Id, a.Company, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
+                            a.Id, a.Logo, a.Company, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
 
                             u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
                             u.UserTypeId,

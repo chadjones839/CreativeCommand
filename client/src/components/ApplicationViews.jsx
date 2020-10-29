@@ -2,19 +2,24 @@
 import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
+import Login from "./Login";
+import Register from "./Register";
+import Home from "./Home";
+//ACCOUNT IMPORTS
 import AccountList from "./accounts/AccountList"
 import AccountDetail from "./accounts/AccountDetail"
 import AccountAddForm from "./accounts/AccountAddForm"
 import AccountEditForm from "./accounts/AccountEditForm"
 import AccountDelete from "./accounts/AccountDelete"
+//CAMPAIGN IMPORTS
 import CampaignList from "./campaigns/CampaignList"
 import CampaignDetail from "./campaigns/CampaignDetail"
 import CampaignAddForm from "./campaigns/CampaignAddForm"
 import CampaignEditForm from "./campaigns/CampaignEditForm"
 import CampaignDelete from "./campaigns/CampaignDelete"
-import Login from "./Login";
-import Register from "./Register";
-import Home from "./Home";
+//CAMPAIGN STATUS IMPORTS
+import CampaignStatusEdit from "./campaignstatus/CampaignStatusEdit"
+
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -76,6 +81,11 @@ export default function ApplicationViews() {
         <Route exact path="/campaign/delete/:id">
           {isLoggedIn ? <CampaignDelete /> : <Redirect to="/login" />}
         </Route> 
+
+        {/* CAMPAIGN STATUSES */}
+        <Route exact path="/campaignstatus/edit/:id">
+          {isLoggedIn ? <CampaignStatusEdit /> : <Redirect to="/login" />}
+        </Route>
 
       </Switch>
     </main>
