@@ -32,6 +32,7 @@ namespace CreativeCommand.Controllers
             return Ok(_campaignStatusRepo.GetAllCampaignStatuses());
         }
 
+        
         [HttpGet("campaignid/{campaignId}")]
         public IActionResult GetAllByCampaignId(int campaignId)
         {

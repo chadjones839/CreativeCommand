@@ -210,6 +210,41 @@ namespace CreativeCommand.Repositories
             }
         }
 
+        public Campaign GetBookedCampaignRevenue(int userId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                       SELECT SUM(c.Revenue) AS BookedRevenue
+                         FROM Campaign c
+                    LEFT JOIN Account a ON c.AccountId = a.id
+                    LEFT JOIN UserProfile up ON a.SalesUserId = up.Id
+                    LEFT JOIN CampaignStatus cs ON cs.CampaignId = c.Id
+                        WHERE up.Id = @Id AND cs.IsApproved = 0";
+
+                    DbUtils.AddParameter(cmd, "@Id", userId);
+
+                    Campaign campaign = null;
+
+                    var reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        return new Campaign()
+                        {
+                            Revenue = reader.GetInt32(reader.GetOrdinal("BookedRevenue"))
+                        };          
+                    }
+                    reader.Close();
+
+                    return campaign;
+                }
+            }
+        }
+
+
         public void Add(Campaign campaign)
         {
             using (var conn = Connection)

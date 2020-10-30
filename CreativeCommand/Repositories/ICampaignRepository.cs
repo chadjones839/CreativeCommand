@@ -11,5 +11,6 @@ namespace CreativeCommand.Repositories
         void Delete(int id);
         void Update(Campaign campaign);
         List<Campaign> GetAllCampaignsByAccountId(int accountId);
+        Campaign GetBookedCampaignRevenue(int userId);
     }
 }

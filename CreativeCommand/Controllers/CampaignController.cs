@@ -37,6 +37,13 @@ namespace CreativeCommand.Controllers
             return Ok(_campaignRepo.GetCampaignById(id));
         }
 
+        [HttpGet("booked/{userId}")]
+        public IActionResult GetBookedRevenueBySalesUser(int userId)
+        {
+            return Ok(_campaignRepo.GetBookedCampaignRevenue(userId));
+        }
+
+
         [HttpPost]
         public IActionResult Post(Campaign campaign)
         {
