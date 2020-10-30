@@ -1,7 +1,14 @@
+/* 
+COLOR PALLETE:
+
+Ice Cold: #a0d2eb
+Freeze Purple: #e5eaf5
+Medium Purple: #d0bdf4
+Purple Pain: #8458B3
+Heavy Purple: #494d5f */
 
 /* ----------FONTS-------------------------------------------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&display=swap');
-
 
 /* ----------FILES-------------------------------------------------------------------- */
 @import "navbar.css";

@@ -7,31 +7,81 @@ import CampaignPreview from "./campaigns/CampaignPreview"
 
 export default function Home() {
   const { accounts, getAllAccounts } = useContext(AccountContext);
-  const { campaigns, getAllCampaigns } = useContext(CampaignContext);
+  const { campaigns, getAllCampaigns, revenue, getBookedRevenueBySalesId } = useContext(CampaignContext);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
   useEffect(() => {
     getAllAccounts();
     getAllCampaigns();
+    getBookedRevenueBySalesId(sessionUser.id)
   }, []);
+
+  console.log(revenue)
+
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  if (!revenue) {
+    return null
+  }
 
   return (
     <>
       <main className="home-container">
         <div className="homeContainer-contents">
-          <section className="userDetails">
-            <div className="userImage">
-              {!sessionUser.imageUrl ? <img className="userProfilePic" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1596490031/icons/profileNav_lord6y.png" alt="user-image" /> :
-                <img className="userProfilePic" src={sessionUser.imageUrl} alt="user-image" />}
-            </div>
-            <p className="user-name">{sessionUser.firstName} {sessionUser.lastName}</p>
-          </section>
+
           <div className="home-contents">
-            <div className="dashboard-container">
-              <section className="dashboard-details">
-                Overview Container
+
+
+
+            <section className="dashboard-container">
+              <div className="dashboard-details">
+
+                <div className="userDetails">
+                  <div className="userContainer">
+                    <div className="userImage">
+                      {!sessionUser.imageUrl ? 
+                      <img className="userProfilePic" src="./userIcon.png" alt="user-image" /> 
+                      :
+                      <img className="userProfilePic" src={sessionUser.imageUrl} alt="user-image" />}
+                    </div>
+                    <h5 className="user-name">
+                      {sessionUser.firstName} {sessionUser.lastName}
+                      </h5>
+                    </div>
+                </div>
+                
+                <div className="revenueDetails">
+                  <div className="booked">
+                    <h7>Booked</h7>
+                    <h5>${numberWithCommas(revenue.revenue)}</h5>
+                  </div>
+                  <div className="pipeline">
+                    <h7>Pending</h7>
+                    <h5>$2,454,533</h5>
+                  </div>
+                  <div className="projection">
+                    <h7>Projected</h7>
+                    <h5>$3,774,533</h5>
+                  </div>
+                </div>
+
+                <div className="budgetDetails">
+                  <div className="budget">
+                    <h7>Annual Budget</h7>
+                    <h5>$5,774,533</h5>
+                  </div>
+                </div>
+
+
+                
+              </div>
             </section>
-            </div>
+
+
+
+
             <div className="overview-container">
               <section className="account-container">
                 <h3 className="dashboardTitle">Account Activity</h3>
@@ -59,8 +109,8 @@ export default function Home() {
               </section>
 
               {/* <section className="campaignTracker-container">
-                <h3 className="dashboardTitle">Campaign Tracker</h3>
-              </section> */}
+        <h3 className="dashboardTitle">Campaign Tracker</h3>
+        </section> */}
             </div>
           </div>
         </div>

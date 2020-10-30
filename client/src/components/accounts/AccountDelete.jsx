@@ -35,10 +35,10 @@ export default function DeleteAccount() {
                   onClick={deleteAct}
                   value="Confirm"
                   className="mainBtn" />
-                    &nbsp;&nbsp;|&nbsp;&nbsp;
-                  <Link to={`/`}>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <Link to={`/`}>
                   Cancel
-                  </Link>
+          </Link>
               </div>
             </div>
           </div>

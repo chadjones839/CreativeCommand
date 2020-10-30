@@ -114,6 +114,55 @@ namespace CreativeCommand.Repositories
                 }
             };
         }
+
+        public List<Campaign> GetAllCampaignsByAccountId(int accountId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                       SELECT c.Id, c.Title, c.AccountId, c.Revenue, c.ScheduleTypeId, c.PlatformId, c.CreateDate, 
+                              c.StartDate, c.EndDate, c.Impressions, c.Audience,
+
+                              a.Id, a.Company, a.Logo, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
+
+                              u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
+                              u.UserTypeId,
+
+                              um.Id AS ManagerId, um.FirebaseUserId AS ManagerFirebaseId, um.FirstName AS ManagerFirstName, 
+                              um.LastName AS ManagerLastName, um.Email AS ManagerEmail, um.UserTypeId AS ManagerUserTypeId,
+
+                              s.Id, s.Name AS ScheduleTypeName,
+
+                              p.Id, p.Name AS PlatformName
+
+                         FROM Campaign c
+                              LEFT JOIN Account a ON c.AccountId = a.Id
+                              LEFT JOIN UserProfile u ON a.SalesUserId = u.Id
+                              LEFT JOIN UserProfile um ON a.ManagerUserId = um.Id
+                              LEFT JOIN ScheduleType s ON c.ScheduleTypeId = s.Id
+                              LEFT JOIN Platform p ON c.PlatformId = p.Id
+                          WHERE a.Id = @Id";
+                    DbUtils.AddParameter(cmd, "@Id", accountId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    var campaigns = new List<Campaign>();
+
+                    while (reader.Read())
+                    {
+                        campaigns.Add(NewCampaignFromReader(reader));
+                    }
+
+                    reader.Close();
+
+                    return campaigns;
+                }
+            };
+        }
+
         public Campaign GetCampaignById(int id)
         {
             using (var conn = Connection)
@@ -160,6 +209,41 @@ namespace CreativeCommand.Repositories
                 }
             }
         }
+
+        public Campaign GetBookedCampaignRevenue(int userId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                       SELECT SUM(c.Revenue) AS BookedRevenue
+                         FROM Campaign c
+                    LEFT JOIN Account a ON c.AccountId = a.id
+                    LEFT JOIN UserProfile up ON a.SalesUserId = up.Id
+                    LEFT JOIN CampaignStatus cs ON cs.CampaignId = c.Id
+                        WHERE up.Id = @Id AND cs.IsApproved = 0";
+
+                    DbUtils.AddParameter(cmd, "@Id", userId);
+
+                    Campaign campaign = null;
+
+                    var reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        return new Campaign()
+                        {
+                            Revenue = reader.GetInt32(reader.GetOrdinal("BookedRevenue"))
+                        };          
+                    }
+                    reader.Close();
+
+                    return campaign;
+                }
+            }
+        }
+
 
         public void Add(Campaign campaign)
         {

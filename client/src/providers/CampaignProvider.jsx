@@ -10,6 +10,8 @@ export const CampaignProvider = (props) => {
     const [campaigns, setCampaigns] = useState([]);
     const [campaign, setCampaign] = useState({});
 
+    const [revenue, setRevenue] = useState();
+
     const getAllCampaigns = () => {
         getToken().then((token) =>
             fetch(apiUrl, {
@@ -30,6 +32,17 @@ export const CampaignProvider = (props) => {
                 }
             })).then((resp) => resp.json())
             .then(setCampaign);
+    };
+
+    const getBookedRevenueBySalesId = (id) => {
+        getToken().then((token) =>
+            fetch(`${apiUrl}/booked/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })).then((resp) => resp.json())
+            .then(setRevenue);
     };
 
     const addCampaign = (campaign) => {
@@ -74,7 +87,7 @@ export const CampaignProvider = (props) => {
 
     return (
         <CampaignContext.Provider value={{
-            campaign, campaigns, getAllCampaigns, getCampaignById, addCampaign, updateCampaign, deleteCampaign, setCampaign
+            campaign, campaigns, revenue, getAllCampaigns, getCampaignById, addCampaign, updateCampaign, deleteCampaign, setCampaign, getBookedRevenueBySalesId
         }}>
             {props.children}
         </CampaignContext.Provider>

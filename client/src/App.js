@@ -20,8 +20,8 @@ function App() {
               <PlatformProvider>
                 <CampaignStatusProvider>
 
-                <Navbar />
-                <ApplicationViews />
+                  <Navbar />
+                  <ApplicationViews />
 
                 </CampaignStatusProvider>
               </PlatformProvider>

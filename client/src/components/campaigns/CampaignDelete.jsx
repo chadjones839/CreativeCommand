@@ -35,10 +35,10 @@ export default function DeletePostPage() {
                   onClick={deleteConfirm}
                   value="Confirm"
                   className="mainBtn" />
-                    &nbsp;&nbsp;|&nbsp;&nbsp;
-                  <Link to={`/`}>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <Link to={`/`}>
                   Cancel
-                  </Link>
+          </Link>
               </div>
             </div>
           </div>

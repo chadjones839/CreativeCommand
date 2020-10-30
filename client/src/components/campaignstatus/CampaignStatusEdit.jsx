@@ -3,7 +3,6 @@ import React, { useState, useContext, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory, useParams } from "react-router-dom";
 import { CampaignStatusContext } from "../../providers/CampaignStatusProvider";
-import { UserProfileContext } from "../../providers/UserProfileProvider";
 
 export default function CampaignStatusEditForm() {
   const history = useHistory();
@@ -21,6 +20,7 @@ export default function CampaignStatusEditForm() {
     isComplete: ""
   });
 
+  console.log("before:", campaignStatus)
   useEffect(() => {
     getCampaignStatusById(id)
   }, [id])
@@ -28,6 +28,7 @@ export default function CampaignStatusEditForm() {
   useEffect(() => {
     setEditedCampaignStatus(campaignStatus)
   }, [campaignStatus])
+  console.log("after:", campaignStatus)
 
   const handleFieldChange = (e) => {
     const stateToChange = { ...editedCampaignStatus };
@@ -38,17 +39,29 @@ export default function CampaignStatusEditForm() {
   const saveChanges = (e) => {
     e.preventDefault();
 
-    // SOLD
+    updateCampaignStatus({
+      id: campaignStatus.id,
+      campaignId: campaignStatus.campaignId,
+      isSold: editedCampaignStatus.isSold,
+      isApproved: editedCampaignStatus.isApproved,
+      creativeSubmitted: editedCampaignStatus.creativeSubmitted,
+      inProduction: editedCampaignStatus.inProduction,
+      isScheduled: editedCampaignStatus.isScheduled,
+      isComplete: editedCampaignStatus.isComplete
+    });
 
-    if (editedCampaignStatus.isApproved === "true") {
+    // SOLD
+    if (editedCampaignStatus.isSold === "true") {
       editedCampaignStatus.isSold = true;
     }
-    else if (editedCampaignStatus.isApproved === "false") {
+    else if (editedCampaignStatus.isSold === "false") {
       editedCampaignStatus.isSold = false;
     }
     else if (!editedCampaignStatus.isSold) {
       editedCampaignStatus.isSold = campaignStatus.isSold;
     }
+
+    editedCampaignStatus.isSold = editedCampaignStatus.isSold === "true";
 
     // APPROVED
     if (editedCampaignStatus.isApproved === "true") {
@@ -105,18 +118,7 @@ export default function CampaignStatusEditForm() {
       editedCampaignStatus.isComplete = campaignStatus.isComplete;
     }
 
-    updateCampaignStatus({
-      id: editedCampaignStatus.id,
-      campaignId: editedCampaignStatus.campaignId,
-      isSold: editedCampaignStatus.isSold,
-      isApproved: editedCampaignStatus.isApproved,
-      creativeSubmitted: editedCampaignStatus.creativeSubmitted,
-      inProduction: editedCampaignStatus.inProduction,
-      isScheduled: editedCampaignStatus.isScheduled,
-      isComplete: editedCampaignStatus.isComplete
-    });
-
-    updateCampaignStatus(editedCampaignStatus.id, editedCampaignStatus)
+    updateCampaignStatus(campaignStatus.id, editedCampaignStatus)
       .then(() => {
         history.push(`/campaign/${campaignStatus.campaignId}`)
       })
@@ -125,6 +127,9 @@ export default function CampaignStatusEditForm() {
   if (!editedCampaignStatus || !campaignStatus.campaign) {
     return null
   }
+  // else if (editedCampaignStatus.id === id) {
+  //   return null;
+  // }
 
   return (
     <>
@@ -138,22 +143,22 @@ export default function CampaignStatusEditForm() {
               id="campaignStatusId"
               type="hidden"
               name="campaignStatusId"
-              value={editedCampaignStatus.id} />
+              value={campaignStatus.id} />
             <Input
               id="campaignId"
               type="hidden"
               name="campaignId"
-              defaultValue={editedCampaignStatus.campaignId} />
+              defaultValue={campaignStatus.campaignId} />
           </FormGroup>
           <FormGroup>
-            <Label for="sold">Sold: </Label>
+            <Label for="isSold">Sold: </Label>
             {campaignStatus.isSold == true ?
               <h6>Completed</h6> :
               <Input
-                id="sold"
+                id="isSold"
                 type="select"
-                name="sold"
-                defaultValue={editedCampaignStatus.isSold}
+                name="isSold"
+                defaultValue={campaignStatus.isSold}
                 onChange={handleFieldChange}>
                 <option selected value="false">Not Completed</option>
                 <option value="true">Completed</option>
@@ -168,7 +173,7 @@ export default function CampaignStatusEditForm() {
                 id="isApproved"
                 type="select"
                 name="isApproved"
-                defaultValue={editedCampaignStatus.isApproved}
+                defaultValue={campaignStatus.isApproved}
                 onChange={handleFieldChange}>
                 <option selected value="false">Not Completed</option>
                 <option value="true">Completed</option>
@@ -183,7 +188,7 @@ export default function CampaignStatusEditForm() {
                 id="creativeSubmitted"
                 type="select"
                 name="creativeSubmitted"
-                defaultValue={editedCampaignStatus.creativeSubmitted}
+                defaultValue={campaignStatus.creativeSubmitted}
                 onChange={handleFieldChange}>
                 <option selected value="false">Not Completed</option>
                 <option value="true">Completed</option>
@@ -198,7 +203,7 @@ export default function CampaignStatusEditForm() {
                 id="inProduction"
                 type="select"
                 name="inProduction"
-                defaultValue={editedCampaignStatus.inProduction}
+                defaultValue={campaignStatus.inProduction}
                 onChange={handleFieldChange}>
                 <option selected value="false">Not Completed</option>
                 <option value="true">Completed</option>
@@ -213,7 +218,7 @@ export default function CampaignStatusEditForm() {
                 id="isScheduled"
                 type="select"
                 name="isScheduled"
-                defaultValue={editedCampaignStatus.isScheduled}
+                defaultValue={campaignStatus.isScheduled}
                 onChange={handleFieldChange}>
                 <option selected value="false">Not Completed</option>
                 <option value="true">Completed</option>
@@ -228,7 +233,7 @@ export default function CampaignStatusEditForm() {
                 id="isComplete"
                 type="select"
                 name="isComplete"
-                defaultValue={editedCampaignStatus.isComplete}
+                defaultValue={campaignStatus.isComplete}
                 onChange={handleFieldChange}>
                 <option selected value="false">Not Completed</option>
                 <option value="true">Completed</option>

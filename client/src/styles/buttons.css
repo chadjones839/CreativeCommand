@@ -1,47 +1,47 @@
 .accountBtn,
 .campaignBtn {
-    display: block;
-    color: black;
-    cursor: pointer;
-    outline: none;
-    border: none;
-    background-color:#ffffff;
-    width: auto;
-    height: 30px;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 5px;
-    font-size: .8rem;
-    font-weight: 500;
-    box-shadow: 1px 1px 2px 1px #747272;
+  display: block;
+  color: black;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color:#ffffff;
+  width: auto;
+  height: 30px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: .8rem;
+  font-weight: 500;
+  box-shadow: 1px 1px 2px 1px #747272;
 
 }
 
 .accountBtn:hover,
 .campaignBtn:hover {
-    background-color: goldenrod;
+  background-color: goldenrod;
 }
 
 
 .mainBtn{
-    display: block;
-    color: black;
-    cursor: pointer;
-    outline: none;
-    border: none;
-    background-color:#ffffff;
-    width: 40%;
-    text-align: center;
-    height: 30px;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 5px;
-    font-size: .8rem;
-    font-weight: 500;
-    box-shadow: 1px 1px 2px 1px #747272;
-    text-decoration: none;
+  display: block;
+  color: black;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color:#ffffff;
+  width: 40%;
+  text-align: center;
+  height: 30px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: .8rem;
+  font-weight: 500;
+  box-shadow: 1px 1px 2px 1px #747272;
+  text-decoration: none;
 }
 
 .mainBtn:hover {
-    background-color: #c4bebe;
+  background-color: #c4bebe;
 }

@@ -9,19 +9,19 @@ export default function AccountAddForm() {
   const history = useHistory();
   const { addAccount } = useContext(AccountContext);
   const { salesUsers, managerUsers, getAllSalesUsers, getAllManagerUsers } = useContext(UserProfileContext);
-  const [ salesUserId, setSalesUserId ] = useState()
-  const [ managerUserId, setManagerUserId ] = useState()
+  const [salesUserId, setSalesUserId] = useState()
+  const [managerUserId, setManagerUserId] = useState()
   const [isLoading, setIsLoading] = useState(false);
 
   const [account, setAccount] = useState({
-      company: "",
-      logo: "",
-      address: "",
-      city: "",
-      state: "",
-      zipCode: "",
-      salesUserId: "",
-      managerUserId: ""
+    company: "",
+    logo: "",
+    address: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    salesUserId: "",
+    managerUserId: ""
   });
 
   useEffect(() => {
@@ -48,17 +48,17 @@ export default function AccountAddForm() {
 
   const createAccount = (e) => {
     e.preventDefault();
-    if (account.company === "" || 
-        account.address === "" ||
-        account.city === "" ||
-        account.state === "" ||
-        account.zipCode === "" ||
-        salesUserId === "" ||
-        managerUserId === "") {
-        alert("Missing Fields")
+    if (account.company === "" ||
+      account.address === "" ||
+      account.city === "" ||
+      account.state === "" ||
+      account.zipCode === "" ||
+      salesUserId === "" ||
+      managerUserId === "") {
+      alert("Missing Fields")
 
     } else {
-        setIsLoading(true);
+      setIsLoading(true);
     }
 
     const parseSalesId = parseInt(salesUserId);
@@ -69,9 +69,9 @@ export default function AccountAddForm() {
     account.zipCode = parseZip;
 
     addAccount(account)
-    .then((a) => {
+      .then((a) => {
         history.push(`/account/${a.id}`)
-    })
+      })
   };
 
   if (!account || !salesUsers || !managerUsers) {
@@ -80,101 +80,101 @@ export default function AccountAddForm() {
 
   return (
     <>
-    <Form className="login-form" onSubmit={createAccount}>
-      <fieldset className="loginFields">
-        <FormGroup>
-          <Label for="company">Company</Label>
-          <Input 
-            id="company" 
-            type="text" 
-            name="company"
-            value={account.company}
-            onChange={handleFieldChange} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="logo">Logo</Label>
-          <Input 
-            id="logo" 
-            type="text" 
-            name="logo"
-            value={account.logo}
-            onChange={handleFieldChange} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="address">Address</Label>
-          <Input 
-            id="address" 
-            type="text" 
-            name="address"
-            value={account.address}
-            onChange={handleFieldChange} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="city">City</Label>
-          <Input 
-            id="city" 
-            type="text" 
-            name="city"
-            value={account.city}
-            onChange={handleFieldChange} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="state">State</Label>
-          <Input 
-            id="state" 
-            type="text" 
-            name="state"
-            value={account.state}
-            onChange={handleFieldChange} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="zipCode">Zip Code</Label>
-          <Input 
-            id="zipCode" 
-            type="text" 
-            name="zipCode"
-            value={account.zipCode}
-            onChange={handleFieldChange} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="salesUserId">Assigned Rep</Label>
-          <Input 
-            id="salesUserId" 
-            type="select" 
-            name="salesUserId"
-            defaultValue={account.salesUserId}
-            onChange={handleSalesUserChange}>
-                <option></option>
-                {salesUsers.map(users =>
-                    <option value={users.id}>
-                        {users.fullName}
-                    </option>
-                )}
-          </Input>
-        </FormGroup>
-        <FormGroup>
-          <Label for="managerUserId">Assigned Manager</Label>
-          <Input 
-            id="managerUserId" 
-            type="select" 
-            name="managerUserId"
-            defaultValue={account.managerUserId}
-            onChange={handleManagerUserChange}>
-                <option></option>
-                {managerUsers.map(users =>
-                    <option value={users.id}>
-                        {users.fullName}
-                    </option>
-                )}
-          </Input>
-        </FormGroup>
-        <div className="loginBtn">
+      <Form className="login-form" onSubmit={createAccount}>
+        <fieldset className="loginFields">
           <FormGroup>
-            <Button>Save Changes</Button>
+            <Label for="company">Company</Label>
+            <Input
+              id="company"
+              type="text"
+              name="company"
+              value={account.company}
+              onChange={handleFieldChange} />
           </FormGroup>
-        </div>
-      </fieldset>
-    </Form>
+          <FormGroup>
+            <Label for="logo">Logo</Label>
+            <Input
+              id="logo"
+              type="text"
+              name="logo"
+              value={account.logo}
+              onChange={handleFieldChange} />
+          </FormGroup>
+          <FormGroup>
+            <Label for="address">Address</Label>
+            <Input
+              id="address"
+              type="text"
+              name="address"
+              value={account.address}
+              onChange={handleFieldChange} />
+          </FormGroup>
+          <FormGroup>
+            <Label for="city">City</Label>
+            <Input
+              id="city"
+              type="text"
+              name="city"
+              value={account.city}
+              onChange={handleFieldChange} />
+          </FormGroup>
+          <FormGroup>
+            <Label for="state">State</Label>
+            <Input
+              id="state"
+              type="text"
+              name="state"
+              value={account.state}
+              onChange={handleFieldChange} />
+          </FormGroup>
+          <FormGroup>
+            <Label for="zipCode">Zip Code</Label>
+            <Input
+              id="zipCode"
+              type="text"
+              name="zipCode"
+              value={account.zipCode}
+              onChange={handleFieldChange} />
+          </FormGroup>
+          <FormGroup>
+            <Label for="salesUserId">Assigned Rep</Label>
+            <Input
+              id="salesUserId"
+              type="select"
+              name="salesUserId"
+              defaultValue={account.salesUserId}
+              onChange={handleSalesUserChange}>
+              <option></option>
+              {salesUsers.map(users =>
+                <option value={users.id}>
+                  {users.fullName}
+                </option>
+              )}
+            </Input>
+          </FormGroup>
+          <FormGroup>
+            <Label for="managerUserId">Assigned Manager</Label>
+            <Input
+              id="managerUserId"
+              type="select"
+              name="managerUserId"
+              defaultValue={account.managerUserId}
+              onChange={handleManagerUserChange}>
+              <option></option>
+              {managerUsers.map(users =>
+                <option value={users.id}>
+                  {users.fullName}
+                </option>
+              )}
+            </Input>
+          </FormGroup>
+          <div className="loginBtn">
+            <FormGroup>
+              <Button>Save Changes</Button>
+            </FormGroup>
+          </div>
+        </fieldset>
+      </Form>
     </>
   );
 }

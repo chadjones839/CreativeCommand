@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using CreativeCommand.Repositories;
 using CreativeCommand.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 
 namespace CreativeCommand.Controllers
 {
@@ -13,15 +14,15 @@ namespace CreativeCommand.Controllers
     {
         private readonly ICampaignRepository _campaignRepo;
         private readonly IAccountRepository _accountRepo;
-        private readonly IUserProfileRepository _userRepo;
+        private readonly ICampaignStatusRepository _campaignStatusRepo;
         public CampaignController(
             ICampaignRepository campaignRepository,
             IAccountRepository accountRepository,
-            IUserProfileRepository userRepository)
+            ICampaignStatusRepository campaignStatusRepository)
         {
             _campaignRepo = campaignRepository;
             _accountRepo = accountRepository;
-            _userRepo = userRepository;
+            _campaignStatusRepo = campaignStatusRepository;
         }
 
         [HttpGet]
@@ -35,6 +36,13 @@ namespace CreativeCommand.Controllers
         {
             return Ok(_campaignRepo.GetCampaignById(id));
         }
+
+        [HttpGet("booked/{userId}")]
+        public IActionResult GetBookedRevenueBySalesUser(int userId)
+        {
+            return Ok(_campaignRepo.GetBookedCampaignRevenue(userId));
+        }
+
 
         [HttpPost]
         public IActionResult Post(Campaign campaign)
@@ -58,6 +66,9 @@ namespace CreativeCommand.Controllers
         [HttpDelete("delete/{id}")]
         public IActionResult Delete(int id)
         {
+            CampaignStatus campaignStatus = _campaignStatusRepo.GetByCampaignId(id);
+            _campaignStatusRepo.Delete(campaignStatus.Id);
+            
             _campaignRepo.Delete(id);
             return NoContent();
         }
