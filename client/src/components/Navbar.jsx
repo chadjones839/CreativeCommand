@@ -57,7 +57,9 @@ export default function Header() {
               </NavItem>
             </>
             }
+            
             {isLoggedIn && sessionUser.userTypeId === 1 &&
+              
               <NavItem>
                 <NavLink 
                   style={{color: '#e5eaf5'}} 
@@ -69,25 +71,44 @@ export default function Header() {
           }
           </Nav>
           <Nav navbar>
+            
             {isLoggedIn &&
               <>
+              <div className="navUserContainer">
+                <div className="navUserImage">
+                    {!sessionUser.imageUrl ? 
+                    <img src="./userIcon.png" alt="user-image" /> 
+                    :
+                    <img src={sessionUser.imageUrl} alt="user-image" />}
+                  </div>
+                </div>
                 <NavItem>
                   <a
                     aria-current="page"
                     className="nav-link"
-                    style={{ cursor: "pointer" }}
+                    style={{ cursor: "pointer", color: '#e5eaf5' }}
                     onClick={logout}>Logout
-          </a>
+                  </a>
                 </NavItem>
               </>
             }
             {!isLoggedIn &&
               <>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/login">Login</NavLink>
+                  <NavLink 
+                    tag={RRNavLink} 
+                    style={{color: '#e5eaf5'}} 
+                    to="/login">
+                      Login
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/register">Register</NavLink>
+                  <NavLink 
+                    tag={RRNavLink} 
+                    style={{color: '#e5eaf5'}} 
+                    to="/register">
+                      Register
+                  </NavLink>
                 </NavItem>
               </>
             }

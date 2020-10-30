@@ -1,7 +1,9 @@
 /* -----------ACCOUNT PREVIEW------------------------------ */
 /* -------------------------------------------------------- */
 .accountCard {
-  border-bottom: 1px solid black;
+  border: 1px solid black;
+  border-radius: 8px;
+  margin: 5px 0;
   display: flex; 
   padding: 10px; 
 }
@@ -9,6 +11,7 @@
 .companyLogo {
   height: auto;
   width: 80%;
+  max-width: 70px;
 }
 
 .accountCard-left {
@@ -21,25 +24,26 @@
 .accountCard-middle {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin-left: 10px;
   width: 70%;
 }
 
 .accountCard-companyName {
   margin: 0;
-  color: blue;
+  color: #6524aa;
   font-weight: bold;
-  font-size: 1.2em;
-
+  font-size: 1.30em;
 }
 
 .accountCard-details {
   margin: 0;
+  font-size: 1.1em;
   line-height: .8;
 }
 
 .accountActivity-identifiers > em {
-  font-size: .8em;
+  font-size: 1em;
 }
 
 .accountCard-right {

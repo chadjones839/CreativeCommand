@@ -22,15 +22,16 @@
 .campaignCard-middle {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin-left: 10px;
   width: 70%;
 }
 
 .campaignCard-campaignName {
   margin: 0;
-  color: blue;
+  color :#6524aa;
   font-weight: bold;
-  font-size: 1em;
+  font-size: 1.3em;
 }
 
 .campaign-company {
@@ -39,11 +40,12 @@
 
 .campaignCard-details {
   margin: 0;
+  font-size: 1.1em;
   line-height: .8;
 }
 
 .campaignActivity-identifiers > em {
-  font-size: .8em;
+  font-size: 1em;
 }
 
 .campaignCard-right {

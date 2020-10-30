@@ -43,6 +43,12 @@ namespace CreativeCommand.Controllers
             return Ok(_campaignRepo.GetBookedCampaignRevenue(userId));
         }
 
+        [HttpGet("pending/{userId}")]
+        public IActionResult GetPendingRevenueBySalesUser(int userId)
+        {
+            return Ok(_campaignRepo.GetPendingCampaignRevenue(userId));
+        }
+
 
         [HttpPost]
         public IActionResult Post(Campaign campaign)

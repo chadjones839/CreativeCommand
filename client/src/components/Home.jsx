@@ -7,22 +7,35 @@ import CampaignPreview from "./campaigns/CampaignPreview"
 
 export default function Home() {
   const { accounts, getAllAccounts } = useContext(AccountContext);
-  const { campaigns, getAllCampaigns, revenue, getBookedRevenueBySalesId } = useContext(CampaignContext);
+  const { campaigns, getAllCampaigns, revenue, pendingRevenue, getBookedRevenueBySalesId, getPendingRevenueBySalesId } = useContext(CampaignContext);
   const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
   useEffect(() => {
     getAllAccounts();
     getAllCampaigns();
     getBookedRevenueBySalesId(sessionUser.id)
+    getPendingRevenueBySalesId(sessionUser.id)
   }, []);
 
   console.log(revenue)
 
   function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    if (!x) {
+      return 0
+    }
+    else {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
   }
 
-  if (!revenue) {
+  function combinedNumberWithCommas(x, y) {
+    let z = x + y;  
+
+    return z.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    
+  }
+
+  if (!revenue || !pendingRevenue) {
     return null
   }
 
@@ -59,11 +72,11 @@ export default function Home() {
                   </div>
                   <div className="pipeline">
                     <h7>Pending</h7>
-                    <h5>$2,454,533</h5>
+                    <h5>${numberWithCommas(pendingRevenue.revenue)}</h5>
                   </div>
                   <div className="projection">
                     <h7>Projected</h7>
-                    <h5>$3,774,533</h5>
+                    <h5>${combinedNumberWithCommas(revenue.revenue, pendingRevenue.revenue)}</h5>
                   </div>
                 </div>
 
@@ -90,10 +103,11 @@ export default function Home() {
                     <a className="mainBtn" href="/accounts/add">+ New Account</a>
                   </div>
                 </div>
-                {accounts.map(a =>
-                  <AccountPreview key={a.id} account={a} />
-                )}
-
+                <div className="account-list">
+                  {accounts.map(a =>
+                    <AccountPreview key={a.id} account={a} />
+                  )}
+                </div>
               </section>
 
               <section className="campaign-container">
@@ -103,9 +117,11 @@ export default function Home() {
                     <a className="mainBtn" href="/campaigns/add">+ New Campaign</a>
                   </div>
                 </div>
-                {campaigns.map(c =>
-                  <CampaignPreview key={c.id} campaign={c} />
-                )}
+                <div className="campaignList">
+                  {campaigns.map(c =>
+                    <CampaignPreview key={c.id} campaign={c} />
+                  )}
+                </div>
               </section>
 
               {/* <section className="campaignTracker-container">
