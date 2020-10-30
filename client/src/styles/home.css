@@ -1,77 +1,76 @@
 .home-container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .homeContainer-contents {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-    width: 90%;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  width: 90%;
 }
 
 .userDetails {
-    padding: 20px;
-    border-radius: 5px;
-    margin-right: 10px;
-    border: 1px black solid;
-    width: 20%;
+  padding: 20px;
+  border-radius: 5px;
+  margin-right: 10px;
+  width: 15%;
 }
 
 .home-contents {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .dashboard-container {
-    padding: 20px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    border: 1px black solid;
+  padding: 20px 10px;;
+  background: #e5eaf5;
+  margin-bottom: 10px;
 }
 
 .overview-container {
-    display: flex;
-    justify-content: space-between;
-
+  display: flex;
+  justify-content: space-between;
 }
 
 .account-container,
 .campaign-container {
-    border: 1px black solid;
-    border-radius: 5px;
-    padding: 20px;
-    width: 49%;
+  border: 1px black solid;
+  border-radius: 5px;
+  padding: 20px;
+  width: 49%;
 }
 
 .dashboardTitle {
-    text-align: center;
+  text-align: center;
 }
 
 .addBtn {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 /* ----------------USER---------------------------- */
 /* ------------------------------------------------ */
 
 .userImage {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .userProfilePic {
-    width: 50%;
-    height: auto;
-    border: 2px solid black;
-    border-radius: 50%;
+  width: 50%;
+  height: auto;
+  border-radius: 50%;
 }
 
 .user-name {
-    text-align: center;
-    margin-top: 10px;
+  text-align: center;
+  color: #494d5f;
+  
+  font-size: 1.25vw;
+  margin-top: 10px;
 }

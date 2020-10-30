@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using CreativeCommand.Repositories;
 using CreativeCommand.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 
 namespace CreativeCommand.Controllers
 {
@@ -12,16 +13,17 @@ namespace CreativeCommand.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IAccountRepository _accountRepo;
-        private readonly IUserProfileRepository _userRepo;
-        private readonly IUserTypeRepository _userTypeRepo;
+        private readonly ICampaignRepository _campaignRepo;
+        private readonly ICampaignStatusRepository _campaignStatusRepo;
         public AccountController(
-            IAccountRepository accountRepository, 
-            IUserProfileRepository userRepository, 
-            IUserTypeRepository userTypeRepository)
+            IAccountRepository accountRepository,  
+            ICampaignRepository campaignRepository,
+            ICampaignStatusRepository campaignStatusRepository)
         {
+
             _accountRepo = accountRepository;
-            _userRepo = userRepository;
-            _userTypeRepo = userTypeRepository;
+            _campaignRepo = campaignRepository;
+            _campaignStatusRepo = campaignStatusRepository;
         }
 
         [HttpGet]
@@ -58,6 +60,17 @@ namespace CreativeCommand.Controllers
         [HttpDelete("delete/{id}")]
         public IActionResult Delete(int id)
         {
+            List<CampaignStatus> campaignStatuses = _campaignStatusRepo.GetAllByCampaignAccountId(id);
+            foreach (var item in campaignStatuses)
+            {
+                _campaignStatusRepo.Delete(item.Id);
+            }
+            List<Campaign> campaigns = _campaignRepo.GetAllCampaignsByAccountId(id);
+            foreach (var item in campaigns)
+            {
+                _campaignRepo.Delete(item.Id);
+            }
+
             _accountRepo.Delete(id);
             return NoContent();
         }

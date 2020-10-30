@@ -1,74 +1,74 @@
 /* -----------ACCOUNT PREVIEW------------------------------ */
 /* -------------------------------------------------------- */
 .accountCard {
-    border-bottom: 1px solid black;
-    display: flex; 
-    padding: 10px; 
+  border-bottom: 1px solid black;
+  display: flex; 
+  padding: 10px; 
 }
 
 .companyLogo {
-    height: auto;
-    width: 80%;
+  height: auto;
+  width: 80%;
 }
 
 .accountCard-left {
-    width: 20%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .accountCard-middle {
-    display: flex;
-    flex-direction: column;
-    margin-left: 10px;
-    width: 70%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  width: 70%;
 }
 
 .accountCard-companyName {
-    margin: 0;
-    color: blue;
-    font-weight: bold;
-    font-size: 1.2em;
+  margin: 0;
+  color: blue;
+  font-weight: bold;
+  font-size: 1.2em;
 
 }
 
 .accountCard-details {
-    margin: 0;
-    line-height: .8;
+  margin: 0;
+  line-height: .8;
 }
 
 .accountActivity-identifiers > em {
-    font-size: .8em;
+  font-size: .8em;
 }
 
 .accountCard-right {
-    display: flex;
-    justify-content: flex-end;
-    width: 10%;
+  display: flex;
+  justify-content: flex-end;
+  width: 10%;
 }
 
 .accountButtons {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .deleteContainer {
-    display: flex;
-    justify-content: center;
-    margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
 }
 
 .deleteAccount {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    width: 30%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 30%;
 }
 
 .actionButtons {
-    text-align: center;
+  text-align: center;
 }
 
 
@@ -76,21 +76,21 @@
 /* ---------------------------------------------------------- */
 
 .accountDetail-container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .accountDetailCard {
-    display: flex;
-    width: 60%;
-    border: 1px solid black;
-    border-radius: 15px;
-    padding: 15px;
+  display: flex;
+  width: 60%;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 15px;
 }
 
 .accountDetailsButtons {
-    position: relative;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }

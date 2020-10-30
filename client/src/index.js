@@ -12,7 +12,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
-    <App />,
+  <App />,
   document.getElementById('root')
 );
 

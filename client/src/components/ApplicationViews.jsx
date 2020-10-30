@@ -29,7 +29,9 @@ export default function ApplicationViews() {
       <Switch>
 
         <Route path="/" exact>
-          {isLoggedIn ? <Home /> : <Redirect to="/login" />}
+          {/* {isLoggedIn ?  */}
+          <Home /> 
+          {/* : <Redirect to="/login" />} */}
         </Route>
 
         <Route path="/login">
@@ -59,7 +61,7 @@ export default function ApplicationViews() {
 
         <Route exact path="/account/delete/:id">
           {isLoggedIn ? <AccountDelete /> : <Redirect to="/login" />}
-        </Route> 
+        </Route>
 
         {/* CAMPAIGNS */}
         <Route exact path="/campaigns">
@@ -80,7 +82,7 @@ export default function ApplicationViews() {
 
         <Route exact path="/campaign/delete/:id">
           {isLoggedIn ? <CampaignDelete /> : <Redirect to="/login" />}
-        </Route> 
+        </Route>
 
         {/* CAMPAIGN STATUSES */}
         <Route exact path="/campaignstatus/edit/:id">

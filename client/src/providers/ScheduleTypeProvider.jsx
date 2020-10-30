@@ -22,7 +22,8 @@ export const ScheduleTypeProvider = (props) => {
     };
 
     return (
-        <ScheduleTypeContext.Provider value={{ scheduleTypes, getAllScheduleTypes
+        <ScheduleTypeContext.Provider value={{
+            scheduleTypes, getAllScheduleTypes
         }}>
             {props.children}
         </ScheduleTypeContext.Provider>

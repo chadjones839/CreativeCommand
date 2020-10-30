@@ -112,10 +112,10 @@ export default function CampaignAddForm() {
   };
 
   //   if (!campaign || 
-  //       !accountId || 
-  //       !scheduleTypeId || 
-  //       !platformId) {
-  //     return null
+  //     !accountId || 
+  //     !scheduleTypeId || 
+  //     !platformId) {
+  //   return null
   //   }
 
   return (

@@ -1,6 +1,11 @@
 .nav-name > h5 {
-    font-family: 'News Cycle', sans-serif;
-    margin-bottom: 5px;
-    margin-right: 20px;
-    font-size: 1.15em;
+  font-family: 'News Cycle', sans-serif;
+  margin-bottom: 5px;
+  margin-right: 20px;
+  font-size: 1.15em;
+  color: #a0d2eb;
+}
+
+.nav-item {
+  color: #e5eaf5
 }
