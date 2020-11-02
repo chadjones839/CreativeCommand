@@ -28,24 +28,60 @@ export default function AccountPreview({ account }) {
               </Link>
             </div>
             <div className="accountActivity-identifiers">
-              <p className="accountCard-details">Owned by <strong>{account.salesUser.fullName}</strong></p> <em>Created on {dateTime}</em>
+              <p className="accountCard-details">Owned by <strong>{account.salesUser.fullName}</strong></p>
             </div>
-          </div>
-          <div className="accountCard-right">
-            <div className="accountButtons">
+            {/* <div className="accountLinks">
               <Link
                 className="accountButton"
                 style={{ textDecoration: 'none' }}
                 to={`/account/edit/${account.id}`}>
-                <img className="accountBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121858/icons/edit_oeexa4.png" />
+                  Edit
               </Link>
+              &nbsp;&nbsp; | &nbsp;&nbsp;
               <Link
                 className="accountButton"
                 style={{ textDecoration: 'none' }}
                 to={`/account/delete/${account.id}`}>
-                <img className="accountBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121902/icons/delete_mr2ko5.png" alt="delete" />
+                  Delete
               </Link>
+            </div> */}
+          </div>
+          <div className="accountCard-right">
+          {/* <div className="account-createDate">
+              <em className="accountCreated">Created {dateTime}</em>
+            </div> */}
+            <div className="accountButtons">
+              <div className="accountLinks">
+                <Link
+                  className="editButton"
+                  style={{ textDecoration: 'none' }}
+                  to={`/account/edit/${account.id}`}>
+                    Edit
+                </Link>
+                
+                <Link
+                  className="deleteButton"
+                  style={{ textDecoration: 'none' }}
+                  to={`/account/delete/${account.id}`}>
+                    Delete
+                </Link>
+              </div>
             </div>
+            {/* <div className="accountLinks">
+              <Link
+                className="accountButton"
+                style={{ textDecoration: 'none' }}
+                to={`/account/edit/${account.id}`}>
+                  Edit
+              </Link>
+              &nbsp;&nbsp; | &nbsp;&nbsp;
+              <Link
+                className="accountButton"
+                style={{ textDecoration: 'none' }}
+                to={`/account/delete/${account.id}`}>
+                  Delete
+              </Link>
+            </div> */}
           </div>
         </div>
       </>

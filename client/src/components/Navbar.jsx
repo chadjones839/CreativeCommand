@@ -20,8 +20,8 @@ export default function Header() {
 
   return (
     <div>
-      <Navbar style={{backgroundColor: '#494d5f'}} light expand="md">
-        <NavbarBrand className="nav-name" tag={RRNavLink} to="/">
+      <Navbar style={{backgroundColor: '#404346', padding:"5px 10px"}} light expand="md">
+        <NavbarBrand style={{padding: '0'}} className="nav-name" tag={RRNavLink} to="/">
           <h5>Creative Command</h5>
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
@@ -31,7 +31,7 @@ export default function Header() {
             <>
               <NavItem>
                 <NavLink 
-                style={{color: '#e5eaf5'}} 
+                style={{color: '#b9babb'}} 
                 tag={RRNavLink} 
                 to="/">
                   Home
@@ -40,7 +40,7 @@ export default function Header() {
 
               <NavItem>
                 <NavLink 
-                style={{color: '#e5eaf5'}} 
+                style={{color: '#b9babb'}} 
                 tag={RRNavLink} 
                 to="/accounts">
                   Accounts
@@ -49,7 +49,7 @@ export default function Header() {
 
               <NavItem>
                 <NavLink 
-                  style={{color: '#e5eaf5'}} 
+                  style={{color: '#b9babb'}} 
                   tag={RRNavLink} 
                   to="/campaigns">
                     Campaigns
@@ -62,7 +62,7 @@ export default function Header() {
               
               <NavItem>
                 <NavLink 
-                  style={{color: '#e5eaf5'}} 
+                  style={{color: '#b9babb'}} 
                   tag={RRNavLink} 
                   to="/team">
                     Team
@@ -86,7 +86,7 @@ export default function Header() {
                   <a
                     aria-current="page"
                     className="nav-link"
-                    style={{ cursor: "pointer", color: '#e5eaf5' }}
+                    style={{ cursor: "pointer", color: '#b9babb' }}
                     onClick={logout}>Logout
                   </a>
                 </NavItem>
@@ -97,7 +97,7 @@ export default function Header() {
                 <NavItem>
                   <NavLink 
                     tag={RRNavLink} 
-                    style={{color: '#e5eaf5'}} 
+                    style={{color: '#b9babb'}} 
                     to="/login">
                       Login
                   </NavLink>
@@ -105,7 +105,7 @@ export default function Header() {
                 <NavItem>
                   <NavLink 
                     tag={RRNavLink} 
-                    style={{color: '#e5eaf5'}} 
+                    style={{color: '#b9babb'}} 
                     to="/register">
                       Register
                   </NavLink>

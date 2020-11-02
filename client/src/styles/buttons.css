@@ -19,7 +19,7 @@
 
 .accountBtn:hover,
 .campaignBtn:hover {
-  background-color: goldenrod;
+  background-color: #8458B3;
 }
 
 
@@ -44,4 +44,24 @@
 
 .mainBtn:hover {
   background-color: #c4bebe;
+}
+
+
+.editButton,
+.deleteButton {
+  border: 1px solid #404346;
+  border-radius: 10px;
+  padding: 2px 10px;
+  color: #404346;
+  font-family: 'Nunito', sans-serif;
+  box-shadow: 1px 1px 5px -1px;
+  font-size: .9pem;
+  margin: 5px;
+  text-align: center;
+}
+
+.editButton:hover,
+.deleteButton:hover {
+  background: #404346;
+  color: #ffffff;
 }
