@@ -1,7 +1,9 @@
 /* -----------CAMPAIGN PREVIEW------------------------------ */
 /* -------------------------------------------------------- */
 .campaignCard {
-  border-bottom: 1px solid black;
+  border: #efefef 3px solid;
+  border-radius: 8px;
+  margin: 5px 0;
   display: flex; 
   padding: 10px; 
 }
@@ -22,15 +24,17 @@
 .campaignCard-middle {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin-left: 10px;
   width: 70%;
 }
 
 .campaignCard-campaignName {
   margin: 0;
-  color: blue;
+  color: #27547e;
+  font-family: 'Iceland', sans-serif;
   font-weight: bold;
-  font-size: 1em;
+  font-size: 1.5em;
 }
 
 .campaign-company {
@@ -39,11 +43,12 @@
 
 .campaignCard-details {
   margin: 0;
+  font-size: 1.1em;
   line-height: .8;
 }
 
 .campaignActivity-identifiers > em {
-  font-size: .8em;
+  font-size: 1em;
 }
 
 .campaignCard-right {

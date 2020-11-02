@@ -12,5 +12,6 @@ namespace CreativeCommand.Repositories
         void Update(Campaign campaign);
         List<Campaign> GetAllCampaignsByAccountId(int accountId);
         Campaign GetBookedCampaignRevenue(int userId);
+        Campaign GetPendingCampaignRevenue(int userId);
     }
 }

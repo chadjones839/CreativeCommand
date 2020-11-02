@@ -1,9 +1,27 @@
 .nav-name > h5 {
-  font-family: 'News Cycle', sans-serif;
-  margin-bottom: 5px;
-  margin-right: 20px;
-  font-size: 1.15em;
-  color: #a0d2eb;
+  font-family: 'Iceland', sans-serif;
+  /* margin-bottom: 5px; */
+  padding: 0;
+  margin: 0 20px 0 0;
+  font-size: 1.55em;
+  color: #eef0f1;
+}
+
+.nav-name {
+  padding: 0;
+}
+
+.navUserContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.navUserImage > img {
+  width: 35px;
+  height: auto;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .nav-item {

@@ -3,11 +3,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function AccountPreview({ campaign }) {
-  const sessionUser = JSON.parse(sessionStorage.getItem("user"));
+  const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
 
   const dateTime = new Intl.DateTimeFormat('en-US').format(new Date(campaign.createDate));
   const defaultImg = "https://res.cloudinary.com/dhduglm4j/image/upload/v1603478435/icons/defaultCompanyIcon_bqlwsn.jpg"
 
+  if (sessionUser.id === campaign.account.salesUserId) {
   return (
     <>
       <div className="campaignCard">
@@ -46,5 +47,9 @@ export default function AccountPreview({ campaign }) {
       </div>
     </>
   )
+  }
+  else {
+    return null
+  }
 
 }

@@ -25,7 +25,8 @@
 
 .dashboard-container {
   padding: 20px 10px;;
-  background: #e5eaf5;
+  background: #ffffff;
+  border: #efefef 3px solid;
   margin-bottom: 10px;
 }
 
@@ -36,13 +37,25 @@
 
 .account-container,
 .campaign-container {
-  background: #e5eaf5;
+  border-radius: 3px;
   padding: 20px;
   width: 49%;
 }
 
+.account-list,
+.campaignList {
+  border: #efefef 3px solid;
+  background: #ffffff;
+  border-radius: 3px;
+  height: 80%;
+  padding: 10px 20px;
+  margin: 10px;
+}
+
 .dashboardTitle {
   text-align: center;
+  font-size: 36px;
+  color: #404346;
 }
 
 .addBtn {
@@ -69,7 +82,7 @@
 .booked,
 .pipeline,
 .projection {
-  background: #8458B3;
+  background: #404346;
   border-radius: 3px;
   padding: 3px 20px;
   margin: 5px 0;
@@ -79,7 +92,7 @@
 .booked > h7,
 .pipeline > h7,
 .projection > h7 {
-  color:#a0d2eb;
+  color: #b9babb;
   font-size: 1.1em;
   font-weight: bold;
   font-family: 'News Cycle', sans-serif;
@@ -88,7 +101,7 @@
 .booked > h5,
 .pipeline > h5,
 .projection > h5 {
-  color:#e5eaf5;
+  color: #eef0f1;
   font-size: 1.35em;
   font-weight: bold;
   font-family: 'News Cycle', sans-serif;
@@ -104,7 +117,6 @@
 
 /* ----------------USER---------------------------- */
 /* ------------------------------------------------ */
-
 
 .userDetails {
   display: flex;
@@ -127,6 +139,7 @@
 .user-name {
   text-align: center;
   color: #494d5f;
-  font-size: 1.25vw;
+  font-family: "Iceland", sans-serif;
+  font-size: 1.7vw;
   margin-top: 10px;
 }

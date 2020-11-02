@@ -10,6 +10,10 @@ Heavy Purple: #494d5f */
 /* ----------FONTS-------------------------------------------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Iceland&display=swap');
+
 /* ----------FILES-------------------------------------------------------------------- */
 @import "navbar.css";
 @import "login.css";
@@ -18,3 +22,10 @@ Heavy Purple: #494d5f */
 @import "account.css";
 @import "campaign.css";
 @import "buttons.css";
+
+
+
+#root {
+  font-family: 'Nunito', sans-serif;
+  background: #f7f7f7;
+}

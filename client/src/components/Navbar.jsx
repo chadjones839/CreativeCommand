@@ -20,8 +20,8 @@ export default function Header() {
 
   return (
     <div>
-      <Navbar style={{backgroundColor: '#494d5f'}} light expand="md">
-        <NavbarBrand className="nav-name" tag={RRNavLink} to="/">
+      <Navbar style={{backgroundColor: '#404346', padding:"5px 10px"}} light expand="md">
+        <NavbarBrand style={{padding: '0'}} className="nav-name" tag={RRNavLink} to="/">
           <h5>Creative Command</h5>
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
@@ -31,7 +31,7 @@ export default function Header() {
             <>
               <NavItem>
                 <NavLink 
-                style={{color: '#e5eaf5'}} 
+                style={{color: '#b9babb'}} 
                 tag={RRNavLink} 
                 to="/">
                   Home
@@ -40,7 +40,7 @@ export default function Header() {
 
               <NavItem>
                 <NavLink 
-                style={{color: '#e5eaf5'}} 
+                style={{color: '#b9babb'}} 
                 tag={RRNavLink} 
                 to="/accounts">
                   Accounts
@@ -49,7 +49,7 @@ export default function Header() {
 
               <NavItem>
                 <NavLink 
-                  style={{color: '#e5eaf5'}} 
+                  style={{color: '#b9babb'}} 
                   tag={RRNavLink} 
                   to="/campaigns">
                     Campaigns
@@ -57,10 +57,12 @@ export default function Header() {
               </NavItem>
             </>
             }
+            
             {isLoggedIn && sessionUser.userTypeId === 1 &&
+              
               <NavItem>
                 <NavLink 
-                  style={{color: '#e5eaf5'}} 
+                  style={{color: '#b9babb'}} 
                   tag={RRNavLink} 
                   to="/team">
                     Team
@@ -69,25 +71,44 @@ export default function Header() {
           }
           </Nav>
           <Nav navbar>
+            
             {isLoggedIn &&
               <>
+              <div className="navUserContainer">
+                <div className="navUserImage">
+                    {!sessionUser.imageUrl ? 
+                    <img src="./userIcon.png" alt="user-image" /> 
+                    :
+                    <img src={sessionUser.imageUrl} alt="user-image" />}
+                  </div>
+                </div>
                 <NavItem>
                   <a
                     aria-current="page"
                     className="nav-link"
-                    style={{ cursor: "pointer" }}
+                    style={{ cursor: "pointer", color: '#b9babb' }}
                     onClick={logout}>Logout
-          </a>
+                  </a>
                 </NavItem>
               </>
             }
             {!isLoggedIn &&
               <>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/login">Login</NavLink>
+                  <NavLink 
+                    tag={RRNavLink} 
+                    style={{color: '#b9babb'}} 
+                    to="/login">
+                      Login
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/register">Register</NavLink>
+                  <NavLink 
+                    tag={RRNavLink} 
+                    style={{color: '#b9babb'}} 
+                    to="/register">
+                      Register
+                  </NavLink>
                 </NavItem>
               </>
             }

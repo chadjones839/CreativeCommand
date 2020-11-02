@@ -11,6 +11,7 @@ export const CampaignProvider = (props) => {
     const [campaign, setCampaign] = useState({});
 
     const [revenue, setRevenue] = useState();
+    const [pendingRevenue, setPendingRevenue] = useState();
 
     const getAllCampaigns = () => {
         getToken().then((token) =>
@@ -43,6 +44,17 @@ export const CampaignProvider = (props) => {
                 }
             })).then((resp) => resp.json())
             .then(setRevenue);
+    };
+
+    const getPendingRevenueBySalesId = (id) => {
+        getToken().then((token) =>
+            fetch(`${apiUrl}/pending/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })).then((resp) => resp.json())
+            .then(setPendingRevenue);
     };
 
     const addCampaign = (campaign) => {
@@ -87,10 +99,9 @@ export const CampaignProvider = (props) => {
 
     return (
         <CampaignContext.Provider value={{
-            campaign, campaigns, revenue, getAllCampaigns, getCampaignById, addCampaign, updateCampaign, deleteCampaign, setCampaign, getBookedRevenueBySalesId
+            campaign, campaigns, revenue, pendingRevenue, getAllCampaigns, getCampaignById, addCampaign, updateCampaign, deleteCampaign, setCampaign, getBookedRevenueBySalesId, getPendingRevenueBySalesId
         }}>
             {props.children}
         </CampaignContext.Provider>
     );
-
 }
