@@ -10,17 +10,16 @@ import { PlatformContext } from "../../providers/PlatformProvider";
 export default function CampaignEditForm() {
 
   const { campaign, getCampaignById, updateCampaign } = useContext(CampaignContext);
-  const { accounts, getAllAccounts } = useContext(AccountContext);
+
   const { scheduleTypes, getAllScheduleTypes } = useContext(ScheduleTypeContext);
   const { platforms, getAllPlatforms } = useContext(PlatformContext);
 
-  const [accountId, setAccountId] = useState()
   const [scheduleTypeId, setScheduleTypeId] = useState()
   const [platformId, setPlatformId] = useState()
 
   const [editedCampaign, setEditedCampaign] = useState({
     id: campaign.id,
-    accountId: accountId,
+    accountId: campaign.accountId,
     title: "",
     revenue: "",
     scheduleTypeId: scheduleTypeId,
@@ -40,10 +39,6 @@ export default function CampaignEditForm() {
   }, [])
 
   useEffect(() => {
-    getAllAccounts()
-  }, [])
-
-  useEffect(() => {
     getAllScheduleTypes()
   }, [])
 
@@ -54,10 +49,6 @@ export default function CampaignEditForm() {
   useEffect(() => {
     setEditedCampaign(campaign)
   }, [campaign])
-
-  const handleAccountIdChange = (e) => {
-    setAccountId(e.target.defaultValue);
-  }
 
   const handleScheduleTypeIdChange = (e) => {
     setScheduleTypeId(e.target.defaultValue);
@@ -76,14 +67,11 @@ export default function CampaignEditForm() {
   const saveChanges = (e) => {
     e.preventDefault();
 
-
-    const parseAccountId = parseInt(accountId);
     const parseSchTypeId = parseInt(scheduleTypeId);
     const parsePlatId = parseInt(platformId)
     const parseRev = parseInt(editedCampaign.revenue)
     const parseImp = parseInt(editedCampaign.impressions)
     const parseAud = parseInt(editedCampaign.audience)
-    editedCampaign.accountId = parseAccountId;
     editedCampaign.scheduleTypeId = parseSchTypeId;
     editedCampaign.platformId = parsePlatId;
     editedCampaign.revenue = parseRev;
@@ -156,24 +144,12 @@ export default function CampaignEditForm() {
               onChange={handleFieldChange} />
           </FormGroup>
           <FormGroup>
-            <Label for="accountId">Account Name</Label>
             <Input
               id="accountId"
-              type="select"
               name="accountId"
+              type="hidden"
               required
-              defaultValue={editedCampaign.accountId}
-              onChange={handleAccountIdChange}>
-              {accounts.map(account =>
-                account.id === editedCampaign.accountId ?
-                  <option selected key={account.id} value={account.id}>
-                    {account.company}
-                  </option> :
-                  <option key={account.id} value={account.id}>
-                    {account.company}
-                  </option>
-              )}
-            </Input>
+              defaultValue={editedCampaign.accountId}/>
           </FormGroup>
           <FormGroup>
             <Label for="scheduleTypeId">Schedule Type</Label>

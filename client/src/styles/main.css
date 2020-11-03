@@ -12,7 +12,13 @@ Heavy Purple: #494d5f */
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Iceland&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600&display=swap');
 
 /* ----------FILES-------------------------------------------------------------------- */
 @import "navbar.css";
@@ -25,7 +31,7 @@ Heavy Purple: #494d5f */
 
 
 
-#root {
+#root, html {
   font-family: 'Nunito', sans-serif;
   background: #f7f7f7;
 }

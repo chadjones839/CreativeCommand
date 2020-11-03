@@ -16,6 +16,7 @@
 
 .campaignCard-left {
   width: 20%;
+  min-width: 20%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,15 +27,27 @@
   flex-direction: column;
   justify-content: center;
   margin-left: 10px;
-  width: 70%;
+  width: 60%;
+  min-width: 60%;
+  max-width: 60%;
 }
 
 .campaignCard-campaignName {
   margin: 0;
-  color: #27547e;
-  font-family: 'Iceland', sans-serif;
+  color: #151c22;
+  font-family: 'Teko', sans-serif;
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 1.7em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.campaignCard-campaignName:hover {
+  color: #000000;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 5px rgb(131, 131, 131);
+  transition: 0.3s;
 }
 
 .campaign-company {
@@ -54,7 +67,8 @@
 .campaignCard-right {
   display: flex;
   justify-content: flex-end;
-  width: 10%;
+  width: 20%;
+  min-width: 20%;
 }
 
 .campaignButtons {
@@ -114,6 +128,8 @@
 
 .campaign-title {
   width: 70%;
+  max-width: 70%;
+  min-width: 70%;
 }
 
 .campaignDetails {
@@ -129,7 +145,7 @@
 .progressBar {
   display: flex;
   justify-content: space-between;
-  border: 1px solid black;
+  border: 1px solid #b9babb;
   border-radius: 35px;
 }
 
@@ -143,35 +159,35 @@
   border-radius: 35px 0 0 35px;
   width: 10%;
   text-align: center;
-  border-right: 1px solid black;
+  border-right: 3px solid #b9babb;
 }
 
 .approvalComplete,
 .approvalIncomplete {
   width: 15%;
   text-align: center;
-  border-right: 1px solid black;
+  border-right: 3px solid #b9babb;
 }
 
 .creativeComplete,
 .creativeIncomplete {
   width: 15%;
   text-align: center;
-  border-right: 1px solid black;
+  border-right: 3px solid #b9babb;
 }
 
 .productionComplete,
 .productionIncomplete {
   width: 30%;
   text-align: center;
-  border-right: 1px solid black;
+  border-right: 3px solid #b9babb;
 }
 
 .schedulingComplete,
 .schedulingIncomplete {
   width: 15%;
   text-align: center;
-  border-right: 1px solid black;
+  border-right: 3px solid #b9babb;
 }
 
 
@@ -180,7 +196,7 @@
   border-radius: 0 35px 35px 0;
   width: 15%;
   text-align: center;
-  border-right: 1px solid black;
+  border-right: 3px solid #b9babb;
 }
 
 .soldComplete,
@@ -192,7 +208,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: green;
+  background: linear-gradient(to bottom, #329107 5%,  #225f06 100%);
   padding: 10px 5px;
 }
 
@@ -205,8 +221,30 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #c9c7c7;
+  background: linear-gradient(to bottom, #c9c7c7 5%,  #929191 100%);
   padding: 10px 5px;
+}
+
+.currentStatus {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(to bottom, #c9c7c7 5%,  #929191 100%);
+  padding: 10px 5px;
+  animation: pulse 5s ease infinite;
+}
+
+@keyframes pulse {
+  0% {
+    background: #929191;
+  }
+  50% {
+    background:  #225f06;
+    color: white;
+  }
+  100% {
+    background: #929191;
+  }
 }
 
 .editStatusHeader {

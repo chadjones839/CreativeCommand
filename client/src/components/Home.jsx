@@ -4,6 +4,8 @@ import { AccountContext } from "./../providers/AccountProvider";
 import { CampaignContext } from "./../providers/CampaignProvider";
 import AccountPreview from "./accounts/AccountPreview"
 import CampaignPreview from "./campaigns/CampaignPreview"
+import { Link } from "react-router-dom";
+
 
 export default function Home() {
   const { accounts, getAllAccounts } = useContext(AccountContext);
@@ -47,7 +49,7 @@ export default function Home() {
           <div className="home-contents">
 
 
-
+          <h3 className="overviewTitle">OVERVIEW</h3>
             <section className="dashboard-container">
               <div className="dashboard-details">
 
@@ -86,8 +88,6 @@ export default function Home() {
                     <h5>$5,774,533</h5>
                   </div>
                 </div>
-
-
                 
               </div>
             </section>
@@ -97,10 +97,17 @@ export default function Home() {
 
             <div className="overview-container">
               <section className="account-container">
-                <h3 className="dashboardTitle">Account Activity</h3>
-                <div>
+                <h3 className="dashboardTitle">ACCOUNTS</h3>
+                <div className="accountHeader-main">
                   <div className="addBtn">
-                    <a className="mainBtn" href="/accounts/add">+ New Account</a>
+                    <div className="mainBtn-container">
+                      <Link 
+                        style ={{textDecoration: "none"}}  
+                        className="mainBtn" 
+                        to="/accounts/add">
+                          New Account
+                      </Link>
+                    </div>
                   </div>
                 </div>
                 <div className="account-list">
@@ -111,10 +118,17 @@ export default function Home() {
               </section>
 
               <section className="campaign-container">
-                <h3 className="dashboardTitle">Campaign Activity</h3>
-                <div>
+                <h3 className="dashboardTitle">CAMPAIGNS</h3>
+                <div className="campaignHeader-main">
                   <div className="addBtn">
-                    <a className="mainBtn" href="/campaigns/add">+ New Campaign</a>
+                    <div className="mainBtn-container">
+                      <Link 
+                        style={{textDecoration: "none"}} 
+                        className="mainBtn" 
+                        to="/campaigns/add">
+                          Create Campaign
+                        </Link>
+                    </div>
                   </div>
                 </div>
                 <div className="campaignList">
@@ -123,10 +137,6 @@ export default function Home() {
                   )}
                 </div>
               </section>
-
-              {/* <section className="campaignTracker-container">
-        <h3 className="dashboardTitle">Campaign Tracker</h3>
-        </section> */}
             </div>
           </div>
         </div>

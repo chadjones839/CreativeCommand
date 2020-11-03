@@ -23,11 +23,11 @@ export default function CampaignStatusDetail({ campaignStatus }) {
                 className="accountButton"
                 style={{ textDecoration: 'none' }}
                 to={`/campaignstatus/edit/${campaignStatus.id}`}>
-                <img
-                  className="accountBtn"
-                  src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121858/icons/edit_oeexa4.png"
-                  alt="edit"
-                />
+                  <img
+                    className="accountBtn"
+                    src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121858/icons/edit_oeexa4.png"
+                    alt="edit"
+                  />
               </Link>
             </div>
           </div>

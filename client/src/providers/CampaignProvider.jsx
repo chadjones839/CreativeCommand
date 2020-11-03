@@ -35,6 +35,17 @@ export const CampaignProvider = (props) => {
             .then(setCampaign);
     };
 
+    const getAllCampaignsByAccountId = (id) => {
+        getToken().then((token) =>
+            fetch(`${apiUrl}/accountid/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })).then((resp) => resp.json())
+            .then(setCampaigns);
+    };
+
     const getBookedRevenueBySalesId = (id) => {
         getToken().then((token) =>
             fetch(`${apiUrl}/booked/${id}`, {
@@ -99,7 +110,7 @@ export const CampaignProvider = (props) => {
 
     return (
         <CampaignContext.Provider value={{
-            campaign, campaigns, revenue, pendingRevenue, getAllCampaigns, getCampaignById, addCampaign, updateCampaign, deleteCampaign, setCampaign, getBookedRevenueBySalesId, getPendingRevenueBySalesId
+            campaign, campaigns, revenue, pendingRevenue, getAllCampaigns, getCampaignById, addCampaign, updateCampaign, deleteCampaign, setCampaign, getBookedRevenueBySalesId, getPendingRevenueBySalesId, getAllCampaignsByAccountId
         }}>
             {props.children}
         </CampaignContext.Provider>

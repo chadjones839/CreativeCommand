@@ -12,7 +12,7 @@ export default function AccountPreview({ campaign }) {
   return (
     <>
       <div className="campaignCard">
-        {!campaign.account.logo ? <div className="accountCard-left">
+        {!campaign.account.logo ? <div className="campaignCard-left">
           <img className="companyLogo" src={defaultImg} alt="company-logo" />
         </div> :
           <div className="accountCard-left">
@@ -25,22 +25,22 @@ export default function AccountPreview({ campaign }) {
             </Link>
           </div>
           <div className="campaignActivity-identifiers">
-            <p className="campaignCard-details">Client: <span className="campaign-company">{campaign.account.company}</span></p> <em>Created on {dateTime}</em>
+            <p className="campaignCard-details">Client: <span className="campaign-company">{campaign.account.company}</span></p> 
           </div>
         </div>
         <div className="campaignCard-right">
           <div className="campaignButtons">
             <Link
-              className="campaignButton"
+              className="editButton"
               style={{ textDecoration: 'none' }}
               to={`/campaign/edit/${campaign.id}`}>
-              <img className="campaignBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121858/icons/edit_oeexa4.png" />
+                Edit
             </Link>
             <Link
-              className="campaignButton"
+              className="deleteButton"
               style={{ textDecoration: 'none' }}
               to={`/campaign/delete/${campaign.id}`}>
-              <img className="campaignBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121902/icons/delete_mr2ko5.png" alt="delete" />
+                Delete
             </Link>
           </div>
         </div>

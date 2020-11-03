@@ -30,28 +30,9 @@ export default function AccountPreview({ account }) {
             <div className="accountActivity-identifiers">
               <p className="accountCard-details">Owned by <strong>{account.salesUser.fullName}</strong></p>
             </div>
-            {/* <div className="accountLinks">
-              <Link
-                className="accountButton"
-                style={{ textDecoration: 'none' }}
-                to={`/account/edit/${account.id}`}>
-                  Edit
-              </Link>
-              &nbsp;&nbsp; | &nbsp;&nbsp;
-              <Link
-                className="accountButton"
-                style={{ textDecoration: 'none' }}
-                to={`/account/delete/${account.id}`}>
-                  Delete
-              </Link>
-            </div> */}
           </div>
           <div className="accountCard-right">
-          {/* <div className="account-createDate">
-              <em className="accountCreated">Created {dateTime}</em>
-            </div> */}
             <div className="accountButtons">
-              <div className="accountLinks">
                 <Link
                   className="editButton"
                   style={{ textDecoration: 'none' }}
@@ -65,23 +46,7 @@ export default function AccountPreview({ account }) {
                   to={`/account/delete/${account.id}`}>
                     Delete
                 </Link>
-              </div>
             </div>
-            {/* <div className="accountLinks">
-              <Link
-                className="accountButton"
-                style={{ textDecoration: 'none' }}
-                to={`/account/edit/${account.id}`}>
-                  Edit
-              </Link>
-              &nbsp;&nbsp; | &nbsp;&nbsp;
-              <Link
-                className="accountButton"
-                style={{ textDecoration: 'none' }}
-                to={`/account/delete/${account.id}`}>
-                  Delete
-              </Link>
-            </div> */}
           </div>
         </div>
       </>

@@ -31,7 +31,7 @@ export default function Header() {
             <>
               <NavItem>
                 <NavLink 
-                style={{color: '#b9babb'}} 
+                style={{color: '#b9babb', fontSize: "1.1em" }} 
                 tag={RRNavLink} 
                 to="/">
                   Home
@@ -40,7 +40,7 @@ export default function Header() {
 
               <NavItem>
                 <NavLink 
-                style={{color: '#b9babb'}} 
+                style={{color: '#b9babb', fontSize: "1.1em" }} 
                 tag={RRNavLink} 
                 to="/accounts">
                   Accounts
@@ -49,7 +49,7 @@ export default function Header() {
 
               <NavItem>
                 <NavLink 
-                  style={{color: '#b9babb'}} 
+                  style={{color: '#b9babb', fontSize: "1.1em" }} 
                   tag={RRNavLink} 
                   to="/campaigns">
                     Campaigns
@@ -62,7 +62,7 @@ export default function Header() {
               
               <NavItem>
                 <NavLink 
-                  style={{color: '#b9babb'}} 
+                  style={{color: '#b9babb', fontSize: "1.1em" }} 
                   tag={RRNavLink} 
                   to="/team">
                     Team
@@ -86,7 +86,7 @@ export default function Header() {
                   <a
                     aria-current="page"
                     className="nav-link"
-                    style={{ cursor: "pointer", color: '#b9babb' }}
+                    style={{ cursor: "pointer", color: '#b9babb', fontSize: "1.1em" }}
                     onClick={logout}>Logout
                   </a>
                 </NavItem>

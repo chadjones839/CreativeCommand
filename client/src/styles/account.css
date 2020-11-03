@@ -16,6 +16,7 @@
 
 .accountCard-left {
   width: 20%;
+  min-width: 20%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,15 +27,23 @@
   flex-direction: column;
   justify-content: center;
   margin-left: 10px;
-  width: 50%;
+  width: 60%;
+  max-width: 60%;
+  min-width: 60%;
 }
 
 .accountCard-companyName {
   margin: 0;
-  color: #27547e;
-  font-family: 'Iceland', sans-serif;
+  color: #000000;
+  font-family: 'Teko', sans-serif;
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 1.7em;
+}
+
+.accountCard-companyName:hover {
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 5px rgb(131, 131, 131);
+  transition: 0.3s;
 }
 
 .accountCard-details {
@@ -49,9 +58,10 @@
 
 .accountCard-right {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 30%;
+  /* flex-direction: column; */
+  justify-content: flex-end;
+  width: 20%;
+  min-width: 20%;
 }
 
 .accountButtons {
@@ -60,43 +70,7 @@
   justify-content: space-between;
 }
 
-.deleteContainer {
-  display: flex;
-  justify-content: center;
-  margin-top: 60px;
-}
 
-.deleteAccount {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  width: 30%;
-}
-
-.actionButtons {
-  text-align: center;
-}
-
-.account-createDate {
-  text-align: right;
-}
-
-.accountCreated {
-  font-size: 12px;
-}
-
-.accountButtons {
-  display: flex;
-  align-items: flex-end;
-}
-
-.accountLinks {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  width: 40%
-}
 
 
 
@@ -121,4 +95,252 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+
+.accountDetail-header {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.accountDetailHeaderContent {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.accountHeader-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 15%;
+}
+
+.accountDetailButtons {
+  display: flex;
+  justify-content: flex-end;
+  height: 55%;
+}
+
+.accountDetail-top {
+  display: flex;
+  width: 50%
+}
+
+.accountDetail-companyName {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.companyName-detail {
+  font-family: "Teko", sans-serif;
+  font-size: 4em;
+  letter-spacing: 5px;
+  margin: 0 0 -8px 20px;;
+}
+
+.accountDetail-contents {
+  border: #efefef 3px solid;
+  background: #ffffff;
+  border-radius: 10px;
+  width: 60%;
+  margin: 20px;
+}
+
+.accountDetail-middle {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.accountDetail-identifiers {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+}
+
+.billingDetails {
+  width: 33%;
+}
+
+.accountTeam {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 800;
+}
+
+dt {
+  font-family: 'News Cycle', sans-serif;
+  font-size: 1.25em;
+}
+
+.campaignStatuses {
+  text-align: center;
+}
+
+.statusContainer {
+  display: flex;
+}
+
+.statusContainer > dl {
+  margin: 0 10px;
+}
+
+.statusQty-pitch {
+  font-family: "Teko", sans-serif;
+  font-size: 2em;
+  color: red;
+}
+
+.statusQty {
+  font-family: "Teko", sans-serif;
+  font-size: 2em;
+}
+
+.statusQty-complete {
+  font-family: "Teko", sans-serif;
+  font-size: 2em;
+  color: green;
+}
+
+.campaignStatusList {
+  display: flex;
+  flex-direction: column;
+}
+
+.campaignStatusList-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.campaignStatusList-container {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+.campaignStatusList-h3Container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.addNewBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 10%;
+}
+
+.campaignStatusList-h3 {
+  font-family: "Teko", sans-serif;
+  font-size: 4em;
+  width: 50%;
+}
+
+.campaignStatusList-h3C {
+  font-family: "Teko", sans-serif;
+  font-size: 4em;
+  width: 60%;
+}
+
+/* -----------CAMPAIGN STATUS-------------------------------- */
+/* ---------------------------------------------------------- */
+
+.campaignStatusCard-content {
+  padding: 30px;
+}
+
+.campaignStatus-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.campaignFlight {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 38%;
+  min-width: 38%;
+  max-width: 38%;
+}
+
+.campaignFlight-container > h6 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+}
+
+.campaignStatusList-editBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 12%;
+  min-width: 12%;
+  max-width: 12%;
+}
+
+.accountCampaignStatus-title {
+  width: 50%;
+  min-width: 50%;
+  max-width: 50%;
+}
+
+.toolTip {
+  position: absolute;
+  background: white;
+  display: inline-block;
+  width: 200px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1em;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  color: red;
+  padding: 0; 
+  margin: 0;
+  cursor: help;
+}
+
+.toolTip .toolTipText {
+  visibility: hidden;
+  width: 300px;
+  background-color: black;
+  opacity: 0.8;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+}
+
+.toolTip:hover .toolTipText {
+  visibility: visible;
+}
+
+.accountCampaignStatus-title > h5 {
+  margin: 0;
+  color: #000000;
+  font-family: 'News Cycle', sans-serif;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.accountCampaignStatus-title:hover {
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 5px rgb(131, 131, 131);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.campaignStatusTag-complete,
+.campaignStatusTag-incomplete {
+  font-family: 'Saira Condensed', sans-serif;
+  font-size: 1.15em
+}
+
+.campaignStatusTag-complete {
+  color: #ffffff;
 }

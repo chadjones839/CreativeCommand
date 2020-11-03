@@ -45,7 +45,7 @@ export default function Home() {
               </section>
 
               <section className="accountDetail-container">
-                {<AccountDetail />}
+                {/* {<AccountDetail />} */}
               </section>
             </div>
           </div>

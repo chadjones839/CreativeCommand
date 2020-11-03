@@ -25,6 +25,8 @@ export default function Register() {
   };
 
   return (
+    <>
+    <h2 className="loginHeader">Creative Command</h2>
     <Form className="registration-form" onSubmit={registerClick}>
       <fieldset className="registrationFields">
         <FormGroup>
@@ -54,5 +56,6 @@ export default function Register() {
         </div>
       </fieldset>
     </Form>
+    </>
   );
 }
