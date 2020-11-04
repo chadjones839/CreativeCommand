@@ -250,3 +250,120 @@
 .editStatusHeader {
   text-align: center;
 }
+
+
+
+/* -----------FULL DETAIL------------------------------------ */
+/* ---------------------------------------------------------- */
+
+.campaignDetail-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.campaignDetail-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+}
+
+.campaignDetailHeaderContent {
+  display: flex;
+  margin-top: 5%;
+}
+
+.campaignDetail-left {
+  width: 80%;
+  min-width: 80%;
+  max-width: 80%;
+}
+
+.campaignTitle {
+  font-family: 'Teko', sans-serif;
+  font-size: 4em;
+  margin: 0;
+  padding: 0;
+}
+
+.campaignDetail-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20%;
+  min-width: 20%;
+  max-width: 20%;
+}
+
+.campaignDetailButtons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.campaignDetailCard {
+  border: 3px solid #b9babb;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 20px;
+}
+
+.campaignDetailProgressBar {
+  margin: 20px 0;
+}
+
+.campaignClient {
+  display: flex;
+  margin-bottom: 20px;
+  width: 60%;
+}
+
+.campaignCompanyLogo {
+  width: 10%;
+  min-width: 10%;
+  max-width: 10%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.campaignClientName {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.campaignCompany {
+  margin: 0;
+  font-family: 'Teko', sans-serif;
+  font-size: 3em;
+}
+
+.campaignDetails-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.campaignDetailCard-middle {
+  width: 100%;
+}
+
+.campaignDetails-content {
+  width: 100%;
+}
+
+.campaign-dl {
+  width: 30%;
+  min-width: 30%;
+}
+
+.dlMiddle,
+.dlRight {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+}
+
+.campaignStatus-update {
+  margin: 10px 0;
+  text-align: right;
+}

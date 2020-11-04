@@ -87,8 +87,7 @@ export default function Home() {
                     <h7>Annual Budget</h7>
                     <h5>$5,774,533</h5>
                   </div>
-                </div>
-                
+                </div>  
               </div>
             </section>
 

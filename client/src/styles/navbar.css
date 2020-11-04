@@ -27,3 +27,7 @@
 .nav-item {
   color: #e5eaf5
 }
+
+.nav-link:hover {
+  color: #FFA500;
+}
