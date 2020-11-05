@@ -66,3 +66,30 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+
+
+
+https://res.cloudinary.com/dhduglm4j/image/upload/v1596506450/icons/spacerschoice_cxy8oi.png
+
+
+It's not the best choice, it's Spacer's Choice
+
+
+
+Annual
+TV Campaign
+Revenue: 500,000
+Campaign Start 1/1/2021
+Campaign End 12/31/2021
+IMPS 12,839,245
+AUD 1,900,000
+
+Annual
+Radio Campaign
+Revenue: 350,000
+Campaign Start 1/1/2021
+Campaign End 12/31/2021
+IMPS 17,442,642
+AUD 1,900,000

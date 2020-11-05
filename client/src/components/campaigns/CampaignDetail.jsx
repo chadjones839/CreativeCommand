@@ -50,14 +50,14 @@ export default function CampaignDetail() {
               <Link
                 className="editButton"
                 style={{ textDecoration: 'none' }}
-                to={`/account/edit/${campaign.id}`}>
+                to={`/campaign/edit/${campaign.id}`}>
                   Edit
               </Link>
               
               <Link
                 className="deleteButton"
                 style={{ textDecoration: 'none' }}
-                to={`/account/delete/${campaign.id}`}>
+                to={`/campaign/delete/${campaign.id}`}>
                   Delete
               </Link>
             </div>
@@ -74,59 +74,93 @@ export default function CampaignDetail() {
             </Link>
           </div>
           <div className="progressBar">
-          {campaignStatus.isSold == true ?
-            <div className="soldComplete">
-              <span className="statusTag-complete">Sold</span>
-            </div>
-            :
-            <div className="soldIncomplete">
-              <span className="statusTag-incomplete">Sold</span>
-            </div>}
+          {campaignStatus.isSold == true  ?
+              <div className="soldComplete">
+                <span className="campaignStatusTag-complete">Sold</span>
+              </div>
+              :
+              <div className="soldIncomplete currentStatus">
+                <span className="campaignStatusTag-incomplete">Sold</span>
+              </div>}
 
-          {campaignStatus.isApproved == true ?
-            <div className="approvalComplete">
-              <span className="statusTag-complete">Approved</span>
-            </div>
-            :
-            <div className="approvalIncomplete">
-              <span className="statusTag-incomplete">Approved</span>
-            </div>}
+            {campaignStatus.isApproved == true ?
+              <div className="approvalComplete">
+                <span className="campaignStatusTag-complete">Approved</span>
+              </div>
+              :
+              campaignStatus.isSold == true  ?
+              <div className="approvalIncomplete currentStatus">
+                <span className="campaignStatusTag-incomplete">Approved</span>
+              </div> :
+              <div className="approvalIncomplete">
+                <span className="campaignStatusTag-incomplete">Approved</span>
+              </div>
+            }
 
-          {campaignStatus.creativeSubmitted == true ?
-            <div className="creativeComplete">
-              <span className="statusTag-complete">Creative Submitted</span>
-            </div>
-            :
-            <div className="creativeIncomplete">
-              <span className="statusTag-incomplete">Creative Submitted</span>
-            </div>}
+            {campaignStatus.creativeSubmitted == true ?
+              <div className="creativeComplete">
+                <span className="campaignStatusTag-complete">Creative Submitted</span>
+              </div>
+              :
+              campaignStatus.isSold == true && campaignStatus.isApproved == true ?
+              <div className="creativeIncomplete currentStatus">
+                <span className="campaignStatusTag-incomplete">Creative Submitted</span>
+              </div> :
+              <div className="creativeIncomplete">
+                <span className="campaignStatusTag-incomplete">Creative Submitted</span>
+              </div>
+            }
 
-          {campaignStatus.inProduction == true ?
-            <div className="productionComplete">
-              <span className="statusTag-complete">In Production</span>
-            </div>
-            :
-            <div className="productionIncomplete">
-              <span className="statusTag-incomplete">In Production</span>
-            </div>}
+            {campaignStatus.inProduction == true ?
+              <div className="productionComplete">
+                <span className="campaignStatusTag-complete">In Production</span>
+              </div>
+              :
+              campaignStatus.isSold == true && 
+              campaignStatus.isApproved == true &&
+              campaignStatus.creativeSubmitted == true ?
+              <div className="productionIncomplete currentStatus">
+                <span className="campaignStatusTag-incomplete">In Production</span>
+              </div> :
+              <div className="productionIncomplete">
+                <span className="campaignStatusTag-incomplete">In Production</span>
+              </div>
+              }
 
-          {campaignStatus.isScheduled == true ?
-            <div className="schedulingComplete">
-              <span className="statusTag-complete">Scheduled</span>
-            </div>
-            :
-            <div className="schedulingIncomplete">
-              <span className="statusTag-incomplete">Scheduled</span>
-            </div>}
+            {campaignStatus.isScheduled == true ?
+              <div className="schedulingComplete">
+                <span className="campaignStatusTag-complete">Scheduled</span>
+              </div>
+              :
+              campaignStatus.isSold == true && 
+              campaignStatus.isApproved == true &&
+              campaignStatus.creativeSubmitted == true &&
+              campaignStatus.inProduction == true ?
+              <div className="schedulingIncomplete currentStatus">
+                <span className="campaignStatusTag-incomplete">Scheduled</span>
+              </div> :
+              <div className="schedulingIncomplete">
+                <span className="campaignStatusTag-incomplete">Scheduled</span>
+              </div>
+            }
 
-          {campaignStatus.isComplete == true ?
-            <div className="campaignComplete">
-              <span className="statusTag-complete">Campaign Complete</span>
-            </div>
-            :
-            <div className="campaignIncomplete">
-              <span className="statusTag-incomplete">Campaign Complete</span>
-            </div>}
+            {campaignStatus.isComplete == true ?
+              <div className="campaignComplete">
+                <span className="campaignStatusTag-complete">Complete</span>
+              </div>
+              :
+              campaignStatus.isSold == true && 
+              campaignStatus.isApproved == true &&
+              campaignStatus.creativeSubmitted == true &&
+              campaignStatus.inProduction == true &&
+              campaignStatus.isScheduled == true ?
+              <div className="campaignIncomplete currentStatus">
+                <span className="campaignStatusTag-incomplete">In Flight</span>
+              </div> :
+              <div className="campaignIncomplete">
+                <span className="campaignStatusTag-incomplete">In Flight</span>
+              </div>
+              }
           </div>
         </section>
         
@@ -143,7 +177,12 @@ export default function CampaignDetail() {
             <div className="campaignClient">
               <img className="campaignCompanyLogo" src={campaign.account.logo} alt="company-logo" />
               <div className="campaignClientName">
-                <h3 className="campaignCompany">{campaign.account.company}</h3>
+                <Link 
+                style={{textDecoration: "none", color: "black"}}
+                className="campaignCompany"
+                to={`/account/${campaign.account.id}`}>
+                  {campaign.account.company}
+                </Link>
               </div>
             </div>
             } 
@@ -176,9 +215,9 @@ export default function CampaignDetail() {
                 <dl>
                   <h2 className="campaignDetail-columnHeader">Deliverables</h2>
                   <dt>Impressions</dt> 
-                  <dd>{campaign.impressions}</dd>
+                  <dd>{numberWithCommas(campaign.impressions)}</dd>
                   <dt>Audience</dt>
-                  <dd>{campaign.audience}</dd>
+                  <dd>{numberWithCommas(campaign.audience)}</dd>
                 </dl>
               </div>
             </div>

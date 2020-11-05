@@ -80,7 +80,8 @@ namespace CreativeCommand.Repositories
                               LEFT JOIN UserProfile u ON a.SalesUserId = u.Id
                               LEFT JOIN UserType ut ON u.UserTypeId = ut.Id
                               LEFT JOIN UserProfile um ON a.ManagerUserId = um.Id
-                              LEFT JOIN UserType mut ON um.UserTypeId = mut.Id";
+                              LEFT JOIN UserType mut ON um.UserTypeId = mut.Id
+                     ORDER BY a.Company ASC";
                     var reader = cmd.ExecuteReader();
 
                     var accounts = new List<Account>();

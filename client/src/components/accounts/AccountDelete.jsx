@@ -29,16 +29,19 @@ export default function DeleteAccount() {
           <h4> Delete <span className="deleteConfirm-companyName">{account.company}</span>?</h4>
           <div className="actionButtons">
             <div className="actionBtns">
-              <div className="form-group">
+              <div className="btnGroup">
                 <input
                   type="submit"
                   onClick={deleteAct}
                   value="Confirm"
                   className="mainBtn" />
-          &nbsp;&nbsp;|&nbsp;&nbsp;
-          <Link to={`/`}>
+                <br/>
+                <Link 
+                  style={{textDecoration: "none"}}
+                  className="cancelBtn"
+                  to={`/`}>
                   Cancel
-          </Link>
+                </Link>
               </div>
             </div>
           </div>

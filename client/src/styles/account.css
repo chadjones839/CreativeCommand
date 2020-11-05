@@ -289,7 +289,7 @@ dt {
 
 .toolTip {
   position: absolute;
-  background: white;
+  background: #f7f7f7;
   display: inline-block;
   width: 200px;
   font-family: 'Open Sans', sans-serif;

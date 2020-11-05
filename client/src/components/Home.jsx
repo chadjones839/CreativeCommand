@@ -19,7 +19,44 @@ export default function Home() {
     getPendingRevenueBySalesId(sessionUser.id)
   }, []);
 
-  console.log(revenue)
+  const totalAccounts = [];
+  const totalCampaigns = [];
+
+  function sortAccountsByUser(arr) {
+    arr.forEach(item => {
+      if (item.salesUserId === sessionUser.id) {
+        totalAccounts.push(item)
+      }
+      else {
+        null
+      }
+    })
+  }
+
+  function sortCampaignsByUser(arr) {
+    arr.forEach(item => {
+      if (item.account.salesUserId === sessionUser.id) {
+        totalCampaigns.push(item)
+      }
+      else {
+        null
+      }
+    })
+  }
+
+  sortAccountsByUser(accounts)
+  sortCampaignsByUser(campaigns)
+
+  function count(arr) {
+    let count = 0;
+    for (let i = 0; i < arr.length; i++) {
+      count++
+    }
+    return count;
+  }
+
+  const userAccounts = count(totalAccounts);
+  const userCampaigns = count(totalCampaigns);
 
   function numberWithCommas(x) {
     if (!x) {
@@ -32,9 +69,7 @@ export default function Home() {
 
   function combinedNumberWithCommas(x, y) {
     let z = x + y;  
-
     return z.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    
   }
 
   if (!revenue || !pendingRevenue) {
@@ -56,38 +91,50 @@ export default function Home() {
                 <div className="userDetails">
                   <div className="userContainer">
                     <div className="userImage">
-                      {!sessionUser.imageUrl ? 
-                      <img className="userProfilePic" src="./userIcon.png" alt="user-image" /> 
-                      :
-                      <img className="userProfilePic" src={sessionUser.imageUrl} alt="user-image" />}
-                    </div>
-                    <h5 className="user-name">
-                      {sessionUser.firstName} {sessionUser.lastName}
-                      </h5>
-                    </div>
+                    {!sessionUser.imageUrl ? 
+                    <img className="userProfilePic" src="./userIcon.png" alt="user-image" /> 
+                    :
+                    <img className="userProfilePic" src={sessionUser.imageUrl} alt="user-image" />}
+                  </div>
+                  <h5 className="user-name">
+                    {sessionUser.firstName} {sessionUser.lastName}
+                    </h5>
+                  </div>
                 </div>
                 
+                <div className="accountsOverviewDetails">
+                    <h6>Total Accounts</h6>
+                  <div className="numOfAccounts">
+                    <h5>{userAccounts}</h5>
+                  </div>
+                </div>
+                <div className="accountsOverviewDetails">
+                    <h6>Total Campaigns</h6>
+                  <div className="numOfCampaigns">
+                    <h5>{userCampaigns}</h5>
+                  </div>
+                </div>
+                <div className="budgetDetails">
+                    <h6>Budget</h6>
+                  <div className="budget">
+                    <h5>$1,500,000</h5>
+                  </div>
+                </div> 
+
                 <div className="revenueDetails">
                   <div className="booked">
-                    <h7>Booked</h7>
+                    <h6>Booked</h6>
                     <h5>${numberWithCommas(revenue.revenue)}</h5>
                   </div>
                   <div className="pipeline">
-                    <h7>Pending</h7>
+                    <h6>Pending</h6>
                     <h5>${numberWithCommas(pendingRevenue.revenue)}</h5>
                   </div>
                   <div className="projection">
-                    <h7>Projected</h7>
+                    <h6>Projected</h6>
                     <h5>${combinedNumberWithCommas(revenue.revenue, pendingRevenue.revenue)}</h5>
                   </div>
                 </div>
-
-                <div className="budgetDetails">
-                  <div className="budget">
-                    <h7>Annual Budget</h7>
-                    <h5>$5,774,533</h5>
-                  </div>
-                </div>  
               </div>
             </section>
 
@@ -110,7 +157,10 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="account-list">
-                  {accounts.map(a =>
+                  {totalAccounts.length === 0 ?
+                  <h5 style={{textAlign: "center", border: "7px dashed #efefef", borderRadius: "10px", padding: "10px"}}>You have no accounts<br/> <small>Create a new account by clicking the <strong>"New Account"</strong> button above.</small></h5>
+                  :
+                  accounts.map(a =>
                     <AccountPreview key={a.id} account={a} />
                   )}
                 </div>
@@ -131,7 +181,10 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="campaignList">
-                  {campaigns.map(c =>
+                  {totalCampaigns.length === 0 ?
+                  <h5 style={{textAlign: "center", border: "7px dashed #efefef", borderRadius: "10px", padding: "10px"}}>You have no Campaigns<br/> <small>Create a new Campaign by creating an account, and clicking the <strong>"New Campaign"</strong> button above.</small></h5>
+                  :
+                  campaigns.map(c =>
                     <CampaignPreview key={c.id} campaign={c} />
                   )}
                 </div>

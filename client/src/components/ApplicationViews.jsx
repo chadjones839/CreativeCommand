@@ -15,6 +15,7 @@ import AccountDelete from "./accounts/AccountDelete"
 import CampaignList from "./campaigns/CampaignList"
 import CampaignDetail from "./campaigns/CampaignDetail"
 import CampaignAddForm from "./campaigns/CampaignAddForm"
+import CampaignAccountAddForm from "./campaigns/CampaignAccountAddForm"
 import CampaignEditForm from "./campaigns/CampaignEditForm"
 import CampaignDelete from "./campaigns/CampaignDelete"
 //CAMPAIGN STATUS IMPORTS
@@ -73,6 +74,10 @@ export default function ApplicationViews() {
 
         <Route exact path="/campaigns/add">
           {isLoggedIn ? <CampaignAddForm /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route exact path="/campaigns/new/account-:id">
+          {isLoggedIn ? <CampaignAccountAddForm /> : <Redirect to="/login" />}
         </Route>
 
         <Route exact path="/campaign/edit/:id">

@@ -27,6 +27,7 @@
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
+  height: 50%;
 }
 
 .account-container,
@@ -34,6 +35,7 @@
   border-radius: 3px;
   padding: 0px;
   width: 49%;
+  height: 100%;
   background: #404346;
 }
 
@@ -55,7 +57,7 @@
 
 .mainBtn-container {
   display: flex;
-  width: 100%;
+  width: 120%;
   justify-content: center;
   text-align: center;
   align-items: center;
@@ -68,6 +70,27 @@
   border-radius: 3px;
   height: 80%;
   padding: 10px 20px;
+  overflow-y: scroll;
+  height: 90%;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }
 
 .overviewTitle {
@@ -126,11 +149,81 @@
   width: 10vw;
 }
 
-.booked > h7,
-.pipeline > h7,
-.projection > h7 {
+.budget {
+  background: #404346;
+  border-radius: 50%;
+  padding: 10px;
+  margin: 5px;
+  width: 7vw; 
+  height: 7vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.budgetDetails > h6 {
+  color: #404346;
+  font-size: 1.1vw;
+  font-weight: bold;
+  font-family: 'News Cycle', sans-serif;
+  text-align: center;
+}
+
+.budget > h5 {
+  color: #eef0f1;
+  font-size: 1.2vw;
+  font-weight: bold;
+  font-family: 'News Cycle', sans-serif;
+}
+
+.numOfAccounts {
+  background:  #f7892f;
+  border-radius: 50%;
+  padding: 10px;
+  margin: 5px;
+  width: 7vw; 
+  height: 7vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.numOfCampaigns {
+  background:  #310749;
+  border-radius: 50%;
+  padding: 10px;
+  margin: 5px;
+  width: 7vw; 
+  height: 7vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.accountsOverviewDetails > h6 {
+  color: #404346;
+  font-size: 1.1vw;
+  font-weight: bold;
+  font-family: 'News Cycle', sans-serif;
+  text-align: center;
+}
+
+.numOfAccounts > h5,
+.numOfCampaigns > h5 {
+  color: #eef0f1;
+  font-size: 3vw;
+  font-weight: bold;
+  font-family: 'News Cycle', sans-serif;
+}
+
+.booked > h6,
+.pipeline > h6,
+.projection > h6 {
   color: #f7892f;
-  font-size: 1.1em;
+  font-size: 1.1vw;
   font-weight: bold;
   font-family: 'News Cycle', sans-serif;
 }
@@ -139,12 +232,13 @@
 .pipeline > h5,
 .projection > h5 {
   color: #eef0f1;
-  font-size: 1.35em;
+  font-size: 1.35vw;
   font-weight: bold;
   font-family: 'News Cycle', sans-serif;
 }
 
-.budgetDetails {
+.budgetDetails,
+.accountsOverviewDetails {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -186,5 +280,5 @@
 }
 
 /* ----------------ACCOUNT---------------------------- */
-/* ------------------------------------------------ */
+/* --------------------------------------------------- */
 

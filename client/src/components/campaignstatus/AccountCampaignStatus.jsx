@@ -24,7 +24,7 @@ export default function CampaignStatusDetail({ campaignStatus }) {
               <Link
                 className="campaignCard-campaignName"
                 style={{ textDecoration: 'none' }}
-                to={`/campaign/edit/${campaignStatus.campaignId}`}>
+                to={`/campaign/${campaignStatus.campaignId}`}>
                   {campaignStatus.campaign.title}
               </Link>
             </div>
@@ -57,7 +57,7 @@ export default function CampaignStatusDetail({ campaignStatus }) {
 
           <div className="progressBar">
 
-          {campaignStatus.isSold == true ?
+          {campaignStatus.isSold == true  ?
               <div className="soldComplete">
                 <span className="campaignStatusTag-complete">Sold</span>
               </div>
@@ -71,8 +71,8 @@ export default function CampaignStatusDetail({ campaignStatus }) {
                 <span className="campaignStatusTag-complete">Approved</span>
               </div>
               :
-              campaignStatus.isSold == true ?
-              <div className="currentStatus">
+              campaignStatus.isSold == true  ?
+              <div className="approvalIncomplete currentStatus">
                 <span className="campaignStatusTag-incomplete">Approved</span>
               </div> :
               <div className="approvalIncomplete">
@@ -86,7 +86,7 @@ export default function CampaignStatusDetail({ campaignStatus }) {
               </div>
               :
               campaignStatus.isSold == true && campaignStatus.isApproved == true ?
-              <div className="currentStatus">
+              <div className="creativeIncomplete currentStatus">
                 <span className="campaignStatusTag-incomplete">Creative Submitted</span>
               </div> :
               <div className="creativeIncomplete">
@@ -119,7 +119,7 @@ export default function CampaignStatusDetail({ campaignStatus }) {
               campaignStatus.isApproved == true &&
               campaignStatus.creativeSubmitted == true &&
               campaignStatus.inProduction == true ?
-              <div className="currentStatus">
+              <div className="schedulingIncomplete currentStatus">
                 <span className="campaignStatusTag-incomplete">Scheduled</span>
               </div> :
               <div className="schedulingIncomplete">
@@ -137,11 +137,11 @@ export default function CampaignStatusDetail({ campaignStatus }) {
               campaignStatus.creativeSubmitted == true &&
               campaignStatus.inProduction == true &&
               campaignStatus.isScheduled == true ?
-              <div className="currentStatus">
-                <span className="campaignStatusTag-incomplete">Complete</span>
+              <div className="campaignIncomplete currentStatus">
+                <span className="campaignStatusTag-incomplete">In Flight</span>
               </div> :
               <div className="campaignIncomplete">
-                <span className="campaignStatusTag-incomplete">Complete</span>
+                <span className="campaignStatusTag-incomplete">In Flight</span>
               </div>
               }
           </div>

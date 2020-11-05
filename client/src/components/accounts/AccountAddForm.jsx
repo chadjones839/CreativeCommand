@@ -1,16 +1,17 @@
 /*eslint-disable*/
 import React, { useState, useContext, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { AccountContext } from "../../providers/AccountProvider";
 import { UserProfileContext } from "../../providers/UserProfileProvider";
 
 export default function AccountAddForm() {
   const history = useHistory();
+  const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
   const { addAccount } = useContext(AccountContext);
   const { salesUsers, managerUsers, getAllSalesUsers, getAllManagerUsers } = useContext(UserProfileContext);
-  const [salesUserId, setSalesUserId] = useState()
-  const [managerUserId, setManagerUserId] = useState()
+  // const [salesUserId, setSalesUserId] = useState()
+  // const [managerUserId, setManagerUserId] = useState()
   const [isLoading, setIsLoading] = useState(false);
 
   const [account, setAccount] = useState({
@@ -20,8 +21,8 @@ export default function AccountAddForm() {
     city: "",
     state: "",
     zipCode: "",
-    salesUserId: "",
-    managerUserId: ""
+    salesUserId: sessionUser.id,
+    managerUserId: 1
   });
 
   useEffect(() => {
@@ -32,13 +33,13 @@ export default function AccountAddForm() {
     getAllManagerUsers()
   }, [])
 
-  const handleSalesUserChange = (e) => {
-    setSalesUserId(e.target.value);
-  }
+  // const handleSalesUserChange = (e) => {
+  //   setSalesUserId(e.target.value);
+  // }
 
-  const handleManagerUserChange = (e) => {
-    setManagerUserId(e.target.value);
-  }
+  // const handleManagerUserChange = (e) => {
+  //   setManagerUserId(e.target.value);
+  // }
 
   const handleFieldChange = e => {
     const stateToChange = { ...account };
@@ -52,20 +53,18 @@ export default function AccountAddForm() {
       account.address === "" ||
       account.city === "" ||
       account.state === "" ||
-      account.zipCode === "" ||
-      salesUserId === "" ||
-      managerUserId === "") {
+      account.zipCode === "") {
       alert("Missing Fields")
 
     } else {
       setIsLoading(true);
     }
 
-    const parseSalesId = parseInt(salesUserId);
-    const parseMgrId = parseInt(managerUserId);
+
+    // const parseMgrId = parseInt(managerUserId);
     const parseZip = parseInt(account.zipCode)
-    account.salesUserId = parseSalesId;
-    account.managerUserId = parseMgrId;
+
+    
     account.zipCode = parseZip;
 
     addAccount(account)
@@ -136,7 +135,7 @@ export default function AccountAddForm() {
               value={account.zipCode}
               onChange={handleFieldChange} />
           </FormGroup>
-          <FormGroup>
+          {/* <FormGroup>
             <Label for="salesUserId">Assigned Rep</Label>
             <Input
               id="salesUserId"
@@ -151,8 +150,8 @@ export default function AccountAddForm() {
                 </option>
               )}
             </Input>
-          </FormGroup>
-          <FormGroup>
+          </FormGroup> */}
+          {/* <FormGroup>
             <Label for="managerUserId">Assigned Manager</Label>
             <Input
               id="managerUserId"
@@ -167,7 +166,7 @@ export default function AccountAddForm() {
                 </option>
               )}
             </Input>
-          </FormGroup>
+          </FormGroup> */}
           <div className="loginBtn">
             <FormGroup>
               <Button>Save Changes</Button>

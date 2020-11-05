@@ -58,7 +58,7 @@ export default function AccountDetail() {
   for(let i = 0; i < needsApproval.length; i++){
     notApproved++;
   }
-  let progress = 0
+  let progress = 0  
   for(let i = 0; i < inProgress.length; i++){
     progress++;
   }
@@ -138,7 +138,7 @@ export default function AccountDetail() {
                 <dl>
                   <dt>Needs Pitched</dt>
                   <dd className="statusQty-pitch">{notSold}</dd>
-                  <dt>Needs Approval</dt>
+                  <dt>Approved</dt>
                   <dd className="statusQty approved">{progress}</dd>
                 </dl>
                 <dl>
@@ -160,9 +160,9 @@ export default function AccountDetail() {
               <Link 
                 style={{textDecoration: "none"}} 
                 className="mainBtn" 
-                to="/campaigns/add">
+                to={`/campaigns/new/account-${account.id}`}>
                   Create Campaign
-                </Link>
+              </Link>
             </div>
           </div>
         </div>

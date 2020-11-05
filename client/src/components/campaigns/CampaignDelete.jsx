@@ -29,16 +29,19 @@ export default function DeletePostPage() {
           <h4> Delete <span className="deleteConfirm-companyName">{campaign.title}</span>?</h4>
           <div className="actionButtons">
             <div className="actionBtns">
-              <div className="form-group">
+              <div className="btnGroup">
                 <input
                   type="submit"
                   onClick={deleteConfirm}
                   value="Confirm"
                   className="mainBtn" />
-          &nbsp;&nbsp;|&nbsp;&nbsp;
-          <Link to={`/`}>
-                  Cancel
-          </Link>
+                <br/>
+                <Link 
+                  style={{textDecoration: "none"}}
+                  className="cancelBtn"
+                  to={`/`}>
+                        Cancel
+                </Link>
               </div>
             </div>
           </div>

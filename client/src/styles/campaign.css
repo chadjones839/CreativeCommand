@@ -367,3 +367,23 @@
   margin: 10px 0;
   text-align: right;
 }
+
+.deleteContainer {
+  display:flex;
+  justify-content: center;
+}
+
+.deleteAccount {
+  margin-top: 5%;
+  width: 25%;
+  text-align: center;
+}
+
+.actionBtns {
+  display: flex;
+  justify-content: center;
+}
+
+.btnGroup {
+  align-items: center;
+}
