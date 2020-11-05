@@ -1,7 +1,7 @@
 .login-form {
   display: flex;
   justify-content: center;
-  margin-top: 5%;
+  margin-top: 2%;
 }
 
 .loginFields {
@@ -11,4 +11,15 @@
 .loginBtn {
   display: flex;
   justify-content: flex-end;
+}
+
+.loginHeader {
+  font-family: "Iceland", sans-serif;
+  font-size: 3.5em;
+  text-align: center;
+  margin-top: 5%;
+}
+
+.loginText {
+  text-align: center;
 }

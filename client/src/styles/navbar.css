@@ -1,14 +1,35 @@
-.nav-name > h5 {
-  font-family: 'Iceland', sans-serif;
-  /* margin-bottom: 5px; */
-  padding: 0;
-  margin: 0 20px 0 0;
-  font-size: 1.55em;
-  color: #eef0f1;
+.navbar {
+  background-color: #404346; 
+  padding: 5px 10px;
+}
+
+.left-nav {
+  display: flex;
+}
+
+.main-links,
+.user-options {
+  display: flex;
+  margin: 0;
 }
 
 .nav-name {
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nav-name:hover {
+  text-decoration: none;
+}
+
+.nav-name > h5 {
+  font-family: 'Iceland', sans-serif;
+  padding: 0;
+  margin: 0 20px 0 0;
+  font-size: 1.55em;
+  color: #eef0f1;
 }
 
 .navUserContainer {
@@ -25,5 +46,19 @@
 }
 
 .nav-item {
-  color: #e5eaf5
+  color: #e5eaf5;
+  list-style: none;
+}
+
+.nav-link {
+  color: #b9babb; 
+  font-size: 1.1em;
+}
+
+.nav-link:hover {
+  color: #FFA500;
+}
+
+.nav-link:active {
+  font-weight: 600;
 }

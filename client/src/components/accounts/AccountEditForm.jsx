@@ -7,15 +7,15 @@ import { UserProfileContext } from "../../providers/UserProfileProvider";
 
 export default function AccountEditForm() {
   const history = useHistory();
+  const sessionUser = JSON.parse(sessionStorage.getItem("userProfile"));
   const { id } = useParams();
   const { account, getById, updateAccount } = useContext(AccountContext);
-  const { salesUsers,
-    managerUsers,
-    getAllSalesUsers,
-    getAllManagerUsers
-  } = useContext(UserProfileContext);
-  const [salesUserId, setSalesUserId] = useState()
-  const [managerUserId, setManagerUserId] = useState()
+  // const { salesUsers,
+  //         managerUsers,
+  //         getAllSalesUsers,
+  //         getAllManagerUsers } = useContext(UserProfileContext);
+  // const [salesUserId, setSalesUserId] = useState()
+  // const [managerUserId, setManagerUserId] = useState()
 
   const [editedAccount, setEditedAccount] = useState({
     id: account.id,
@@ -26,8 +26,8 @@ export default function AccountEditForm() {
     state: "",
     zipCode: "",
     dateCreated: "",
-    salesUserId: "",
-    managerUserId: ""
+    salesUserId: sessionUser.id,
+    managerUserId: 1
   });
 
   useEffect(() => {
@@ -38,18 +38,18 @@ export default function AccountEditForm() {
     setEditedAccount(account)
   }, [account])
 
-  useEffect(() => {
-    getAllSalesUsers()
-    getAllManagerUsers()
-  }, [])
+  // useEffect(() => {
+  //   getAllSalesUsers()
+  //   getAllManagerUsers()
+  // }, [])
 
-  const handleSalesUserChange = (e) => {
-    setSalesUserId(e.target.value);
-  }
+  // const handleSalesUserChange = (e) => {
+  //   setSalesUserId(e.target.value);
+  // }
 
-  const handleManagerUserChange = (e) => {
-    setManagerUserId(e.target.value);
-  }
+  // const handleManagerUserChange = (e) => {
+  //   setManagerUserId(e.target.value);
+  // }
 
   const handleFieldChange = e => {
     const stateToChange = { ...editedAccount };
@@ -66,17 +66,19 @@ export default function AccountEditForm() {
       address: editedAccount.address,
       city: editedAccount.city,
       state: editedAccount.state,
-      zipCode: editedAccount.zipCode
+      zipCode: editedAccount.zipCode,
+      salesUserId: sessionUser.id,
+      managerUserId: 1
     });
 
-    const parseSalesId = parseInt(salesUserId);
-    const parseMgrId = parseInt(managerUserId);
-    editedAccount.salesUserId = parseSalesId;
-    editedAccount.managerUserId = parseMgrId;
+    // const parseSalesId = parseInt(salesUserId);
+    // const parseMgrId = parseInt(managerUserId);
+    // editedAccount.salesUserId = parseSalesId;
+    // editedAccount.managerUserId = parseMgrId;
 
-    if (!editedAccount.salesUserId) {
-      editedAccount.salesUserId = account.salesUserId;
-    }
+    // if (!editedAccount.salesUserId) {
+    //   editedAccount.salesUserId = account.salesUserId;
+    // }
 
     if (!editedAccount.managerUserId) {
       editedAccount.managerUserId = account.managerUserId;
@@ -89,7 +91,9 @@ export default function AccountEditForm() {
 
   };
 
-  if (!editedAccount || !salesUsers || !managerUsers) {
+  if (!editedAccount 
+    // || !salesUsers || !managerUsers
+    ) {
     return null
   }
 
@@ -165,32 +169,23 @@ export default function AccountEditForm() {
             onChange={handleFieldChange} />
         </FormGroup>
         <FormGroup>
-          <Label for="salesUserId">Assigned Rep</Label>
+          {/* <Label for="salesUserId">Assigned Rep</Label> */}
           <Input
             id="salesUserId"
-            type="select"
+            type="hidden"
             name="salesUserId"
-            defaultValue={editedAccount.salesUserId}
-            onChange={handleSalesUserChange}>
-            {salesUsers.map(users =>
-              users.id === editedAccount.salesUserId ?
-                <option selected value={users.id}>
-                  {users.fullName}
-                </option> :
-                <option value={users.id}>
-                  {users.fullName}
-                </option>
-            )}
-          </Input>
+            value={editedAccount.salesUserId} />
+            
+
         </FormGroup>
         <FormGroup>
-          <Label for="managerUserId">Assigned Manager</Label>
+          {/* <Label for="managerUserId">Assigned Manager</Label> */}
           <Input
             id="managerUserId"
-            type="select"
+            type="hidden"
             name="managerUserId"
-            defaultValue={editedAccount.managerUserId}
-            onChange={handleManagerUserChange}>
+            value={editedAccount.managerUserId} />
+            {/* onChange={handleManagerUserChange}>
             {managerUsers.map(users =>
               users.id === editedAccount.salesUserId ?
                 <option selected value={users.id}>
@@ -200,7 +195,7 @@ export default function AccountEditForm() {
                   {users.fullName}
                 </option>
             )}
-          </Input>
+          </Input> */}
         </FormGroup>
         <div className="loginBtn">
           <FormGroup>

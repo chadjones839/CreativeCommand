@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import React, { useState, useContext, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { CampaignContext } from "../../providers/CampaignProvider";
 import { CampaignStatusContext } from "../../providers/CampaignStatusProvider";
 import { AccountContext } from "../../providers/AccountProvider";
@@ -12,16 +12,16 @@ export default function CampaignAddForm() {
   const history = useHistory();
   const { addCampaign } = useContext(CampaignContext);
   const { addCampaignStatus } = useContext(CampaignStatusContext);
-  const { accounts, getAllAccounts } = useContext(AccountContext);
   const { scheduleTypes, getAllScheduleTypes } = useContext(ScheduleTypeContext);
   const { platforms, getAllPlatforms } = useContext(PlatformContext);
-  const [accountId, setAccountId] = useState()
   const [scheduleTypeId, setScheduleTypeId] = useState()
   const [platformId, setPlatformId] = useState()
   const [isLoading, setIsLoading] = useState(false);
+  const { id } = useParams()
+  const accountId = parseInt(id)
 
   const [campaign, setCampaign] = useState({
-    accountId: "",
+    accountId: accountId,
     title: "",
     revenue: "",
     scheduleTypeId: "",
@@ -43,20 +43,12 @@ export default function CampaignAddForm() {
   };
 
   useEffect(() => {
-    getAllAccounts()
-  }, [])
-
-  useEffect(() => {
     getAllScheduleTypes()
   }, [])
 
   useEffect(() => {
     getAllPlatforms()
   }, [])
-
-  const handleAccountIdChange = (e) => {
-    setAccountId(e.target.value);
-  }
 
   const handleScheduleTypeIdChange = (e) => {
     setScheduleTypeId(e.target.value);
@@ -87,13 +79,11 @@ export default function CampaignAddForm() {
       setIsLoading(true);
     }
 
-    const parseAccountId = parseInt(accountId);
     const parseSchTypeId = parseInt(scheduleTypeId);
     const parsePlatId = parseInt(platformId)
     const parseRev = parseInt(campaign.revenue)
     const parseImp = parseInt(campaign.impressions)
     const parseAud = parseInt(campaign.audience)
-    campaign.accountId = parseAccountId;
     campaign.scheduleTypeId = parseSchTypeId;
     campaign.platformId = parsePlatId;
     campaign.revenue = parseRev;
@@ -132,20 +122,11 @@ export default function CampaignAddForm() {
               onChange={handleFieldChange} />
           </FormGroup>
           <FormGroup>
-            <Label for="accountId">Account Name</Label>
             <Input
               id="accountId"
-              type="select"
+              type="text"
               name="accountId"
-              defaultValue={campaign.accountId}
-              onChange={handleAccountIdChange}>
-              <option></option>
-              {accounts.map(account =>
-                <option value={account.id}>
-                  {account.company}
-                </option>
-              )}
-            </Input>
+              value={accountId}/>
           </FormGroup>
           <FormGroup>
             <Label for="scheduleTypeId">Schedule Type</Label>

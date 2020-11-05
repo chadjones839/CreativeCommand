@@ -61,8 +61,6 @@ export default function CampaignStatusEditForm() {
       editedCampaignStatus.isSold = campaignStatus.isSold;
     }
 
-    editedCampaignStatus.isSold = editedCampaignStatus.isSold === "true";
-
     // APPROVED
     if (editedCampaignStatus.isApproved === "true") {
       editedCampaignStatus.isApproved = true;
@@ -118,10 +116,58 @@ export default function CampaignStatusEditForm() {
       editedCampaignStatus.isComplete = campaignStatus.isComplete;
     }
 
-    updateCampaignStatus(campaignStatus.id, editedCampaignStatus)
+
+    if (
+      editedCampaignStatus.isSold == false && 
+      (editedCampaignStatus.isApproved == true ||
+        editedCampaignStatus.creativeSubmitted == true || 
+        editedCampaignStatus.inProduction == true || 
+        editedCampaignStatus.isScheduled == true || 
+        editedCampaignStatus.isComplete == true)) {
+      alert("Campaign must be sold before completing later steps")
+    }
+    else if (
+      editedCampaignStatus.isSold == true && 
+      editedCampaignStatus.isApproved == false && 
+      (editedCampaignStatus.creativeSubmitted == true || 
+        editedCampaignStatus.inProduction == true || 
+        editedCampaignStatus.isScheduled == true || 
+        editedCampaignStatus.isComplete == true)) {
+      alert("Campaign must be approved before completing later steps")
+    }
+    else if (
+      editedCampaignStatus.isSold == true && 
+      editedCampaignStatus.isApproved == true && 
+      editedCampaignStatus.creativeSubmitted == false && 
+      (editedCampaignStatus.inProduction == true || 
+        editedCampaignStatus.isScheduled == true || 
+        editedCampaignStatus.isComplete == true)) {
+      alert("Creative must be submitted before completing later steps")
+    }
+    else if (
+      editedCampaignStatus.isSold == true && 
+      editedCampaignStatus.isApproved == true && 
+      editedCampaignStatus.creativeSubmitted == true && 
+      editedCampaignStatus.inProduction == false && 
+      (editedCampaignStatus.isScheduled == true || 
+        editedCampaignStatus.isComplete == true)) {
+      alert("Campaign must clear production before completing later steps")
+    }
+    else if (
+      editedCampaignStatus.isSold == true && 
+      editedCampaignStatus.isApproved == true && 
+      editedCampaignStatus.creativeSubmitted == true && 
+      editedCampaignStatus.inProduction == true && 
+      editedCampaignStatus.isScheduled == false && 
+      editedCampaignStatus.isComplete == true) {
+      alert("Campaign must be scheduled before completing")
+    }
+    else {
+      updateCampaignStatus(campaignStatus.id, editedCampaignStatus)
       .then(() => {
         history.push(`/campaign/${campaignStatus.campaignId}`)
       })
+    }
   };
 
   if (!editedCampaignStatus || !campaignStatus.campaign) {

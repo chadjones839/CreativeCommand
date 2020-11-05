@@ -18,6 +18,14 @@ export default function CampaignDetail() {
     getByCampaignId(id)
   }, []);
 
+  function numberWithCommas(x) {
+    if (!x) {
+      return 0
+    }
+    else {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  }
 
   const defaultImg = "https://res.cloudinary.com/dhduglm4j/image/upload/v1603478435/icons/defaultCompanyIcon_bqlwsn.jpg"
 
@@ -31,131 +39,190 @@ export default function CampaignDetail() {
 
   return (
     <>
-      <section className="accountDetail-container">
-        <div className="accountDetailCard">
-          {!campaign.account.logo ?
-            <div className="accountCard-left">
-              <img className="companyLogo" src={defaultImg} alt="company-logo" />
-            </div> :
-            <div className="accountCard-left">
-              <img className="companyLogo" src={campaign.account.logo} alt="company-logo" />
-            </div>}
-          <div className="accountCard-middle">
-            <dl>
-              <h3>{campaign.title}</h3>
-              <dt><span className="tag">Create Date:</span> {new Intl.DateTimeFormat('en-US').format(new Date(campaign.createDate))}</dt>
-              <dt><span className="tag">Sales Rep:</span> {campaign.account.salesUser.fullName}</dt>
-              <dt><span className="tag">Rep manager:</span> {campaign.account.managerUser.fullName}</dt>
-              <dt><span className="tag">Expected Revenue:</span> {campaign.revenue}</dt>
-              <dt><span className="tag">Campaign Start Date:</span> {new Intl.DateTimeFormat('en-US').format(new Date(campaign.startDate))}</dt>
-              <dt><span className="tag">Campaign End Date:</span> {new Intl.DateTimeFormat('en-US').format(new Date(campaign.endDate))}</dt>
-              <dt><span className="tag">Schedule Type:</span> {campaign.scheduleType.name}</dt>
-              <dt><span className="tag">Ad Channel:</span> {campaign.platform.name}</dt>
-              <br />
-              <h5>Deliverables:</h5>
-              <dt><span className="tag">Impressions:</span> {campaign.impressions}</dt>
-              <dt><span className="tag">Audience:</span> {campaign.audience}</dt>
-
-            </dl>
-          </div>
-          <div className="accountDetailsCard-right">
-            <div className="accountDetailsButtons">
+    <section className="campaignDetail-wrapper">
+      <div className="campaignDetail-container">
+        <div className="campaignDetailHeaderContent">
+          <div className="campaignDetail-left">
+            <h2 className="campaignTitle">{campaign.title}</h2>
+          </div> 
+          <div className="campaignDetail-right"> 
+            <div className="campaignDetailButtons">
               <Link
-                className="accountButton"
+                className="editButton"
                 style={{ textDecoration: 'none' }}
                 to={`/campaign/edit/${campaign.id}`}>
-                <img className="accountBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121858/icons/edit_oeexa4.png" />
+                  Edit
               </Link>
+              
               <Link
-                className="accountButton"
+                className="deleteButton"
                 style={{ textDecoration: 'none' }}
                 to={`/campaign/delete/${campaign.id}`}>
-                <img className="accountBtn" src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121902/icons/delete_mr2ko5.png" alt="delete" />
+                  Delete
               </Link>
             </div>
-          </div>
+          </div>    
         </div>
-      </section>
-
-      <section className="campaignStatus">
-        <div className="inProgressCampaign-card">
-          <div className="campaignTrackerHeader">
-            <div className="campaign-title">
-              <h5>{campaignStatus.campaign.title}</h5>
-            </div>
-            <div className="campaignDetails">
-              <h6>{new Intl.DateTimeFormat('en-US').format(new Date(campaignStatus.campaign.startDate))} - {new Intl.DateTimeFormat('en-US').format(new Date(campaignStatus.campaign.endDate))}</h6>
-            </div>
-            <div className="campaignStatus-actionButtons">
-              <Link
-                className="accountButton"
-                style={{ textDecoration: 'none' }}
-                to={`/campaignstatus/edit/${campaignStatus.id}`}>
-                <img
-                  className="accountBtn"
-                  src="https://res.cloudinary.com/dhduglm4j/image/upload/v1603121858/icons/edit_oeexa4.png"
-                  alt="edit"
-                />
-              </Link>
-            </div>
+        
+        <section className="campaignDetailProgressBar">
+          <div className="campaignStatus-update">
+            <Link
+              className="editButton"
+              style={{ textDecoration: 'none' }}
+              to={`/campaignstatus/edit/${campaignStatus.id}`}>
+              Update Status
+            </Link>
           </div>
           <div className="progressBar">
-
-            {campaignStatus.isSold == true ?
+          {campaignStatus.isSold == true  ?
               <div className="soldComplete">
-                <span className="statusTag-complete">Sold</span>
+                <span className="campaignStatusTag-complete">Sold</span>
               </div>
               :
-              <div className="soldIncomplete">
-                <span className="statusTag-incomplete">Sold</span>
+              <div className="soldIncomplete currentStatus">
+                <span className="campaignStatusTag-incomplete">Sold</span>
               </div>}
 
             {campaignStatus.isApproved == true ?
               <div className="approvalComplete">
-                <span className="statusTag-complete">Approved</span>
+                <span className="campaignStatusTag-complete">Approved</span>
               </div>
               :
+              campaignStatus.isSold == true  ?
+              <div className="approvalIncomplete currentStatus">
+                <span className="campaignStatusTag-incomplete">Approved</span>
+              </div> :
               <div className="approvalIncomplete">
-                <span className="statusTag-incomplete">Approved</span>
-              </div>}
+                <span className="campaignStatusTag-incomplete">Approved</span>
+              </div>
+            }
 
             {campaignStatus.creativeSubmitted == true ?
               <div className="creativeComplete">
-                <span className="statusTag-complete">Creative Submitted</span>
+                <span className="campaignStatusTag-complete">Creative Submitted</span>
               </div>
               :
+              campaignStatus.isSold == true && campaignStatus.isApproved == true ?
+              <div className="creativeIncomplete currentStatus">
+                <span className="campaignStatusTag-incomplete">Creative Submitted</span>
+              </div> :
               <div className="creativeIncomplete">
-                <span className="statusTag-incomplete">Creative Submitted</span>
-              </div>}
+                <span className="campaignStatusTag-incomplete">Creative Submitted</span>
+              </div>
+            }
 
             {campaignStatus.inProduction == true ?
               <div className="productionComplete">
-                <span className="statusTag-complete">In Production</span>
+                <span className="campaignStatusTag-complete">In Production</span>
               </div>
               :
+              campaignStatus.isSold == true && 
+              campaignStatus.isApproved == true &&
+              campaignStatus.creativeSubmitted == true ?
+              <div className="productionIncomplete currentStatus">
+                <span className="campaignStatusTag-incomplete">In Production</span>
+              </div> :
               <div className="productionIncomplete">
-                <span className="statusTag-incomplete">In Production</span>
-              </div>}
+                <span className="campaignStatusTag-incomplete">In Production</span>
+              </div>
+              }
 
             {campaignStatus.isScheduled == true ?
               <div className="schedulingComplete">
-                <span className="statusTag-complete">Scheduled</span>
+                <span className="campaignStatusTag-complete">Scheduled</span>
               </div>
               :
+              campaignStatus.isSold == true && 
+              campaignStatus.isApproved == true &&
+              campaignStatus.creativeSubmitted == true &&
+              campaignStatus.inProduction == true ?
+              <div className="schedulingIncomplete currentStatus">
+                <span className="campaignStatusTag-incomplete">Scheduled</span>
+              </div> :
               <div className="schedulingIncomplete">
-                <span className="statusTag-incomplete">Scheduled</span>
-              </div>}
+                <span className="campaignStatusTag-incomplete">Scheduled</span>
+              </div>
+            }
 
             {campaignStatus.isComplete == true ?
               <div className="campaignComplete">
-                <span className="statusTag-complete">Campaign Complete</span>
+                <span className="campaignStatusTag-complete">Complete</span>
               </div>
               :
+              campaignStatus.isSold == true && 
+              campaignStatus.isApproved == true &&
+              campaignStatus.creativeSubmitted == true &&
+              campaignStatus.inProduction == true &&
+              campaignStatus.isScheduled == true ?
+              <div className="campaignIncomplete currentStatus">
+                <span className="campaignStatusTag-incomplete">In Flight</span>
+              </div> :
               <div className="campaignIncomplete">
-                <span className="statusTag-incomplete">Campaign Complete</span>
-              </div>}
-
+                <span className="campaignStatusTag-incomplete">In Flight</span>
+              </div>
+              }
           </div>
+        </section>
+        
+
+        <div className="campaignDetailCard">
+          <div className="campaignDetailCard-middle">
+            {!campaign.account.logo ?
+            <div className="campaignClient">
+              <img className="campaignCompanyLogo" src={defaultImg} alt="company-logo" />
+              <div className="campaignClientName">
+                <h3 className="campaignCompany">{campaign.account.company}</h3>
+              </div>
+            </div> :
+            <div className="campaignClient">
+              <img className="campaignCompanyLogo" src={campaign.account.logo} alt="company-logo" />
+              <div className="campaignClientName">
+                <Link 
+                style={{textDecoration: "none", color: "black"}}
+                className="campaignCompany"
+                to={`/account/${campaign.account.id}`}>
+                  {campaign.account.company}
+                </Link>
+              </div>
+            </div>
+            } 
+            <div className="campaignDetails-content">
+              <dl className="campaign-dl">
+                <h2 className="campaignDetail-columnHeader">Campaign Details</h2>
+                <dt>Create Date</dt>
+                  <dd>{new Intl.DateTimeFormat('en-US').format(new Date(campaign.createDate))}</dd>
+                <dt>Sales Rep</dt> 
+                  <dd>{campaign.account.salesUser.fullName}</dd>
+                <dt>Rep manager</dt> 
+                  <dd>{campaign.account.managerUser.fullName}</dd>
+              </dl>
+              <div className="dlMiddle">
+                <dl>
+                  <h2 className="campaignDetail-columnHeader">Strategy</h2>
+                  <dt>Expected Revenue</dt> 
+                    <dd>${numberWithCommas(campaign.revenue)}</dd>
+                  <dt>Campaign Start Date</dt> 
+                    <dd>{new Intl.DateTimeFormat('en-US').format(new Date(campaign.startDate))}</dd>
+                  <dt>Campaign End Date</dt>
+                  <dd>{new Intl.DateTimeFormat('en-US').format(new Date(campaign.endDate))}</dd>
+                  <dt>Schedule Type</dt> 
+                  <dd>{campaign.scheduleType.name}</dd>
+                  <dt>Ad Channel</dt> 
+                  <dd>{campaign.platform.name}</dd>
+                </dl>
+              </div>
+              <div className="dlRight">
+                <dl>
+                  <h2 className="campaignDetail-columnHeader">Deliverables</h2>
+                  <dt>Impressions</dt> 
+                  <dd>{numberWithCommas(campaign.impressions)}</dd>
+                  <dt>Audience</dt>
+                  <dd>{numberWithCommas(campaign.audience)}</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
       </section>
     </>

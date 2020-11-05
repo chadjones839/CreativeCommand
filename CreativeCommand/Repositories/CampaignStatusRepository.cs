@@ -316,7 +316,8 @@ namespace CreativeCommand.Repositories
                             LEFT JOIN UserProfile um ON a.ManagerUserId = um.Id
                             LEFT JOIN ScheduleType s ON c.ScheduleTypeId = s.Id
                             LEFT JOIN Platform p ON c.PlatformId = p.Id
-                    WHERE c.AccountId = @Id";
+                    WHERE c.AccountId = @Id
+                    ORDER BY c.StartDate ASC";
 
                     DbUtils.AddParameter(cmd, "@Id", accountId);
 

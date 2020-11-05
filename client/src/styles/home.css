@@ -7,14 +7,7 @@
   display: flex;
   justify-content: center;
   margin-top: 40px;
-  width: 80%;
-}
-
-.userDetails {
-  padding: 20px;
-  border-radius: 5px;
-  margin-right: 10px;
-  width: 15%;
+  width: 60%;
 }
 
 .home-contents {
@@ -24,7 +17,7 @@
 }
 
 .dashboard-container {
-  padding: 20px 10px;;
+  padding:0;
   background: #ffffff;
   border: #efefef 3px solid;
   margin-bottom: 10px;
@@ -33,13 +26,41 @@
 .overview-container {
   display: flex;
   justify-content: space-between;
+  margin-top: 30px;
+  height: 50%;
 }
 
 .account-container,
 .campaign-container {
   border-radius: 3px;
-  padding: 20px;
+  padding: 0px;
   width: 49%;
+  height: 100%;
+  background: #404346;
+}
+
+.accountHeader-main,
+.campaignHeader-main {
+  display: flex;
+  justify-content: center;
+}
+
+.addBtn {
+  display: flex;
+  justify-content: flex-end;
+  width: 60%
+}
+
+.campaignTitle-main {
+  width: 80%;
+}
+
+.mainBtn-container {
+  display: flex;
+  width: 120%;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
 }
 
 .account-list,
@@ -49,18 +70,57 @@
   border-radius: 3px;
   height: 80%;
   padding: 10px 20px;
-  margin: 10px;
+  overflow-y: scroll;
+  height: 90%;
 }
 
-.dashboardTitle {
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.overviewTitle {
+  padding: 0 12px;
   text-align: center;
-  font-size: 36px;
+  font-size: 46px;
   color: #404346;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  letter-spacing: 5px;
+}
+
+
+.dashboardTitle {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 46px;
+  color: #efefef;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  letter-spacing: 5px;
+  margin-top: 10px;
 }
 
 .addBtn {
   display: flex;
   justify-content: center;
+  text-align: center;
+  align-items: center;
   margin-bottom: 20px;
 }
 
@@ -75,7 +135,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 10px 30px;
   text-align: center;
 }
 
@@ -89,11 +149,81 @@
   width: 10vw;
 }
 
-.booked > h7,
-.pipeline > h7,
-.projection > h7 {
-  color: #b9babb;
-  font-size: 1.1em;
+.budget {
+  background: #404346;
+  border-radius: 50%;
+  padding: 10px;
+  margin: 5px;
+  width: 7vw; 
+  height: 7vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.budgetDetails > h6 {
+  color: #404346;
+  font-size: 1.1vw;
+  font-weight: bold;
+  font-family: 'News Cycle', sans-serif;
+  text-align: center;
+}
+
+.budget > h5 {
+  color: #eef0f1;
+  font-size: 1.2vw;
+  font-weight: bold;
+  font-family: 'News Cycle', sans-serif;
+}
+
+.numOfAccounts {
+  background:  #f7892f;
+  border-radius: 50%;
+  padding: 10px;
+  margin: 5px;
+  width: 7vw; 
+  height: 7vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.numOfCampaigns {
+  background:  #310749;
+  border-radius: 50%;
+  padding: 10px;
+  margin: 5px;
+  width: 7vw; 
+  height: 7vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.accountsOverviewDetails > h6 {
+  color: #404346;
+  font-size: 1.1vw;
+  font-weight: bold;
+  font-family: 'News Cycle', sans-serif;
+  text-align: center;
+}
+
+.numOfAccounts > h5,
+.numOfCampaigns > h5 {
+  color: #eef0f1;
+  font-size: 3vw;
+  font-weight: bold;
+  font-family: 'News Cycle', sans-serif;
+}
+
+.booked > h6,
+.pipeline > h6,
+.projection > h6 {
+  color: #f7892f;
+  font-size: 1.1vw;
   font-weight: bold;
   font-family: 'News Cycle', sans-serif;
 }
@@ -102,12 +232,13 @@
 .pipeline > h5,
 .projection > h5 {
   color: #eef0f1;
-  font-size: 1.35em;
+  font-size: 1.35vw;
   font-weight: bold;
   font-family: 'News Cycle', sans-serif;
 }
 
-.budgetDetails {
+.budgetDetails,
+.accountsOverviewDetails {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -122,6 +253,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: linear-gradient(180deg, #f7892f 5% , #aa530c 100%);
+  padding: 20px;
+  margin-right: 30px;
+  width: 15%;
 }
 
 .userImage {
@@ -138,8 +273,12 @@
 
 .user-name {
   text-align: center;
-  color: #494d5f;
-  font-family: "Iceland", sans-serif;
+  color: #e7e7e7;
+  font-family: "Teko", sans-serif;
   font-size: 1.7vw;
   margin-top: 10px;
 }
+
+/* ----------------ACCOUNT---------------------------- */
+/* --------------------------------------------------- */
+

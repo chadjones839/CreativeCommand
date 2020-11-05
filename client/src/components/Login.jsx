@@ -18,6 +18,8 @@ export default function Login() {
   };
 
   return (
+    <>
+    <h2 className="loginHeader">Creative Command</h2>
     <Form className="login-form" onSubmit={loginSubmit}>
       <fieldset className="loginFields">
         <FormGroup>
@@ -35,5 +37,6 @@ export default function Login() {
         </div>
       </fieldset>
     </Form>
+    </>
   );
 }

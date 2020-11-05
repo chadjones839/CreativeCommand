@@ -31,6 +31,12 @@ namespace CreativeCommand.Controllers
             return Ok(_campaignRepo.GetAllCampaigns());
         }
 
+        [HttpGet("accountid/{id}")]
+        public IActionResult GetAllByAccountId(int id)
+        {
+            return Ok(_campaignRepo.GetAllCampaignsByAccountId(id));
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetCampaign(int id)
         {
