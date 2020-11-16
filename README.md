@@ -1,6 +1,6 @@
 # Creative Command
 
-Creative Command is built for the advertising professional that's constantly on the the move, juggling numerous daily responsibilities. The development of an ad campaign can take a few days to a few weeks, and can change multiple hands (from sales, production, traffic, etc). This platform is a lite CRM with a heavy focus on tracking campaigns in each stage of their process. In it's very esssence, it keeps all hand
+Creative Command is built for the advertising professional that's constantly on the the move, juggling numerous daily responsibilities. The development of an ad campaign can take a few days to a few weeks, and can change multiple hands (from sales, production, traffic, etc). This platform is a lite CRM with a heavy focus on tracking campaigns in each stage of their process.
 
 The tech stack for this project includes SQL, C#, and .NET on the backend and JavaScript/React on the front. Firebase was used for password authentication.
 
