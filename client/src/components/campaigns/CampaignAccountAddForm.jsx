@@ -92,7 +92,6 @@ export default function CampaignAddForm() {
 
     addCampaign(campaign)
       .then((c) => {
-
         campaignStatus.campaignId = c.id;
         addCampaignStatus(campaignStatus)
           .then(() => {
@@ -124,7 +123,7 @@ export default function CampaignAddForm() {
           <FormGroup>
             <Input
               id="accountId"
-              type="text"
+              type="hidden"
               name="accountId"
               value={accountId}/>
           </FormGroup>

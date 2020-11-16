@@ -42,7 +42,7 @@
 
 .accountCard-companyName:hover {
   letter-spacing: 1px;
-  text-shadow: 2px 2px 5px rgb(131, 131, 131);
+  text-shadow: 2px 2px 5px rgb(199, 198, 198);
   transition: 0.3s;
 }
 
@@ -343,4 +343,79 @@ dt {
 
 .campaignStatusTag-complete {
   color: #ffffff;
+}
+
+
+
+/* -----------ACCOUNT LIST----------------------------------- */
+/* ---------------------------------------------------------- */
+
+.accountList-container {
+  background: #404346;
+  width: 30%;
+}
+
+.accountListCard {
+  display: flex;
+  padding: 0 10px;
+  border: 1px solid #babbba;
+  background: white;
+  padding: 5px;
+}
+
+.accountListCard-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.accountListCard-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+  width: 90%;
+}
+
+.companyListLogo {
+  width: 40px;
+  height: auto;
+  border-radius: 50px;
+}
+
+.mainBtn-listContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.accountsListItems {
+  background: white;
+  height: 600px;
+  overflow-y: scroll;
+}
+
+.dashboardListTitle {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 46px;
+  color: #efefef;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
+  letter-spacing: 5px;
+  margin-top: 10px;
+}
+
+.accountListCard-companyName {
+  margin: 0;
+  color: #000000;
+  font-family: 'Teko', sans-serif;
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+.accountListCard-companyName:hover {
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 5px rgb(199, 198, 198);
+  transition: 0.3s;
 }

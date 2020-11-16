@@ -1,95 +1,31 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# JobCannon
 
-## Available Scripts
+Creative Command is built for the advertising professional that's constantly on the the move, juggling numerous daily responsibilities. The development of an ad campaign can take a few days to a few weeks, and can change multiple hands (from sales, production, traffic, etc). This platform is a lite CRM with a heavy focus on tracking campaigns in each stage of their process. In it's very esssence, it keeps all hand
 
-In the project directory, you can run:
+The tech stack for this project includes SQL, C#, and .NET on the backend and JavaScript/React on the front. Firebase was used for password authentication.
 
-### `npm start`
+## Usage
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Click 'Register' and create a new user from the home page to login.
+- Click 'Add Account' to create a new account. 
+- Once a new account is created, a user can add campaigns to that account. Either from the home page or the account page, click the "Create Campaign" button.
+- After a campaign is created, the user is brought to the campaign details page. This contains infomation on the campaign, as well as a new tracker bar.
+- To edit the tracker, click "update campaign". The user is presented with a series of dropdowns. The dropdowns can only be completed in order.
 
 
 
+## Screenshots
+
+<img src="https://res.cloudinary.com/dhduglm4j/image/upload/v1605544279/creative_command_g17yub.png" height="282" width="639">
+<img src="https://res.cloudinary.com/dhduglm4j/image/upload/v1605544279/creativecommand2_qvdlv7.png" height="282" width="639">
 
 
-https://res.cloudinary.com/dhduglm4j/image/upload/v1596506450/icons/spacerschoice_cxy8oi.png
+## Installation
 
-
-It's not the best choice, it's Spacer's Choice
-
-
-
-Annual
-TV Campaign
-Revenue: 500,000
-Campaign Start 1/1/2021
-Campaign End 12/31/2021
-IMPS 12,839,245
-AUD 1,900,000
-
-Annual
-Radio Campaign
-Revenue: 350,000
-Campaign Start 1/1/2021
-Campaign End 12/31/2021
-IMPS 17,442,642
-AUD 1,900,000
+- Clone repository using terminal
+- cd into the CreativeCommand folder
+- Run `start CreativeCommand.sln` to open in visual studio
+- Run the build one the file is opened
+- In the terminal, cd into the client folder
+- Then run `npm install`
+- After installations, run `npm start` to host app on localhost:3000
