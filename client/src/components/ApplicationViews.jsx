@@ -11,6 +11,8 @@ import AccountDetail from "./accounts/AccountDetail"
 import AccountAddForm from "./accounts/AccountAddForm"
 import AccountEditForm from "./accounts/AccountEditForm"
 import AccountDelete from "./accounts/AccountDelete"
+import LeadsList from "./leads/LeadsList"
+import LeadDetail from "./leads/LeadDetail"
 //CAMPAIGN IMPORTS
 import CampaignList from "./campaigns/CampaignList"
 import CampaignDetail from "./campaigns/CampaignDetail"
@@ -61,6 +63,14 @@ export default function ApplicationViews() {
 
         <Route exact path="/account/delete/:id">
           {isLoggedIn ? <AccountDelete /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route exact path="/leads">
+          {isLoggedIn ? <LeadsList /> : <Redirect to="/login" />}
+        </Route>
+        
+        <Route exact path="/leads/:id">
+          {isLoggedIn ? <LeadDetail /> : <Redirect to="/login" />}
         </Route>
 
         {/* CAMPAIGNS */}

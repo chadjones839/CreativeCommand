@@ -31,6 +31,12 @@ export default function Header() {
               </li>
 
               <li className="nav-item">
+                <a className="nav-link" id="accounts" href="/leads">
+                  Leads
+                </a>
+              </li>
+
+              <li className="nav-item">
                 <a className="nav-link" id="campaigns" href="/campaigns">
                   Campaigns
                 </a>
