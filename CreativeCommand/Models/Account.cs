@@ -43,6 +43,7 @@ namespace CreativeCommand.Models
         [Required]
         public int ManagerUserId { get; set; }
         public UserProfile ManagerUser { get; set; }
+        public bool IsLead { get; set; }
 
     }
 }

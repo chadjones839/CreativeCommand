@@ -32,6 +32,12 @@ namespace CreativeCommand.Controllers
             return Ok(_accountRepo.GetAllAccounts());
         }
 
+        [HttpGet ("leads")]
+        public IActionResult GetAllLeads()
+        {
+            return Ok(_accountRepo.GetAllLeads());
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetAccount(int id)
         {

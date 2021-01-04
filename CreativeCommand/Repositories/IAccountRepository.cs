@@ -10,5 +10,6 @@ namespace CreativeCommand.Repositories
         void Add(Account account);
         void Delete(int id);
         void Update(Account account);
+        List<Account> GetAllLeads();
     }
 }

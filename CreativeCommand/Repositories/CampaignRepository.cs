@@ -65,7 +65,8 @@ namespace CreativeCommand.Repositories
                         LastName = reader.GetString(reader.GetOrdinal("ManagerLastName")),
                         Email = reader.GetString(reader.GetOrdinal("ManagerEmail")),
                         UserTypeId = reader.GetInt32(reader.GetOrdinal("ManagerUserTypeId"))
-                    }
+                    },
+                    IsLead = reader.GetBoolean(reader.GetOrdinal("IsLead"))
                 }
             };
         }
@@ -82,7 +83,8 @@ namespace CreativeCommand.Repositories
                               c.StartDate, c.EndDate, c.Impressions, c.Audience,
 
                               a.Id, a.Company, a.Logo, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
-
+                              a.IsLead,
+                
                               u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
                               u.UserTypeId,
 
@@ -127,6 +129,7 @@ namespace CreativeCommand.Repositories
                               c.StartDate, c.EndDate, c.Impressions, c.Audience,
 
                               a.Id, a.Company, a.Logo, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
+                              a.IsLead,
 
                               u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
                               u.UserTypeId,
@@ -175,6 +178,7 @@ namespace CreativeCommand.Repositories
                               c.StartDate, c.EndDate, c.Impressions, c.Audience,
 
                               a.Id, a.Company, a.Logo, a.Address, a.City, a.State, a.ZipCode, a.SalesUserId, a.ManagerUserId,
+                              a.IsLead,
 
                               u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
                               u.UserTypeId,
