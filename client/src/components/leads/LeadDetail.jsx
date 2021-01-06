@@ -1,9 +1,19 @@
 /*eslint-disable*/
 import React, { useContext, useEffect, useState } from "react";
+import { Input } from 'reactstrap';
 import { useParams, Link } from "react-router-dom";
 import { AccountContext } from "../../providers/AccountProvider";
 import { CampaignStatusContext } from "../../providers/CampaignStatusProvider";
-import AccountCampaignStatus from "../campaignstatus/AccountCampaignStatus";
+import Location from '../../Icons/Location.js'
+import Email from '../../Icons/Email.js'
+import Company from '../../Icons/Company.js'
+import Phone from '../../Icons/Phone.js'
+import Star from '../../Icons/Star.js'
+import Note from '../../Icons/Note.js'
+import Activity from '../../Icons/Activity.js'
+import Task from '../../Icons/Task.js'
+import EmailOutline from '../../Icons/EmailOutline.js'
+import DropArrow from '../../Icons/DropArrow.js'
 
 
 export default function AccountDetail() {
@@ -15,60 +25,26 @@ export default function AccountDetail() {
     getById(id)
   }, []);
 
-  useEffect(() => {
-    getAllByCampaignAccountId(id)
-  }, []);
+  function leadActions() {
+    document.getElementById("leadActionsDropdown").classList.toggle("show");
+  }
 
-  const needsSold = [];
-  const needsApproval = [];
-  const inProgress = [];
-  const completed = [];
+  function activityType() {
+    document.getElementById("leadActionsDropdown").classList.toggle("show");
+  }
 
-  const allInProgress = [];
-  const allCompleted = [];
-
-  const currentStatus = (arr) => {
-    arr.forEach(item => {
-      if (item.isSold === false) {
-        needsSold.push(item);
-        allInProgress.push(item);
+  window.onclick = function(event) {
+    if (!event.target.matches('.leadActionsBtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
       }
-      else if (item.isSold === true && item.isApproved === false) {
-        needsApproval.push(item);
-        allInProgress.push(item);
-      }
-      else if (item.isSold === true && item.isApproved === true && item.isComplete === true) {
-        completed.push(item)
-        allCompleted.push(item);
-      }
-      else {
-        inProgress.push(item);
-        allInProgress.push(item);
-      }
-    })
+    }
   }
-  
-  currentStatus(campaignStatuses)
-
-  let notSold = 0
-  for(let i = 0; i < needsSold.length; i++){
-    notSold++;
-  }
-  let notApproved = 0
-  for(let i = 0; i < needsApproval.length; i++){
-    notApproved++;
-  }
-  let progress = 0  
-  for(let i = 0; i < inProgress.length; i++){
-    progress++;
-  }
-  let complete = 0
-  for(let i = 0; i < completed.length; i++){
-    complete++;
-  }
-
-
-  const defaultImg = "https://res.cloudinary.com/dhduglm4j/image/upload/v1603478435/icons/defaultCompanyIcon_bqlwsn.jpg"
 
   if (!account || !campaignStatuses || !account.salesUser || !account.managerUser) {
     return null
@@ -77,8 +53,8 @@ export default function AccountDetail() {
   return (
     <>
       <main className="leadContainer">
-        <div className="lead__detail">
-          <div className="leadHeader">
+        <div className="leadHeader">
+          <div className="leadHeader__container">
             <div className="leadHeader__title">
               <h3>Lead Details</h3>
             </div>
@@ -90,19 +66,22 @@ export default function AccountDetail() {
               </hr>
             </div>
           </div>
+        </div>
+        <div className="lead__detail">
+          
           <section className="leadContainer__left">
             <div className="leadDetails">
               <div className="leadDetails__contact">
                 <dl className="leadDetails__contactInfo">
-                  <dt>&#9734;</dt>
+                  <dt><Star fill=" #f7ffff" viewBox="-10 -10 35 35"/></dt>
                   <dd><h3><strong>Jackie Welles</strong></h3></dd>
-                  <dt>&#127970;</dt>
+                  <dt><Company fill=" #f7ffff" viewBox="-10 -8 35 35"/></dt>
                   <dd>CMO, <strong>{account.company}</strong></dd>
-                  <dt>&#9993;</dt>
+                  <dt><Email fill=" #f7ffff" viewBox="-10 -8 35 35"/></dt>
                   <dd>jackie.welles@spacerschoice.com</dd>
-                  <dt>&#128379;</dt>
+                  <dt><Phone fill=" #f7ffff" viewBox="-10 -8 35 35"/></dt>
                   <dd>202.345.2341</dd>
-                  <dt>&#x1F4CD;</dt>
+                  <dt><Location fill=" #f7ffff" viewBox="-10 -8 35 35"/></dt>
                   <dd>{account.city} {account.state}, {account.zipCode}
                   </dd>
                 </dl>
@@ -157,8 +136,79 @@ export default function AccountDetail() {
 
             </div>
           </section>
-          <section className="leadContainer-right">
+          <section className="leadContainer__right">
+            <div className="leadActivity">
+              <div className="leadActivity-buttons">
+                <button className="leadActivityBtn addActivity">
+                  <Activity width={18} height={18} fill="#333333" viewBox="0 0 30 30"/>Activity
+                </button>
+                <button className="leadActivityBtn addNote">
+                  <Note width={18} height={18} fill="#333333" viewBox="0 0 30 30"/>Note
+                </button>
+                <button className="leadActivityBtn addTask">
+                  <Task width={18} height={18} fill="#333333" viewBox="0 0 30 30"/>Task
+                </button>
+              </div>
+              <div className="leadActions">
+                <div className="leadActions__sendEmail">
+                  <button className="sendEmailBtn">
+                    <EmailOutline width={18} height={18} fill="#333333" viewBox="0 0 30 30"/>Send Email
+                  </button>
+                </div>
 
+
+
+                <div className="leadActions__options">
+                  <button onClick={leadActions} className="leadActionsBtn">
+                    Lead Actions &nbsp;&nbsp; <DropArrow width={18} height={18} fill="#f7ffff" viewBox="0 -6 40 40"/>
+                  </button>
+                  <div id="leadActionsDropdown" className="dropdown-content">
+                    <a href="#"><strong>Convert to Account</strong></a>
+                    <a href="#">Edit</a>
+                    <a href="#">Delete</a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div className="activityContainer">
+              <div className="activityButtons">
+              <div className="link-pad">&nbsp;</div>
+                <button className="link active"><span>Activity History</span></button>
+                <button className="link"><span>Lead Details</span></button>    
+                <button className="link"><span>Tasks</span></button>    
+                <button className="link"><span>Notes</span></button>    
+              <div className="link-pad">&nbsp;</div>
+              </div>
+              <div className="activityFilters">
+                <div className="activityFilters__type">
+                  <p className="activityFilters__type__label">Activity Type</p>
+                  <select
+                    id="activities-filter"
+                    type="select"
+                    name="activities-filter"
+                    defaultValue="All Selected">
+                      <option selected>All Selected</option>
+                      <option>Sales Activties</option>
+                      <option>Notes</option>
+                      <option>Tasks</option>
+                  </select>
+                </div>
+                <div className="activityFilters__time">
+                  <p className="timeFilters__type__label">Time</p>
+                  <select
+                    id="time-filter"
+                    type="select"
+                    name="time-filter"
+                    defaultValue="All Selected">
+                      <option selected>All Time</option>
+                      <option>Past Day</option>
+                      <option>Past Week</option>
+                      <option>Past Month</option>
+                  </select>
+                </div>
+              </div>
+            </div>
           </section>
         </div>
       </main>
