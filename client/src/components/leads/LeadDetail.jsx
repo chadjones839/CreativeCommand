@@ -1,6 +1,5 @@
 /*eslint-disable*/
 import React, { useContext, useEffect, useState } from "react";
-import { Input } from 'reactstrap';
 import { useParams, Link } from "react-router-dom";
 import { AccountContext } from "../../providers/AccountProvider";
 import { CampaignStatusContext } from "../../providers/CampaignStatusProvider";
@@ -14,6 +13,9 @@ import Activity from '../../Icons/Activity.js'
 import Task from '../../Icons/Task.js'
 import EmailOutline from '../../Icons/EmailOutline.js'
 import DropArrow from '../../Icons/DropArrow.js'
+import Pulse from '../../Icons/Pulse.js'
+import EmailCircle from '../../Icons/EmailCircle.js'
+import NoteActivity from '../../Icons/NoteActivity.js'
 
 
 export default function AccountDetail() {
@@ -206,6 +208,106 @@ export default function AccountDetail() {
                       <option>Past Week</option>
                       <option>Past Month</option>
                   </select>
+                </div>
+              </div>
+              <div className="activityLogContainer">
+                <div className="activityLog">
+                  <h4>Today</h4>
+                  <div className="todaysActivity">
+
+
+                  <div className="loggedActivity">
+                      <div className="activityDateTime__container">
+                        <div className="activityDateTime">
+                          <p>12 Dec</p>
+                          <i>10:12 AM</i>
+                        </div>
+                      </div>
+                      <div className="activityDescription">
+                        <div className="activityIcon">
+                          <EmailCircle width={24} height={24} fill="#333333" viewBox="0 -2 30 30"/>
+                        </div>
+                        <div className="activityDetails">
+                          Sent Email with subject: "<span className="actionTitle">Today's Presentation/Digital Copy</span>"
+                        </div>
+                      </div>
+                      <div className="activityScore">
+                        <h3 className="neutralScore">+0</h3>
+                      </div>
+                    </div>
+
+
+                    <div className="loggedActivity">
+                      <div className="activityDateTime__container">
+                        <div className="activityDateTime">
+                          <p>12 Dec</p>
+                          <i>07:36 AM</i>
+                        </div>
+                      </div>
+                      <div className="activityDescription">
+                        <div className="activityIcon">
+                          <Pulse width={24} height={24} fill="#333333" viewBox="0 -2 30 30"/>
+                        </div>
+                        <div className="activityDetails">
+                          Presented marketing plan "<span className="actionTitle">It's not the best choice, it's Spacer's Choice</span>"
+                        </div>
+                      </div>
+                      <div className="activityScore">
+                        <h3 className="positiveScore">+20</h3>
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <h4>Dec 2020</h4>
+                  <div className="thisMonthsActivity">
+
+                  <div className="loggedActivity">
+                      <div className="activityDateTime__container">
+                        <div className="activityDateTime">
+                          <p>07 Dec</p>
+                          <i>12:45 PM</i>
+                        </div>
+                      </div>
+                      <div className="activityDescription">
+                        <div className="activityIcon">
+                          <Pulse width={24} height={24} fill="#333333" viewBox="0 -2 30 30"/>
+                        </div>
+                        <div className="activityDetails">
+                          <span className="actionTitle">Set Demo Meeting</span>: presenting marketing plan "<span className="actionTitle">It's not the best choice, it's Spacer's Choice</span>" on Dec 12, 2020.
+                        </div>
+                      </div>
+                      <div className="activityScore">
+                        <h3 className="positiveScore">+10</h3>
+                      </div>
+                    </div>
+
+                    <div className="loggedActivity">
+                      <div className="activityDateTime__container">
+                        <div className="activityDateTime">
+                          <p>04 Dec</p>
+                          <i>12:45 PM</i>
+                        </div>
+                      </div>
+                      <div className="activityDescription">
+                        <div className="activityIcon">
+                          <NoteActivity width={24} height={24} fill="#333333" viewBox="0 -2 30 30"/>
+                        </div>
+                        <div className="activityDetails">
+                          <span className="actionTitle">Call</span>: Jackie was out. Spoke with Jan the receptionist about her holiday plans. She's visiting family in the city next week.
+                        </div>
+                      </div>
+                      <div className="activityScore">
+                        <h3 className="positiveScore">+10</h3>
+                      </div>
+                    </div>
+                    
+
+                  </div>
+                  <h4>Nov 2020</h4>
+                  <div className="lastMonthsActivity">
+
+                  </div>
                 </div>
               </div>
             </div>
