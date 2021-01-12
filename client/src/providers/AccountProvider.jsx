@@ -21,6 +21,17 @@ export const AccountProvider = (props) => {
                 .then(setAccounts));
     };
 
+    const getAllLeads = () => {
+        getToken().then((token) =>
+            fetch(`${apiUrl}/leads`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then(resp => resp.json())
+                .then(setAccounts));
+    };
+
     const getAllAccountsByUser = (id) => {
         return getToken().then((token) =>
             fetch(`/api/account/myaccounts${id}`, {
@@ -85,7 +96,7 @@ export const AccountProvider = (props) => {
 
     return (
         <AccountContext.Provider value={{
-            account, accounts, getAllAccounts, getById, addAccount, updateAccount, deleteAccount, setAccount, getAllAccountsByUser
+            account, accounts, getAllAccounts, getAllLeads, getById, addAccount, updateAccount, deleteAccount, setAccount, getAllAccountsByUser
         }}>
             {props.children}
         </AccountContext.Provider>

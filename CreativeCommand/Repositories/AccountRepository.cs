@@ -52,7 +52,8 @@ namespace CreativeCommand.Repositories
                         Id = reader.GetInt32(reader.GetOrdinal("ManagerUserTypeId")),
                         Name = reader.GetString(reader.GetOrdinal("ManagerUserTypeName"))
                     }
-                }
+                },
+                IsLead = reader.GetBoolean(reader.GetOrdinal("IsLead"))
             };
         }
 
@@ -65,7 +66,7 @@ namespace CreativeCommand.Repositories
                 {
                     cmd.CommandText = @"
                        SELECT a.Id, a.Company, a.Logo, a.Address, a.City, a.State, a.ZipCode,
-                              a.DateCreated, a.SalesUserId, a.ManagerUserId,
+                              a.DateCreated, a.SalesUserId, a.ManagerUserId, a.IsLead,
 
                               u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
                               u.UserTypeId,
@@ -81,6 +82,50 @@ namespace CreativeCommand.Repositories
                               LEFT JOIN UserType ut ON u.UserTypeId = ut.Id
                               LEFT JOIN UserProfile um ON a.ManagerUserId = um.Id
                               LEFT JOIN UserType mut ON um.UserTypeId = mut.Id
+                        WHERE a.IsLead = 0
+                     ORDER BY a.Company ASC";
+                    var reader = cmd.ExecuteReader();
+
+                    var accounts = new List<Account>();
+
+                    while (reader.Read())
+                    {
+                        accounts.Add(NewAccountFromReader(reader));
+                    }
+
+                    reader.Close();
+
+                    return accounts;
+                }
+            };
+        }
+
+        public List<Account> GetAllLeads()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                       SELECT a.Id, a.Company, a.Logo, a.Address, a.City, a.State, a.ZipCode,
+                              a.DateCreated, a.SalesUserId, a.ManagerUserId, a.IsLead,
+
+                              u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
+                              u.UserTypeId,
+
+                              um.Id AS ManagerId, um.FirebaseUserId AS ManagerFirebaseId, um.FirstName AS ManagerFirstName, 
+                              um.LastName AS ManagerLastName, um.Email AS ManagerEmail, um.UserTypeId AS ManagerUserTypeId,
+
+                              ut.Id, ut.[Name] AS UserTypeName,
+
+                              mut.Id, mut.[Name] AS ManagerUserTypeName
+                         FROM Account a
+                              LEFT JOIN UserProfile u ON a.SalesUserId = u.Id
+                              LEFT JOIN UserType ut ON u.UserTypeId = ut.Id
+                              LEFT JOIN UserProfile um ON a.ManagerUserId = um.Id
+                              LEFT JOIN UserType mut ON um.UserTypeId = mut.Id
+                        WHERE a.IsLead = 1
                      ORDER BY a.Company ASC";
                     var reader = cmd.ExecuteReader();
 
@@ -106,7 +151,7 @@ namespace CreativeCommand.Repositories
                 {
                     cmd.CommandText = @"
                        SELECT a.Id, a.Company, a.Logo, a.Address, a.City, a.State, a.ZipCode,
-                              a.DateCreated, a.SalesUserId, a.ManagerUserId,
+                              a.DateCreated, a.SalesUserId, a.ManagerUserId, a.isLead,
 
                               u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.Email,
                               u.UserTypeId,
@@ -148,10 +193,10 @@ namespace CreativeCommand.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"INSERT INTO Account (Company, Logo, Address, City, State, ZipCode, DateCreated,
-                                                            SalesUserId, ManagerUserId)
+                                                            SalesUserId, ManagerUserId, IsLead)
                                         OUTPUT INSERTED.ID
                                         VALUES (@Company, @Logo, @Address, @City, @State, @ZipCode, 
-                                                @DateCreated, @SalesUserId, @ManagerUserId)";
+                                                @DateCreated, @SalesUserId, @ManagerUserId, @IsLead)";
                     DbUtils.AddParameter(cmd, "@Company", account.Company);
                     DbUtils.AddParameter(cmd, "@Logo", account.Logo);
                     DbUtils.AddParameter(cmd, "@Address", account.Address);
@@ -161,6 +206,7 @@ namespace CreativeCommand.Repositories
                     DbUtils.AddParameter(cmd, "@DateCreated", account.DateCreated);
                     DbUtils.AddParameter(cmd, "@SalesUserId", account.SalesUserId);
                     DbUtils.AddParameter(cmd, "@ManagerUserId", account.ManagerUserId);
+                    DbUtils.AddParameter(cmd, "@IsLead", account.IsLead);
 
                     account.Id = (int)cmd.ExecuteScalar();
                 }
@@ -185,7 +231,8 @@ namespace CreativeCommand.Repositories
 		                        ZipCode = @zipCode,
                                 DateCreated = @dateCreated,
                                 SalesUserId = @salesUserId,
-                                ManagerUserId = @managerUserId
+                                ManagerUserId = @managerUserId,
+                                IsLead = @isLead
                             WHERE Id = @id";
                     cmd.Parameters.AddWithValue("@id", account.Id);
                     cmd.Parameters.AddWithValue("@logo", account.Logo);
@@ -197,6 +244,7 @@ namespace CreativeCommand.Repositories
                     cmd.Parameters.AddWithValue("@dateCreated", account.DateCreated);
                     cmd.Parameters.AddWithValue("@salesUserId", account.SalesUserId);
                     cmd.Parameters.AddWithValue("@managerUserId", account.ManagerUserId);
+                    cmd.Parameters.AddWithValue("@isLead", account.IsLead);
                     cmd.ExecuteNonQuery();
                 }
             }
