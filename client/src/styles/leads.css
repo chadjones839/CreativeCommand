@@ -32,12 +32,39 @@
 }
 
 .lead-backBtn {
-  width: 8%;
+  border: #333333 1px solid;
+  background-color: #333333;
+  outline: none;
+  font-size: 12px;
+  color: #f7f7f7;
+  padding: 3px;
+  margin-right: 10px;
+  width: 70px;
+  border-radius: 2px;
+  -webkit-transition: 1s ease-out;
+  -moz-transition: 1s ease-out;
+  -o-transition: 1s ease-out;
+  transition: 1s ease-out;
+}
+
+.lead-backBtn:hover {
+  border-color: #1f1e1e;
+  background-color: #1f1e1e;
+  transition: 1s ease-in;
+}
+
+.lead-backBtn:active,
+.lead-backBtn:focus {
+  border-color: black;
+  color: black;
+  background-color: #ecebeb;
+  transition: 1s ease-in;
+  outline: none;
 }
 
 .spacerBar {
   border-bottom: 1px #bebbbb solid;
-  width: 90%;
+  width: 95%;
   padding-left: 10px;
 }
 
@@ -77,7 +104,7 @@
 }
 
 .leadDetails__contactInfo > dd {
-  font-size: 18px;
+  font-size: 15px;
   padding-left: 50px;
 }
 
@@ -114,6 +141,8 @@
   font-weight: 600;
   border-bottom: 1px solid #bebbbb;
   padding: 5px;
+  background-color: #ececec;
+  font-size: 18px;
 }
 
 .leadProperties__details {
@@ -122,9 +151,9 @@
 
 .leadProperties__list > dt {
   float: left;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 400;
-  width: 25%;
+  width: 35%;
   display: flex;
   flex-direction: row;
   justify-content: left;
@@ -132,9 +161,9 @@
 }
 
 .leadProperties__list > dd {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
-  width: 75%;
+  width: 65%;
   display: flex;
   flex-direction: row;
   justify-content: left;

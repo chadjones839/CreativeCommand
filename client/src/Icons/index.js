@@ -1,4 +1,5 @@
 export { default as Activity } from './Activity'
+export { default as BackArrow } from './BackArrow'
 export { default as Company } from './Company'
 export { default as DropArrow } from './DropArrow'
 export { default as Email } from './Email'

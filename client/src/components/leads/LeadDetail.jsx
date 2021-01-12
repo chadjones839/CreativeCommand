@@ -2,6 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { AccountContext } from "../../providers/AccountProvider";
+import { ContactContext } from "../../providers/ContactsProvider";
 import { CampaignStatusContext } from "../../providers/CampaignStatusProvider";
 import Location from '../../Icons/Location.js'
 import Email from '../../Icons/Email.js'
@@ -16,22 +17,30 @@ import DropArrow from '../../Icons/DropArrow.js'
 import Pulse from '../../Icons/Pulse.js'
 import EmailCircle from '../../Icons/EmailCircle.js'
 import NoteActivity from '../../Icons/NoteActivity.js'
+import BackArrow from '../../Icons/BackArrow.js'
 
 
 export default function AccountDetail() {
+  const { contact, getByAccountId } = useContext(ContactContext);
   const { account, getById } = useContext(AccountContext);
-  const { campaignStatuses, getAllByCampaignAccountId } = useContext(CampaignStatusContext);
+
   const { id } = useParams()
 
   useEffect(() => {
     getById(id)
+    getByAccountId(id)
   }, []);
 
-  function leadActions() {
-    document.getElementById("leadActionsDropdown").classList.toggle("show");
+  function phoneFormat(phoneNumberString) {
+    var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+    var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
+    if (match) {
+      return match[1] + '.' + match[2] + '.' + match[3]
+    }
+    return null
   }
 
-  function activityType() {
+  function leadActions() {
     document.getElementById("leadActionsDropdown").classList.toggle("show");
   }
 
@@ -48,7 +57,7 @@ export default function AccountDetail() {
     }
   }
 
-  if (!account || !campaignStatuses || !account.salesUser || !account.managerUser) {
+  if (!contact || !contact.account) {
     return null
   }
 
@@ -62,7 +71,7 @@ export default function AccountDetail() {
             </div>
             <div className="leadSecondaryHeader">
               <button className="lead-backBtn">
-                <strong>&#8592; Back</strong>
+                <BackArrow width={15} height={15} fill="#f7f7f7" viewBox="0 0 30 30" /><strong> Back</strong>
               </button>
               <hr className="spacerBar">
               </hr>
@@ -78,20 +87,20 @@ export default function AccountDetail() {
                   <dt><Star fill=" #f7ffff" viewBox="-10 -10 35 35"/></dt>
                   <dd><h3><strong>Jackie Welles</strong></h3></dd>
                   <dt><Company fill=" #f7ffff" viewBox="-10 -8 35 35"/></dt>
-                  <dd>CMO, <strong>{account.company}</strong></dd>
+                  <dd>{contact.title}, <strong>{contact.account.company}</strong></dd>
                   <dt><Email fill=" #f7ffff" viewBox="-10 -8 35 35"/></dt>
-                  <dd>jackie.welles@spacerschoice.com</dd>
+                  <dd>{contact.email}</dd>
                   <dt><Phone fill=" #f7ffff" viewBox="-10 -8 35 35"/></dt>
-                  <dd>202.345.2341</dd>
+                  <dd><i>o.</i> &nbsp;{phoneFormat(contact.officePhone)} <br/> <i>m.</i> {phoneFormat(contact.cellPhone)}</dd>
                   <dt><Location fill=" #f7ffff" viewBox="-10 -8 35 35"/></dt>
-                  <dd>{account.city} {account.state}, {account.zipCode}
+                  <dd>{contact.account.address} <br/> {contact.account.city} {contact.account.state}, {contact.account.zipCode}
                   </dd>
                 </dl>
               </div>
               <div className="leadDetails__quickInfo">
                 <div className="leadDetails__leadScore">
                   <div className="leadScore">
-                    57
+                    40
                   </div>
                   <div className="leadCategory">
                     Lead Score
@@ -99,10 +108,10 @@ export default function AccountDetail() {
                 </div>
                 <div className="leadDetails__leadScore">
                   <div className="leadScore">
-                    27
+                    0 days
                   </div>
                   <div className="leadCategory">
-                    Engaged
+                    Last Activity
                   </div>
                 </div>
                 <div className="leadDetails__leadScore">
@@ -122,11 +131,15 @@ export default function AccountDetail() {
               <div className="leadProperties__details">
                 <dl className="leadProperties__list">
                     <dt>Lead Owner</dt>
-                    <dd>{account.salesUser.fullName}</dd>
+                    <dd>{contact.account.salesUser.fullName}</dd>
                     <dt>Lead Type</dt>
-                    <dd>Cold</dd>
+                    <dd>Warm</dd>
                     <dt>Lead Source</dt>
-                    <dd>AdAge</dd>
+                    <dd>Networking Event</dd>
+                    <dt>Closure Prediction</dt>
+                    <dd>Low</dd>
+                    <dt>Expected Revenue</dt>
+                    <dd>$1,034,000</dd>
                     <dt>Lead Age</dt>
                     <dd>33 days</dd>
                     <dt>Industry</dt>
@@ -177,9 +190,9 @@ export default function AccountDetail() {
               <div className="activityButtons">
               <div className="link-pad">&nbsp;</div>
                 <button className="link active"><span>Activity History</span></button>
-                <button className="link"><span>Lead Details</span></button>    
-                <button className="link"><span>Tasks</span></button>    
+                <button className="link"><span>Proposals</span></button>    
                 <button className="link"><span>Notes</span></button>    
+                <button className="link"><span>Tasks</span></button>    
               <div className="link-pad">&nbsp;</div>
               </div>
               <div className="activityFilters">
@@ -266,7 +279,7 @@ export default function AccountDetail() {
                       <div className="activityDateTime__container">
                         <div className="activityDateTime">
                           <p>07 Dec</p>
-                          <i>12:45 PM</i>
+                          <i>2:18 PM</i>
                         </div>
                       </div>
                       <div className="activityDescription">
@@ -286,7 +299,7 @@ export default function AccountDetail() {
                       <div className="activityDateTime__container">
                         <div className="activityDateTime">
                           <p>04 Dec</p>
-                          <i>12:45 PM</i>
+                          <i>1:45 PM</i>
                         </div>
                       </div>
                       <div className="activityDescription">
@@ -298,7 +311,7 @@ export default function AccountDetail() {
                         </div>
                       </div>
                       <div className="activityScore">
-                        <h3 className="positiveScore">+10</h3>
+                        <h3 className="neutralScore">+0</h3>
                       </div>
                     </div>
                     
@@ -307,7 +320,48 @@ export default function AccountDetail() {
                   <h4>Nov 2020</h4>
                   <div className="lastMonthsActivity">
 
+                  <div className="loggedActivity">
+                    <div className="activityDateTime__container">
+                      <div className="activityDateTime">
+                        <p>09 Nov</p>
+                        <i>07:28 AM</i>
+                      </div>
+                    </div>
+                    <div className="activityDescription">
+                      <div className="activityIcon">
+                        <Pulse width={24} height={24} fill="#333333" viewBox="0 -2 30 30"/>
+                      </div>
+                      <div className="activityDetails">
+                        <span className="actionTitle">Note</span>: Met Jackie Welles at a networking event, exchanged cards. Said to call next month.
+                      </div>
+                    </div>
+                    <div className="activityScore">
+                      <h3 className="positiveScore">+5</h3>
+                    </div>
                   </div>
+              
+
+                  <div className="loggedActivity">
+                      <div className="activityDateTime__container">
+                        <div className="activityDateTime">
+                          <p>09 Nov</p>
+                          <i>07:23 AM</i>
+                        </div>
+                      </div>
+                      <div className="activityDescription">
+                        <div className="activityIcon">
+                          <Pulse width={24} height={24} fill="#333333" viewBox="0 -2 30 30"/>
+                        </div>
+                        <div className="activityDetails">
+                          <span className="actionTitle">Lead Created</span> by Bill Brasky
+                        </div>
+                      </div>
+                      <div className="activityScore">
+                        <h3 className="positiveScore">+5</h3>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
